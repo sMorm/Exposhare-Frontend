@@ -1,0 +1,33 @@
+.signupContent {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+  animation: fade-up 0.5s forwards;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.signupImageContainer{
+  display: flex;
+  width: 50%;
+  margin-top: 5%;
+}
+
+@media (max-width: 800px) {
+  .signupContent {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+  }
+  .signupImageContainer {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+  }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(-5%) }
+  to { opacity: 1; transform: translateY(0%) }
+}

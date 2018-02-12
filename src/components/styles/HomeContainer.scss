@@ -1,0 +1,62 @@
+$primary-color: rgb(222, 221, 211);
+$primary-dark-color: rgb(200,200,200);
+
+.homeContainer {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 3% 0;
+}
+
+.welcomeContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: none;
+  align-items: center;
+  img {
+    width: 60%;
+  }
+  animation: fade-up 0.5s forwards;
+}
+
+.welcomeText {
+  min-width: 270px;
+  h1 {
+    font-size: 45px;
+    line-height: 0px;
+    font-family: 'proxima_nova_altbold', sans-serif;
+  }
+  p {
+    font-size: 30px;
+  }
+  animation: fade-up 1.5s forwards;
+}
+
+.welcomeSignupButton {
+  text-decoration: none;
+  border: solid 1px #D4CDC7;
+  padding: 10px 15px;
+  color: rgb(179, 173, 168);
+  border-radius: 5px;
+  transition: all 0.5s;
+  &:hover {
+    background-color: #D4CDC7;
+    color: white;
+  }
+}
+
+@media (max-width: 700px) {
+  .welcomeText {
+    h1 {
+      font-size: 30px;
+    }
+    p {
+      font-size: 20px;
+    }
+  }
+
+  .welcomeSignupButton {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+}

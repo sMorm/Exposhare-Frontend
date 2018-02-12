@@ -1,0 +1,86 @@
+.signupForm {
+  padding: 8em 2em;
+  padding-top: 2em;
+  background-color: #F8F8F8;
+  width: 75%;
+  min-width: 250px;
+  border-top: solid 10px rgb(230, 230, 230);
+  input {
+    font-size: 16px;
+    padding: 15px 5px;
+    outline: none;
+    background: white;
+    border: solid 1px #E5E5E5;
+    transition: all 0.5s;
+    &:focus {
+      border-color: #AF998D;
+    }
+  }
+  button {
+    width: 100%;
+    padding: 14px 5px;
+    background-color: #AF998D;
+    border: none;
+    color: white;
+    font-size: 16px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    outline: none;
+  }
+}
+.signupNames {
+  display: flex;
+  width: 100%;
+}
+
+.signupSingles {
+  display: flex;
+  flex-direction: column;
+  input {
+    width: 97%;
+  }
+  input:last-child {
+    border-top: solid 1px transparent;
+    &:focus {
+      border: solid 1px #AF998D;
+    }
+  }
+}
+
+.signupLabel { 
+  display: flex;
+  flex-direction: column;
+  input {
+    width: 92.8%;
+  }
+}
+
+.mediaDivider {
+  margin-top: 2em;
+  text-align: center;
+  hr {
+    border: none;
+    border-bottom: solid 1px #AF998D;
+  }
+  p {
+    letter-spacing: 3px;
+    font-size: 12px;
+    background: #F8F8F8;
+    width: 15%;
+    margin: auto;
+    margin-top: -16px;
+    color: #888;
+  }
+}
+
+.signupMember {
+  color: #888;
+}
+
+.signupImageContainer {
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  margin: auto;
+}
