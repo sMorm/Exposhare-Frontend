@@ -1,0 +1,1 @@
+export const gqlEndpoint = 'http://graphql.org/swapi-graphql/'

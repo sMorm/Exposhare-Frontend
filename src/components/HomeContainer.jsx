@@ -19,6 +19,7 @@ class HomeContainer extends Component {
           </span>
           <img src={polaroids} alt='undraw.co' />
         </div>
+        <div style={{height: '2000px'}}/>
       </div>
     )
   }

@@ -10,12 +10,32 @@ import PropTypes from 'prop-types'
 
 // import { login } from '../../actions/login'
 
+// Apollo Client
+import { client } from '../../shared/utils/apollo'
+import gql from 'graphql-tag'
 class LoginForm extends Component {
   state = {
     username: '',
     password: '',
     isLoading: false
   }
+
+  componentWillMount = () => {
+    client.query({
+      query: gql`
+        query {
+          person(id: "10", personID: "10") {
+            name
+          }
+        }
+      `
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+  }
+  
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
