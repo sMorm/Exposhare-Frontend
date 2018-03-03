@@ -1,0 +1,11 @@
+query user($id: Int!) {
+  user(id: $id) {
+    feed {
+      id,
+      content,
+      likes,
+      created_at,
+      image_url,
+    }
+  }
+}

@@ -1,28 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
-import './styles/HomeContainer.scss'
+import { connect } from 'react-redux'
+import { mapStateToProps } from '../shared/utils/redux'
 
-import polaroids from '../images/polaroids.svg'
+import GuestHome from './Home/GuestHome.jsx'
+import UserHome from './Home/UserHome.jsx'
 
 class HomeContainer extends Component {
   render() {
     return (
-      <div className='homeContainer'>
-        <div className='welcomeContainer'>
-          <span className='welcomeText'>
-            <h1>Photo Sharing</h1>
-            <p>For Everyone.</p>
-            <Link to='/signup' className='welcomeSignupButton'>
-              Join the Community
-            </Link>
-          </span>
-          <img src={polaroids} alt='undraw.co' />
-        </div>
-        <div style={{height: '2000px'}}/>
-      </div>
+      <Fragment>
+        {this.props.user.isAuthenticated 
+          ? <UserHome id={this.props.user.info.id}/> 
+          : <GuestHome/> 
+        }
+      </Fragment>
     )
   }
 }
 
-export default HomeContainer
+export default connect(mapStateToProps)(HomeContainer)

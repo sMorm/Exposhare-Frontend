@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-
 import LoginForm from './Login/LoginForm.jsx'
+import { svgBus } from '../shared/constants/links'
 
 import './styles/LoginContainer.scss'
-import busSVG from '../images/bus.svg'
+
 export default class LoginContainer extends Component {
   render() {
     return (
@@ -11,12 +11,11 @@ export default class LoginContainer extends Component {
         <span className='signupContent'>
           <div className='signupImageContainer'>
             <span className='campContainer'>
-              <img src={busSVG} alt=''/>
+              <img src={svgBus} alt='undraw.co' />
             </span>           
           </div>
           <LoginForm /> 
         </span>
-        
       </div>
     )
   }

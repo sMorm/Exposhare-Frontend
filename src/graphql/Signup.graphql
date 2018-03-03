@@ -1,0 +1,8 @@
+mutation newUser($firstname: String!, $lastname: String!, $email: String!, $password: String!) {
+  newUser(firstname: $firstname, lastname: $lastname, email: $email, password: $password) {
+    user {
+      firstname
+    },
+    token
+  }
+}

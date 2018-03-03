@@ -5,8 +5,8 @@ import React, { Component } from 'react'
 import SignupForm from './Signup/SignupForm.jsx'
 
 // Import images/styles
+import { svgCamp } from '../shared/constants/links'
 import './styles/SignupContainer.scss'
-import bridgeSVG from '../images/camp.svg'
 
 export default class SignupContainer extends Component {
   render() {
@@ -15,7 +15,7 @@ export default class SignupContainer extends Component {
         <span className='signupContent'>
           <div className='signupImageContainer'>
             <span className='campContainer'>
-              <img src={bridgeSVG} alt=''/>
+              <img src={svgCamp} alt='undraw.co' />
             </span>
           </div>
           <SignupForm />

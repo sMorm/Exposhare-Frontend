@@ -45,6 +45,13 @@ module.exports = {
             options: {}  
           }
         ]
+      },
+      {
+        test: /\.graphql$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'graphql-tag/loader'
+        }]
       }
     ]
   },

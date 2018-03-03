@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { mapStateToProps } from '../shared/utils/redux'
+import { setCurrentUser } from '../actions/user'
+
+import { Guest, LoggedIn } from './Navigation/NavigationOptions.jsx'
 
 import './styles/Navigation.scss'
 
@@ -7,7 +13,8 @@ class Navigation extends Component {
 
   state = {
     offset: 0,
-    navContainerStyle: 'navigationContainer enter'
+    navContainerStyle: 'navigationContainer enter',
+    loggedIn: false
   }
 
   /**
@@ -48,6 +55,12 @@ class Navigation extends Component {
     }
     this.setState({ offset })
   }
+  
+  logout = () => {
+    localStorage.removeItem('jwtToken')
+    this.props.dispatch(setCurrentUser({}))
+    this.props.history.push('/')
+  }
 
   render() {
     return (
@@ -55,10 +68,10 @@ class Navigation extends Component {
         <div className={this.state.navContainerStyle}>
           <span className='navigationContent'>
             <Link to='/' style={{textDecoration: 'none'}}><h1>Exposhare</h1></Link>
-            <span className='navigationLinkContainer'>
-              <Link to='/login' className='navigationLink'>LOGIN</Link>
-              <Link to='/signup' className='navigationLink'>SIGNUP</Link>
-            </span>
+            {this.props.user.isAuthenticated 
+              ? <LoggedIn logout={this.logout} user={this.props.user} /> 
+              : <Guest/> 
+            }
           </span>
         </div>
         <div className='navigationPlaceholder' />
@@ -67,20 +80,8 @@ class Navigation extends Component {
   }
 }
 
-const AuthRoute = withRouter(() => {
-  return localStorage.jwtToken 
-  ? (
-    <span className='navigationLinkContainer'>
-      <Link to='/profile' className='navigationLink'>{localStorage.firstname}</Link>
-      <Link to='/' onClick={logout()} className='navigationLink'>LOGOUT</Link>
-    </span>
-  ) 
-  : (
-    <span className='navigationLinkContainer'>
-      <Link to='/login' className='navigationLink'>LOGIN</Link>
-      <Link to='/signup' className='navigationLink'>SIGNUP</Link>
-    </span>
-  )
-})
+Navigation.contextTypes = {
+  router: PropTypes.object.isRequired
+}
 
-export default Navigation
+export default withRouter(connect(mapStateToProps)(Navigation))

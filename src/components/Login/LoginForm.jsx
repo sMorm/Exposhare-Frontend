@@ -1,76 +1,37 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { ThreeBounce } from 'better-react-spinkit'
 import './styles/LoginForm.scss'
-import Validator from 'validator'
-
 import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
-// import { mapStateToProps } from '../../utils/redux'
+import { validateLoginForm } from '../../shared/utils/validate'
+import { connect } from 'react-redux'
+import { dispatchAndRedirect } from '../../shared/utils/redux'
 
-// import { login } from '../../actions/login'
-
-// Apollo Client
-import { client } from '../../shared/utils/apollo'
-import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
+import LOGIN_MUTATION from '../../graphql/Login.graphql'
 class LoginForm extends Component {
+  
   state = {
-    username: '',
+    email: '',
     password: '',
     isLoading: false
   }
 
-  componentWillMount = () => {
-    client.query({
-      query: gql`
-        query {
-          person(id: "10", personID: "10") {
-            name
-          }
-        }
-      `
-    })
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => console.log(err))
-  }
-  
-
-  onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  validateForm(data) {
-    let errors = {}
-    let isValid = true
-
-    if(Validator.isEmpty(data.username))
-      errors.username = 'A username is required'
-    if(Validator.isEmpty(data.password))
-      errors.password = 'Password required to login'
-    if(errors.password || errors.username)
-      isValid = false
-
-    return {
-      errors,
-      isValid
-    }
-  }
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value })
 
   onSubmit = e => {
     e.preventDefault()
+    const { dispatch, authenticate } = this.props
+    const { push } = this.props.history
+    const { email, password } = this.state
+
     this.setState({ isLoading: true })
-    const { isValid, errors } = this.validateForm(this.state)
+    const { isValid, errors } = validateLoginForm(this.state)
     if(isValid) {
-      this.props.login(this.state)
+      authenticate({ email, password })
       .then(res => {
-        // console.log(res)
-        this.context.router.history.push('/')
-      })
-      .catch(err => {
-        console.log(err)
-        this.setState({err, isLoading: false})
+        const { token } = res.data.authenticate
+        dispatchAndRedirect({ token, dispatch, push })
       })
     } else {
       this.setState({ errors, isLoading: false })
@@ -84,10 +45,10 @@ class LoginForm extends Component {
           <h1>Login</h1>
           <input
             type='text'
-            name='username'
-            placeholder='Username'
+            name='email'
+            placeholder='E-mail'
             onChange={this.onChange}
-            value={this.state.username}/>
+            value={this.state.email}/>
           <br/>
           <input
             type='password'
@@ -115,4 +76,16 @@ LoginForm.contextTypes = {
   router: PropTypes.object.isRequired
 }
 
-export default LoginForm
+LoginForm.propTypes = {
+  authenticate: PropTypes.func.isRequired
+}
+
+const withMutations = graphql(LOGIN_MUTATION, {
+  props: ({ mutate }) => ({
+    authenticate: ({ email, password }) => {
+      return mutate({ variables: { email, password } })
+    }
+  })
+})
+
+export default withRouter(connect()(withMutations(LoginForm)))
