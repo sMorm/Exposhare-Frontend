@@ -9,14 +9,10 @@ import UserHome from './Home/UserHome.jsx'
 
 class HomeContainer extends Component {
   render() {
-    return (
-      <Fragment>
-        {this.props.user.isAuthenticated 
-          ? <UserHome id={this.props.user.info.id}/> 
-          : <GuestHome/> 
-        }
-      </Fragment>
-    )
+    if(this.props.user.isAuthenticated)
+      return <UserHome id={this.props.user.info.id}/>
+    else
+      return <GuestHome/> 
   }
 }
 

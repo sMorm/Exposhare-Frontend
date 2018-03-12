@@ -1,10 +1,15 @@
+.loginFormContainer {
+  width: 75%;
+}
+
 .loginForm {
   padding: 8em 2em;
   padding-top: 2em;
   background-color: #F8F8F8;
-  width: 50%;
+  width: 70%;
   min-width: 250px;
   border-top: solid 10px rgb(230, 230, 230);
+
   input {
     display: block;
     font-size: 16px;
@@ -15,6 +20,8 @@
     border: solid 1px #E5E5E5;
     transition: all 0.5s;
     width: 97%;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
     &:focus {
       border-color: #AF998D;
     }
@@ -29,5 +36,18 @@
     letter-spacing: 2px;
     cursor: pointer;
     outline: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .loginForm {
+    min-width: none;
+    background: none;
+    padding: 0;
+    border: none;
+    width: 100%;
+    max-width: 350px;
+    margin: auto;
+    
   }
 }

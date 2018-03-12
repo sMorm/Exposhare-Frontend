@@ -5,7 +5,6 @@ $primary-dark-color: rgb(200,200,200);
   width: 90%;
   max-width: 1200px;
   margin: auto;
-  padding: 3% 0;
 }
 
 .welcomeContainer {
@@ -13,8 +12,9 @@ $primary-dark-color: rgb(200,200,200);
   justify-content: space-between;
   flex-wrap: none;
   align-items: center;
+  padding: 3em 0;
   img {
-    width: 60%;
+    width: 50%;
   }
   animation: fade-up 0.5s forwards;
 }
@@ -45,7 +45,48 @@ $primary-dark-color: rgb(200,200,200);
   }
 }
 
+.secondWelcomeContainer {
+  display: flex;
+  justify-content: space-between;
+  border-top: solid 2px #efefef;
+  padding: 50px 0px;
+  padding-bottom: 30px;
+  h1 {
+    font-family: 'proxima_nova_altbold';
+    font-size: 40px;
+  }
+  p {
+    display: inline;
+  }
+
+  img {
+    width: 100%;
+  }
+
+}
+
+.secondWelcomeContent {
+  width: 48%;
+}
+
+.secondWelcomeText {
+  display: flex;
+  font-size: 40px;
+  strong {
+    font-family: 'proxima_nova_altbold';
+  }
+  p {
+    font-weight: 300;
+    font-family: 'proxima_nova_ltthin'
+  }
+}
+
 @media (max-width: 700px) {
+  .welcomeContainer {
+    img {
+      display: none;
+    }
+  }
   .welcomeText {
     h1 {
       font-size: 30px;
@@ -58,5 +99,9 @@ $primary-dark-color: rgb(200,200,200);
   .welcomeSignupButton {
     padding: 5px 10px;
     font-size: 14px;
+  }
+
+  .secondWelcomeContainer {
+    display: block;
   }
 }

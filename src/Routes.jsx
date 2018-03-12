@@ -17,6 +17,8 @@ import Navigation from './components/Navigation.jsx'
 import LoginContainer from './components/LoginContainer.jsx'
 import SignupContainer from './components/SignupContainer.jsx'
 import UserProfileContainer from './components/UserProfileContainer.jsx'
+import UploadContainer from './components/UploadContainer.jsx'
+import NotFound from './components/NotFound.jsx'
 
 if(localStorage.jwtToken) {
   store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)))
@@ -35,7 +37,8 @@ class Routes extends Component {
                 <Route path='/login' component={LoginContainer} />
                 <Route path='/signup' component={SignupContainer} />
                 <Route path='/user/*' component={UserProfileContainer} />
-                <Route path='/*' render={() => <h1>404 lol</h1>} />
+                <Route path='/upload' component={UploadContainer} />
+                <Route path='/*' component={NotFound}/>
               </Switch>
             </Fragment>
           </Router>

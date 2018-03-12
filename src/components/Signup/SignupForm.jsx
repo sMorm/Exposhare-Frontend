@@ -25,6 +25,12 @@ class SignupForm extends Component {
     errors: {},
   }
 
+  componentDidMount = () => {
+    if(localStorage.jwtToken)
+      this.props.history.push('/')
+  }
+  
+
   clearErrors = () => {
     this.setState({ errors: {} })
   }

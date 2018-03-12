@@ -5,8 +5,10 @@ import { connect } from 'react-redux'
 import { mapStateToProps } from '../shared/utils/redux'
 import { setCurrentUser } from '../actions/user'
 
-import { Guest, LoggedIn } from './Navigation/NavigationOptions.jsx'
+import LoggedIn from './Navigation/LoggedIn.jsx'
+import Guest from './Navigation/Guest.jsx'
 
+import lottieFile from '../shared/lottie/menu_button.json'
 import './styles/Navigation.scss'
 
 class Navigation extends Component {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { ThreeBounce } from 'better-react-spinkit'
-import './styles/LoginForm.scss'
 import PropTypes from 'prop-types'
 import { validateLoginForm } from '../../shared/utils/validate'
 import { connect } from 'react-redux'
@@ -9,6 +8,9 @@ import { dispatchAndRedirect } from '../../shared/utils/redux'
 
 import { graphql } from 'react-apollo'
 import LOGIN_MUTATION from '../../graphql/Login.graphql'
+
+import './styles/LoginForm.scss'
+
 class LoginForm extends Component {
   
   state = {
@@ -40,7 +42,7 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className='loginFormContainer'>
         <form className='loginForm' onSubmit={this.onSubmit}>
           <h1>Login</h1>
           <input

@@ -14,13 +14,13 @@
   margin-top: 5%;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   .signupContent {
     display: flex;
     justify-content: center;
-    margin: auto;
   }
   .signupImageContainer {
+    display: none;
     position: absolute;
     z-index: -1;
     width: 100%;

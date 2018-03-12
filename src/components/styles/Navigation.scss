@@ -5,6 +5,7 @@ $primary-color: #b0998c;
   width: 100%;
   height: 85px;
 }
+
 .navigationContainer {
   width: 100%;
   background: 'transparent';
@@ -24,26 +25,6 @@ $primary-color: #b0998c;
     color: black;
     font-family: 'proxima_nova_altbold'
   }
-}
-
-.navigationLinkContainer {
-  width: 15%;
-  max-width: 200px;
-  min-width: 150px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.navigationLink {
-  text-decoration: none;
-  letter-spacing: 2px;
-  color: black;
-  border-bottom: solid 1px transparent;
-  &:hover {
-    border-bottom: solid 1px $primary-color;
-  }
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .enter {

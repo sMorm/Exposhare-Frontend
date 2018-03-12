@@ -1,0 +1,27 @@
+$primary-color: #b0998c;
+
+.navigationLinkContainer {
+  width: 15%;
+  max-width: 200px;
+  min-width: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigationLink {
+  text-decoration: none;
+  letter-spacing: 2px;
+  color: black;
+  border-bottom: solid 1px transparent;
+  &:hover {
+    border-bottom: solid 1px $primary-color;
+  }
+  padding: 0px 5px;
+}
+
+@media (max-width: 700px) {
+  .navigationLinkContainer {
+    display: none;
+  }
+}
