@@ -36,7 +36,12 @@ export default class UploadContainer extends Component {
         fr.readAsDataURL(file)
         fr.onload = () => {
           setTimeout(() => this.setState( { 
-            rawImage: { src: file.preview, width: i.width, height: i.height, data: reader.result },
+            rawImage: {
+              src: file.preview,
+              width: image.width, 
+              height: image.height, 
+              data: fr.result 
+            },
             loading: false
           }), 1000)
         }
