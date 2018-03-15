@@ -1,0 +1,103 @@
+.cropModalContainer {
+  position: fixed;
+  z-index: 6;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: scroll; /* Enable scroll if needed */
+  background-color: white; /* Fallback color */
+  background-color: white; /* Black w/ opacity */
+  padding: 5%;
+}
+
+.modalContent {
+  width: 90%;
+  height: calc(100vh - 200px);
+  img {
+    width: 50%;
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  h1 {
+    font-size: 30px;
+  }
+}
+
+.closeModal {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  cursor: pointer;  
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #000;
+    &:hover {
+      background: #ccc;
+    }
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+.cropModalButtons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 0px;
+  button {
+    cursor: pointer;
+    outline: none;
+    padding: 5px 10px;
+    border: solid 1px #c9b7ad;
+    color: #c9b7ad;
+    font-family: 'proxima_nova_ltsemibold';
+    font-size: 18px;
+    border-radius: 15px;
+    &:hover {
+      background: #c9b7ad;
+      color: white;
+    }
+  }
+}
+
+.cropModalLoading {
+  position: fixed;
+  z-index: 6;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: scroll; /* Enable scroll if needed */
+  background-color: transparent; /* Fallback color */
+  background-color: transparent; /* Black w/ opacity */
+}
+
+.cropModalLoadingContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255, 0.95);
+  h1 {
+    font-family: 'proxima_nova_ltsemibold';
+    font-size: 40px;
+  }
+}

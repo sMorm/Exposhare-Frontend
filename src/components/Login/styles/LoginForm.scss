@@ -1,12 +1,14 @@
 .loginFormContainer {
   width: 75%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .loginForm {
   padding: 8em 2em;
   padding-top: 2em;
   background-color: #F8F8F8;
-  width: 70%;
+  width: 40%;
   min-width: 250px;
   border-top: solid 10px rgb(230, 230, 230);
 

@@ -8,9 +8,14 @@ import { setCurrentUser } from '../actions/user'
 import LoggedIn from './Navigation/LoggedIn.jsx'
 import Guest from './Navigation/Guest.jsx'
 
-import lottieFile from '../shared/lottie/menu_button.json'
 import './styles/Navigation.scss'
 
+/**
+ * The main navigation component, active
+ * on every page. Depending on whether
+ * the user is logged in, it renders
+ * <LoggedIn /> or <Guest />.
+ * */
 class Navigation extends Component {
 
   state = {
@@ -58,6 +63,9 @@ class Navigation extends Component {
     this.setState({ offset })
   }
   
+  /**
+   * Clear token, update redux, redirect
+   */
   logout = () => {
     localStorage.removeItem('jwtToken')
     this.props.dispatch(setCurrentUser({}))

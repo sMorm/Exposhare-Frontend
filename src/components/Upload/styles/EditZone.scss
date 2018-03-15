@@ -1,0 +1,47 @@
+$primary-color: #d6c8c0;
+$secondary-color: #c9b7ad;
+
+.editZoneContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.landscape {
+  display: block;
+  .previewContainer {
+    width: 100%;
+  }
+}
+
+.previewContainer {
+  width: 50%;
+  img {
+    width: 100%;
+  }
+}
+
+.editOptions {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  padding: 15px 0;
+  button {
+    padding: 5px 10px;
+    font-size: 18px;
+    font-family: 'proxima_nova_ltsemibold';
+    border: solid 1px $secondary-color;
+    color: $secondary-color;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
+    &:hover {
+      color: white;
+      background: $primary-color;
+      border-color: transparent;
+    }
+  }
+}
+
+.editContainer{
+  width: 48%;
+}

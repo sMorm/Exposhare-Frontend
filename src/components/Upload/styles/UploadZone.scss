@@ -1,0 +1,82 @@
+$primary-color: #d6c8c0;
+$secondary-color: #c9b7ad;
+
+.uploadZoneContainer {
+  width: 100%;
+}
+
+.dropzonePrompt {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropzonePromptText {
+  width: 42%;
+  h1 {
+    font-family: 'proxima_nova_ltsemibold';
+  }
+}
+
+.uploadDropzone {
+  opacity: 0.8;
+  background: $primary-color;
+  border: dotted 4px #666;
+  border-radius: 5px;
+  width: 48%;
+  cursor: pointer;
+}
+
+.uploadDropzoneActive {
+  background: $secondary-color;
+}
+
+.uploadDropzoneContainer {
+  display: block;
+  text-align: center;
+  p {
+    bottom: 20px;
+    font-size: 30px;
+    margin-top: -30px;
+    font-family: 'proxima_nova_ltsemibold';
+    color: white;
+  }
+}
+
+.errorText {
+  p {
+    color: red;
+    animation: shake 1s forwards;
+  }
+}
+
+@media (max-width: 700px) {
+  .dropzonePrompt {
+    display: block;
+  }
+
+  .uploadDropzone {
+    width: 100%;
+    margin: auto;
+  }
+  .dropzonePromptText{
+    width: 90%;
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

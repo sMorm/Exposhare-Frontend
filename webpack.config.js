@@ -15,23 +15,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
         }
       },
       {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      },
-      {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         exclude: /node_modules/,
         loaders: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      { //  to load react-cropper styles
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       },
       { //  loader configuration that does not scramble the image file names in the build task 
         test: /\.jpe?g$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,

@@ -9,9 +9,7 @@ import './styles/LoginContainer.scss'
 class LoginContainer extends Component {
 
   componentDidMount = () => {
-    if(localStorage.jwtToken) {
-      this.props.history.push('/')
-    }
+    if(localStorage.jwtToken) this.props.history.push('/')
   }
   
   render() {
