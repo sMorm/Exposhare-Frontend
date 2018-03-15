@@ -27,7 +27,8 @@ export default class UploadZone extends Component {
           onDrop={this.props.onDrop}
           accept="image/*"
           className='uploadDropzone'
-          activeClassName='uploadDropzoneActive'>
+          activeClassName='uploadDropzoneActive'
+          multiple={false}>
             <span className={uploadDropzoneContainerStyle}>
               <Lottie options={lottieOptions} height={300} width={300} />
               <p>{message}</p>

@@ -12,7 +12,7 @@ const Loading = () => {
   return (
     <div className='cropModalLoading'>
       <span className='cropModalLoadingContent'>
-        <h1>Cropping...</h1>
+        <h1>Snip snip hehe...</h1>
       </span>
     </div>
   )
