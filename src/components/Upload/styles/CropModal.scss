@@ -8,7 +8,7 @@
   overflow: scroll; /* Enable scroll if needed */
   background-color: white; /* Fallback color */
   background-color: white; /* Black w/ opacity */
-  padding: 5%;
+  padding: 2% 5%;
 }
 
 .modalContent {
@@ -99,5 +99,14 @@
   h1 {
     font-family: 'proxima_nova_ltsemibold';
     font-size: 40px;
+  }
+}
+
+@media (max-width: 700px) {
+  .cropModalContainer {
+    padding: 2% 5%;
+  }
+  .closeModal {
+    transform: scale(0.7);
   }
 }

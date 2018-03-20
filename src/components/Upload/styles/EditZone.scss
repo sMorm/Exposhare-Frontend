@@ -20,20 +20,50 @@ $secondary-color: #c9b7ad;
   }
 }
 
-.editOptions {
+.editContainer{
+  width: 48%;
+  h1 {
+    margin-top: 0;
+  }
+}
+
+.editToolContainer {
   display: flex;
   justify-content: space-between;
-  width: 40%;
-  padding: 15px 0;
+  padding: 20px 0px;;
+}
+
+.editToolbox {
+  width: 48%;
+}
+
+.editToolboxHeader {
+  display: flex;
+  align-items: center;
+  font-family: 'proxima_nova_ltsemibold';
+  font-size: 30px;
+  padding: 10px 0px;
+}
+
+.editToolContent {
+  display: flex;
+  justify-content: space-between;
+  text-align: center; 
+  width: 100%;
+  min-width: 450px;
+  transition: all 0.4s;
   button {
-    padding: 5px 10px;
-    font-size: 18px;
+    display: block;
+    width: 100px;
+    height: 100px;
+    padding: 4px;
+    font-size: 16px;
     font-family: 'proxima_nova_ltsemibold';
-    border: solid 1px $secondary-color;
-    color: $secondary-color;
+    border: solid 1px black;
+    color: black;
     cursor: pointer;
-    border-radius: 5px;
     outline: none;
+    transition: all 0.2s;
     &:hover {
       color: white;
       background: $primary-color;
@@ -42,9 +72,106 @@ $secondary-color: #c9b7ad;
   }
 }
 
-.editContainer{
+.toolboxIcon {
+  display: block;
+  margin: auto;
+  color: red;
+  margin-top: 10px;
+}
+
+.editDescription {
   width: 48%;
-  h1 {
-    margin-top: 0;
+}
+
+.editDescriptionInput {
+  font-family: 'proxima_nova_ltsemibold';
+  textarea {
+    width: 99%;
+    resize: none;
+    outline: none;
+    border: solid 1px black;
+    font-size: 20px;
+    padding-bottom: 2px;
+    color: #666;
+  }
+  button {
+    width: 100%;
+    padding: 5px 2px;
+    background: black;
+    color: white;
+    font-size: 14px;
+  }
+}
+
+.editSubmitButton {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  button {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    font-size: 20px;
+    font-family: 'proxima_nova_ltsemibold';
+    border: solid 1px black;
+    margin-top: 20px;
+    padding: 12px 0px;
+    color: black;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s;
+    &:hover {
+      color: white;
+      background: $primary-color;
+      border-color: transparent;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .editZoneContainer {
+    display: block;
+  }
+  .previewContainer {
+    width: 100%;
+  }
+
+  .editContainer{
+    width: 100%;
+  }
+
+  .editToolContainer{
+    display: block;
+  }
+  
+  .editToolbox {
+    width: 100%;
+  }
+
+  .editToolboxHeader {
+    font-size: 24px;
+  }
+  .editToolContent {
+    padding: 1em 0;
+    min-width: 0;
+    button {
+      height: 80px;
+      width: 80px;
+      font-size: 12px;      
+    }
+  }
+
+  .editSubmitButton {
+    display: block;
+    justify-content: none;
+    button {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .editToolContainer{
+    display: block;
   }
 }

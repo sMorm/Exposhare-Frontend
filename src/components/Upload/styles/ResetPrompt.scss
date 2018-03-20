@@ -1,0 +1,54 @@
+$primary-color: #b0998c;
+
+.promptModalContainer {
+  position: fixed;
+  z-index: 6;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: scroll; /* Enable scroll if needed */
+  background-color: white; /* Fallback color */
+  background-color: white; /* Black w/ opacity */
+}
+
+.promptModalContent {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+.promptModalDialog {
+  margin: auto;
+  background: white;
+  border-radius: 10px;
+  h1 {
+    font-family: 'proxima_nova_altbold'
+  }
+  p {
+    color: #777;
+  }
+
+  h2 {
+    width: 250px;
+    border: solid 1px black;
+    padding: 10px;
+    padding-left: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+      background: black;
+      color: white;
+    }
+  }
+  .continue {
+    &:hover {
+      background: $primary-color;
+      border: solid 1px $primary-color;
+    }
+  }
+}
+

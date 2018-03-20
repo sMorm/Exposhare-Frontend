@@ -1,8 +1,13 @@
 import React, { Component, Fragment } from 'react'
+import Ionicon from 'react-ionicons'
+import { withRouter, Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import FilterPreviews from './FilterPreviews.jsx'
 import filters from '../../shared/data/filters'
 import CropModal from './CropModal.jsx'
+import ResetPrompt from './ResetPrompt.jsx'
+import Lightbox from '../reusables/Lightbox.jsx'
 
 import './styles/EditZone.scss'
 
@@ -12,69 +17,182 @@ import './styles/EditZone.scss'
  * that the user is able to edit their photos
  * before it gets published.
  */
-export default class EditZone extends Component {
+class EditZone extends Component {
 
   state = {
     cropModal: false,
+    isLandscape: false,
+    resetPrompt: false,
+    rechoosePrompt: false,
+    lightbox: false,
     croppedImageData: null,
     filter: '',
-    finalImg: ''
+    description: '',
+    file: null
+  }
+
+  componentDidMount() {
+    // scroll into view on larger screens
+    if(this.context.router.route.location.state)
+      setTimeout(() => window.scroll({ top: 20, behavior: 'smooth' }), 200)
+  }
+  
+  checkOrientation = () => {
+    const { naturalHeight, naturalWidth } = this.preview
+    if (naturalHeight > naturalWidth)
+      this.setState({ isLandscape: false })
+    else
+      this.setState({ isLandscape: true })
   }
   
   toggleCrop = () => this.setState({ cropModal: !this.state.cropModal })
-
+  toggleLightbox = () => this.setState({ lightbox: !this.state.lightbox })
+  toggleReset = () => this.setState({ resetPrompt: !this.state.resetPrompt })
+  toggleReselect = () => this.setState({ reselectPrompt: !this.state.reselectPrompt })
+  onChange = e => this.setState({ [e.target.name]: e.target.value })
   crop = data => {
     this.setState({ croppedImageData: data })
+    this.checkOrientation()
   }
 
-  setFilter = (filter) =>  this.setState({ filter })
+  promptResponse = (promptAccept) => {
+    if(promptAccept) // User clicked continue on modal
+      this.setState({ filter: '', croppedImageData: null, resetPrompt: false })
+    else
+      this.setState({ resetPrompt: false })
+  }
 
-  save = () => {
-    if(this.state.filter === '') {
-      this.setState({ finalImg: this.img.src })
+  reselectResponse = (promptAccept) => {
+    if(promptAccept) // User clicked continue on modal
+      this.context.router.history.goBack() // call function to reset everything
+    else
+      this.setState({ reselectPrompt: false })
+  }
+
+  setFilter = (filter) =>  {
+    if(this.state.filter === filter)
+      this.setState({ filter: '' }) 
+    else
+      this.setState({ filter })
+  }
+
+  onSubmit = () => {
+    const { filter, description } = this.state
+    let finalImage
+
+    // Get the final image to upload
+    if(filter === '') {
+      finalImage = this.preview.src
     } else {
       const canvas = document.createElement('canvas')
       const context = canvas.getContext('2d')
-      const img = this.img // my <img /> in react
-      canvas.width = this.img.naturalWidth
-      canvas.height = this.img.naturalHeight
-      context.filter = this.state.filter
-      context.drawImage(this.img, 0, 0)
-      const finalImg = canvas.toDataURL()
-      this.setState({ finalImg })
+      canvas.width = this.preview.naturalWidth
+      canvas.height = this.preview.naturalHeight
+      context.filter = filter
+      context.drawImage(img, 0, 0)
+      finalImg = canvas.toDataURL()
     }
   }
   
   render() {
-    const { width, height, data, src } = this.props.rawImage
-    const { cropModal, croppedImageData, filter } = this.state
-    let editZoneContainerStyle = 'editZoneContainer'
-    if((width - height) > 100) {
-      editZoneContainerStyle = 'editZoneContainer landscape'
+    if(!this.context.router.route.location.state){
+      return <Redirect to='/upload'/>
     }
-    let imagePreview = src
-    if(croppedImageData !== null)
-      imagePreview = croppedImageData
+    const { file } = this.context.router.route.location.state
+    const { 
+      cropModal, 
+      croppedImageData,
+      filter, 
+      isLandscape, 
+      lightbox, 
+      resetPrompt, 
+      reselectPrompt 
+    } = this.state
+    // different styles for portrait and landscape photos
+    let editZoneContainerStyle = 'editZoneContainer'
+    if (isLandscape)
+      editZoneContainerStyle = 'editZoneContainer landscape'
+
+    // check if the photo has been cropped, so we can render the right one
+    let preview = file
+    if (croppedImageData !== null)
+      preview = croppedImageData
     return (
-      <Fragment>
-        <span className='editOptions'>
-          <button onClick={this.toggleCrop}>Do Stuff</button>
-          <button onClick={this.toggleCrop}>Crop Photo</button>
-          <button onClick={this.props.cancel}>Change Photo</button>
-        </span>
+      <div className='container'>
+        {cropModal && <CropModal file={file} close={this.toggleCrop} crop={this.crop} filter={this.state.filter}/>}
+        {lightbox && <Lightbox image={preview} filter={filter} close={this.toggleLightbox} isLandscape={isLandscape}/> }
+        {resetPrompt && <ResetPrompt response={this.promptResponse} description='This will clear applied filter and cropping.' />}
+        {reselectPrompt && <ResetPrompt response={this.reselectResponse} description='Start from scratch & choose new photo to edit.' />}
+        
         <div className={editZoneContainerStyle}>
           <span className='previewContainer'>
-            <img src={imagePreview} alt='raw source' style={{filter: this.state.filter }} ref={(img) => { this.img = img }} />
+            <img 
+              src={preview} 
+              alt='raw source' 
+              style={{ filter }}
+              onLoad={this.checkOrientation} 
+              onClick={ this.toggleLightbox }
+              ref={ref => {this.preview = ref} }/>
           </span>
           <span className='editContainer'>
-            <h1>Apply Filter</h1>
-            <FilterPreviews setFilter={this.setFilter} image={this.props.rawImage.src}/>
+            <FilterPreviews setFilter={this.setFilter} image={preview} isLandscape={isLandscape}/>
           </span>
         </div>
-        {cropModal && <CropModal rawImage={this.props.rawImage} toggleCrop={this.toggleCrop} crop={this.crop}/>}
-        <button onClick={this.save}>Save</button>
-        <img src={this.state.finalImg} alt='s' />
-      </Fragment>
+
+        <div className='editToolContainer'>
+
+          <span className='editToolbox'>
+            <span className='editToolboxHeader'>
+              <Ionicon icon='ios-cog-outline' fontSize='40px' color='black'/>
+              &nbsp;Toolbox
+            </span>
+            <span className='editToolContent'>
+              <button onClick={this.toggleLightbox}>
+                <Ionicon icon='ios-expand' fontSize='30px' color='black' className='toolboxIcon'/>
+                <p>Enlarge</p>
+              </button>
+              <button onClick={this.toggleCrop}>
+                <Ionicon icon='ios-crop' fontSize='30px' color='black' className='toolboxIcon'/>
+                <p>Crop</p>
+              </button>
+              <button onClick={this.toggleReset}>
+                <Ionicon icon='ios-refresh-circle-outline' fontSize='30px' color='black' className='toolboxIcon'/>
+                <p>Reset</p>
+              </button>
+              <button onClick={this.toggleReselect}>
+                <Ionicon icon='ios-images-outline' fontSize='30px' color='black' className='toolboxIcon'/>
+                <p>Re-select</p>
+              </button>
+            </span>
+          </span>
+          
+          <span className='editDescription' >
+            <span className='editToolboxHeader'>
+              <Ionicon icon='ios-create-outline' fontSize='40px' color='black'/>
+              &nbsp;Description
+            </span>
+            <span className='editDescriptionInput'>
+              <textarea 
+                type='text' 
+                onChange={this.onChange} 
+                name='description'
+                placeholder='Write something about the image'
+                rows={4}/>
+            </span>
+          </span>
+
+        </div>
+
+        <span className='editSubmitButton'>
+          <button onClick={this.onSubmit} className='editSubmitButton'>Create Post</button>
+        </span>
+      </div>
     )
   }
 }
+
+EditZone.contextTypes = {
+  router: PropTypes.object.isRequired
+}
+
+export default withRouter(EditZone)

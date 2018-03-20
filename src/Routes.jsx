@@ -19,6 +19,8 @@ import SignupContainer from './components/SignupContainer.jsx'
 import UserProfileContainer from './components/UserProfileContainer.jsx'
 import UploadContainer from './components/UploadContainer.jsx'
 import ChatContainer from './components/ChatContainer.jsx'
+
+import EditZone from './components/Upload/EditZone.jsx'
 import NotFound from './components/NotFound.jsx'
 
 if(localStorage.jwtToken) {
@@ -38,8 +40,9 @@ class Routes extends Component {
                 <Route path='/login' component={LoginContainer} />
                 <Route path='/signup' component={SignupContainer} />
                 <Route path='/user/*' component={UserProfileContainer} />
-                <Route path='/upload' component={UploadContainer} />
                 <Route path='/messages' component={ChatContainer} />
+                <Route exact path='/upload' component={UploadContainer} />
+                <Route path='/upload/edit/' component={EditZone} />
                 <Route path='/*' component={NotFound}/>
               </Switch>
             </Fragment>
