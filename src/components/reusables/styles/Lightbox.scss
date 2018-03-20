@@ -1,0 +1,42 @@
+.lightboxContainer {
+  position: fixed;
+  z-index: 6;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: scroll; /* Enable scroll if needed */
+  background-color: white; /* Fallback color */
+  background-color: white; /* Black w/ opacity */
+  padding: 2% 5%;
+}
+
+.lightboxContent {
+  width: 90%; /* Full width */
+  text-align: center;
+  img {
+    height: calc(88vh);
+    animation: fade-pop-enter 0.5s forwards;    
+  }
+  p {
+    color: #aaa;
+  }
+}
+
+.lightboxContent-landscape {
+  width: 90%; /* Full width */
+  text-align: center;
+  img {
+    width: 100%;
+    animation: fade-pop-enter 0.5s forwards;    
+  }
+  p {
+    color: #aaa;
+  }
+}
+
+.lightboxClose {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}

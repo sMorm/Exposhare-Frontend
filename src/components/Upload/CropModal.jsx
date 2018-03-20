@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import Header from '../reusables/Header.jsx'
 import Cropper from 'react-cropper'
+import Lottie from 'react-lottie'
 
 import './styles/CropModal.scss'
 import 'cropperjs/dist/cropper.css' // bootstrap react-cropper css
+import lottieFile from '../../shared/lottie/simple_loader.json'
 
 /**
  * Full-screen loading component
  */
 const Loading = () => {
+  const lottieOptions = { loop: true, autoplay: true, animationData: lottieFile }
   return (
     <div className='cropModalLoading'>
       <span className='cropModalLoadingContent'>
-        <h1>Cropping...</h1>
+        <Lottie options={lottieOptions} width={300} height={300} />
       </span>
     </div>
   )
@@ -31,6 +34,16 @@ export default class CropModal extends Component {
     loading: false
   }
 
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeypress)
+  }
+  
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeypress)
+  }
+
+  handleKeypress = e => e.key === 'Escape' && this.props.close()
+
   /**
    * The reason why we want to start the loading first is 
    * because sometimes when the client tries to crop a canvas
@@ -41,7 +54,7 @@ export default class CropModal extends Component {
     this.setState({ loading: true })
     setTimeout(() => {
       this.props.crop(this.refs.cropper.getCroppedCanvas().toDataURL())
-      this.props.toggleCrop()
+      this.props.close()
     }, 500)
   }
 
@@ -51,13 +64,14 @@ export default class CropModal extends Component {
         <div className='modalContent'>
           <span className='modalHeader'>
             <Header title='Crop & Resize' />
-            <span className='closeModal' onClick={this.props.toggleCrop}/>
+            <span className='closeModal' onClick={this.props.close}/>
           </span>
           <Cropper
             ref='cropper'
-            src={this.props.rawImage.src}
+            src={this.props.file}
             style={{height: 'calc(100vh - 300px)', width: '100%'}}
-            guides={false}/>
+            guides={false}
+            ref='cropper'/>
           <span className='cropModalButtons'>
             <button onClick={this.crop}>Make crop</button>
           </span>
