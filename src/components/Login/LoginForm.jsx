@@ -32,7 +32,7 @@ class LoginForm extends Component {
     if(isValid) {
       authenticate({ email, password })
       .then(res => {
-        const { token } = res.data.authenticate
+        const { token } = res.data.loginUser
         dispatchAndRedirect({ token, dispatch, push })
       })
     } else {

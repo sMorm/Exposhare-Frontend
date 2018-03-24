@@ -16,7 +16,7 @@ const Dropdown = (props) => {
   return (
     <span className='loggedInDropdownContainer'>
       <span className='dropdownTriangle'/>
-      <Link to='/account' className='loggedInLinkDropdown' onClick={props.toggle}>Account</Link>
+      <Link to={`/user/${props.user_id}`} className='loggedInLinkDropdown' onClick={props.toggle}>Account</Link>
       <br/>
       <span className='loggedInLinkDropdown'>Logout</span>
     </span>
@@ -65,7 +65,7 @@ export default class LoggedIn extends Component {
             <img src={this.state.profile_picture} alt='User Profile'/>
             <p>{this.props.user.info.firstname}</p>
           </span>
-          {this.state.showDropdown && <Dropdown logout={this.props.logout} toggle={this.toggleDropdown}/>}
+          {this.state.showDropdown && <Dropdown logout={this.props.logout} toggle={this.toggleDropdown} user_id={this.props.user.info.id}/>}
         </span>
         <Hamburger user={this.props.user.info.firstname} logout={this.props.logout} loggedIn/>
       </Fragment>

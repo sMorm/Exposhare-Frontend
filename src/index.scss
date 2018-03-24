@@ -22,3 +22,11 @@ body {
   from { transform: scale(1); opacity: 1; }
   to { transform: scale(0); opacity: 0; }
 }
+
+@media (max-width: 700px) {
+  .container {
+    width: 100%;
+    padding: 0;
+  }
+
+}

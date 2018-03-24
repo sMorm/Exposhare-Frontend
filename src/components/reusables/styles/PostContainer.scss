@@ -4,9 +4,10 @@
 }
 
 .postImageContainer {
-  width: 60%;
+  width: 40%;
   img {
     width: 100%;
+    border: solid 1px #eee;
     border-radius: 5px;
   }
 }
@@ -20,14 +21,16 @@
     align-self: center;    
     width: 50px;
     border-radius: 50%;
+    cursor: pointer;
   }
   p {
     padding: 0px 5px;
+    cursor: pointer;
   }
 }
 
 .postContentContainer{
-  width: 35%;
+  width: 50%;
 }
 
 .postInteractionContainer {

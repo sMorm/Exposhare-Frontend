@@ -2,6 +2,9 @@ import React, { Component, Fragment } from 'react'
 import Ionicon from 'react-ionicons'
 import { withRouter, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import axios from 'axios'
+import { connect } from 'react-redux'
+import { mapStateToProps } from '../../shared/utils/redux'
 
 import FilterPreviews from './FilterPreviews.jsx'
 import filters from '../../shared/data/filters'
@@ -28,7 +31,8 @@ class EditZone extends Component {
     croppedImageData: null,
     filter: '',
     description: '',
-    file: null
+    file: null,
+    isLoading: false
   }
 
   componentDidMount() {
@@ -77,25 +81,34 @@ class EditZone extends Component {
   }
 
   onSubmit = () => {
+    this.setState({ isLoading: true })
     const { filter, description } = this.state
-    let finalImage
-
+    const { id } = this.props.user.info
     // Get the final image to upload
-    if(filter === '') {
-      finalImage = this.preview.src
-    } else {
-      const canvas = document.createElement('canvas')
-      const context = canvas.getContext('2d')
-      canvas.width = this.preview.naturalWidth
-      canvas.height = this.preview.naturalHeight
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+    canvas.width = this.preview.naturalWidth
+    canvas.height = this.preview.naturalHeight
+    if(filter !== '')
       context.filter = filter
-      context.drawImage(img, 0, 0)
-      finalImg = canvas.toDataURL()
-    }
+    context.drawImage(this.preview, 0, 0)
+    canvas.toBlob((blob => {
+      console.log(blob)
+      const fd = new FormData()
+      fd.append('photo', blob, 'image.jpg')
+      fd.append('content', description)
+      fd.append('user_id', id)
+      axios.post('http://localhost:4000/api/posts', fd)
+      .then(res => {
+        this.props.history.push('/')
+        this.setState({ isLoading: false })
+      })
+      .catch(e => console.log)
+    }), 'image/jpeg', 0.2) // mime-type, quality 0.1 to 1.0
   }
   
   render() {
-    if(!this.context.router.route.location.state){
+    if(!this.context.router.route.location.state || !this.props.user.isAuthenticated){
       return <Redirect to='/upload'/>
     }
     const { file } = this.context.router.route.location.state
@@ -192,7 +205,11 @@ class EditZone extends Component {
 }
 
 EditZone.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
 }
 
-export default withRouter(EditZone)
+EditZone.propTypes = {
+  user: PropTypes.object.isRequired
+}
+
+export default withRouter(connect(mapStateToProps)(EditZone))

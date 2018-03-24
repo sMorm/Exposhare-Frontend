@@ -1,11 +1,17 @@
 query user($id: Int!) {
   user(id: $id) {
     feed {
+      user {
+        id,
+        firstname,
+        lastname,
+        profile_picture
+      },
       id,
       content,
       likes,
       created_at,
-      image_url,
+      image_url
     }
   }
 }
