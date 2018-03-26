@@ -21,8 +21,8 @@ class UserHome extends Component {
             {({ loading, error, data }) => {
               if(loading) return <Lottie options={lottieOptions} height={300} width={300} />
               if(error) return <h1>error :/</h1>
-              const { feed } = data.user
-              return feed.map((post, key) => <PostContainer key={key} post={post} />)
+              console.log(data)
+              return data.userFeed.map((post, key) => <PostContainer key={key} post={post} />)
             }}
           </Query>
         </div>

@@ -4,7 +4,7 @@ import './styles/ProfileHeader.scss'
 import Ionicon from 'react-ionicons'
 import { withRouter } from 'react-router-dom'
 
-import USER_QUERY from '../../graphql/User.graphql'
+import USER_QUERY from '../../graphql/Profile.graphql'
 import { Query } from 'react-apollo'
 
 // HoC
@@ -47,72 +47,61 @@ class ProfileHeader extends Component {
 
   render() {
     const id = this.props.match.params[0]
-
+    let containerStyle = 'profileHeaderContainer', showScrollButton = false
+    if(this.state.isScrollingUp)
+      containerStyle = 'profileHeaderContainer stickyNav'
+    if(window.pageYOffset > 200) {
+      showScrollButton = (
+        <button onClick={this.scrollToTop}>
+          <Ionicon icon='ios-arrow-round-up' fontSize='28px' color='#fff'/>
+          Back to Top
+        </button>
+      )
+    }
+    const { firstname, lastname, bio, followers, following, profile_picture, username } = this.props.user
+    const profilePic = (profile_picture === null) ? 'http://via.placeholder.com/50x50' : profile_picture
     return (
-      <Query query={USER_QUERY} variables={{ id }} options={{fetchPolicy: 'cache-first'}}>
-        {({ loading, error, data }) => {
-          if(loading) return <h1>loading</h1>
-          if(error) return <h1>error</h1>
-          console.log(data)
-          let contentStyle = 'profileHeaderContent', showScrollButton = false
-          if(this.state.isScrollingUp)
-            contentStyle = 'profileHeaderContent stickyNav'
-          if(window.pageYOffset > 200) {
-            showScrollButton = (
-              <button onClick={this.scrollToTop}>
-                <Ionicon icon='ios-arrow-round-up' fontSize='28px' color='#fff'/>
-                Back to Top
-              </button>
-            )
-          }
-          const { firstname, lastname, bio, followers, following, profile_picture, username } = data.user 
-          const profilePic = (profile_picture === null) ? 'http://via.placeholder.com/50x50' : profile_picture
-          return (
-            <div className='container'>
-              <div className='profileHeaderContainer'>
-              <span className={contentStyle}>
-                <span className='profileHeaderName'>
-                  <img src={profilePic} alt={`${username}'s profile`} />
-                  <span>
-                    <h1>{`${firstname} ${lastname}`}</h1>
-                    <h5>@{username}</h5>
-                  </span>
-                </span>
-    
-                <span className='profileInteractions'>
-                  <button>Follow</button>
-                  <button>Message</button>
-                </span>
-              </span>
-    
-              <span className='profileHeaderStats'>
-                <span>
-                  <h3>Posts</h3>
-                  <p>4</p>
-                </span>
-                <span>
-                  <h3>Followers</h3>
-                  <p>{followers}</p>
-                </span>
-                <span>
-                  <h3>Following</h3>
-                  <p>{following}</p>
-                </span>
-                <span>
-                  <h3>Likes</h3>
-                  <p>445</p>
-                </span>
-              </span>
-    
-              </div>
-    
-            <span className='profileHeaderUtility'>
-              {showScrollButton}
+      <React.Fragment>
+        <div className={containerStyle}>
+        <span className='profileHeaderContent'>
+          <span className='profileHeaderName'>
+            <img src={profilePic} alt={`${username}'s profile`} />
+            <span>
+              <h1>{`${firstname} ${lastname}`}</h1>
+              <h5>@{username}</h5>
             </span>
-          </div>
-          )
-        }}
-      </Query>
+          </span>
+
+          <span className='profileInteractions'>
+            <button>Follow</button>
+            <button>Message</button>
+          </span>
+        </span>
+
+        <span className='profileHeaderStats'>
+          <span>
+            <h3>Posts</h3>
+            <p>4</p>
+          </span>
+          <span>
+            <h3>Followers</h3>
+            <p>{followers}</p>
+          </span>
+          <span>
+            <h3>Following</h3>
+            <p>{following}</p>
+          </span>
+          <span>
+            <h3>Likes</h3>
+            <p>445</p>
+          </span>
+        </span>
+
+        </div>
+      <span className='profileHeaderUtility'>
+        {showScrollButton}
+      </span>
+    </React.Fragment>
     )
   }
 }

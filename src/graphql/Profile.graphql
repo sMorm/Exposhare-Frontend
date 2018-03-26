@@ -9,5 +9,9 @@ query user($id: Int!) {
     username,
     followers,
     following
+  },
+  userPosts(id: $id) {
+    id,
+    image_url
   }
 }
