@@ -1,0 +1,76 @@
+.searchHeaderContainer {
+  h1 {
+    font-family: 'proxima_nova_altbold';
+    font-size: 42px;
+  }
+  p {
+    font-size: 24px;
+    color: #555;
+  }
+}
+
+.searchHeaderContent {
+  display: flex;
+  justify-content: space-between;
+  input {
+    width: 95%;
+    padding: 10px 2%;
+    font-size: 24px;
+    font-family: 'proxima_nova_altbold';
+    outline: none;
+    border: solid 2px #ccc;
+  }
+}
+
+.searchHeaderText {
+  width: 60%;
+}
+
+.searchHeaderLottie {
+  width: 30%;
+}
+
+.searchUserResults {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  span {
+    margin: 5px 0;
+  }
+
+}
+.searchUserResultContent {
+  text-decoration: none;
+  border: solid 1px #888;
+  width: 28%;
+  color: #444;
+  margin: 25px 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.searchUserResultFlex {
+  display: flex;
+  justify-content: flex-start;
+  img {
+    width: 90px;
+    border-radius: 50%;
+    align-self: center;
+    padding-right: 5px;
+  }
+}
+
+@media (max-width: 700px) {
+  .searchHeaderContent {
+    display: block;
+    input {
+      width: 90%;
+    }
+  }
+  .searchHeaderText {
+    width: 100%;
+  }
+  .searchHeaderLottie {
+    display: none;
+  }
+}

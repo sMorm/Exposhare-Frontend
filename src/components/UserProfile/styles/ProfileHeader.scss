@@ -1,9 +1,10 @@
 .profileHeaderContainer {
   position: sticky;
+  position: -webkit-sticky;
   top: -1px;
   background: white;
   width: 100%;
-  padding: 0px 2px;
+  padding: 2px;
   display: flex;
   justify-content: space-between;
   animation: slideUp 0.5s forwards;
@@ -88,8 +89,12 @@
   display: flex;
   justify-content: space-between;
   text-align: right;
+  font-family: 'proxima_nova_altbold';
   span {
     padding-left: 5%;
+  }
+  p {
+    color: #555;
   }
 }
 

@@ -7,9 +7,6 @@ import { withRouter } from 'react-router-dom'
 import USER_QUERY from '../../graphql/Profile.graphql'
 import { Query } from 'react-apollo'
 
-// HoC
-import { withScroll } from '../hocUtils.js'
-
 class ProfileHeader extends Component {
 
   state = {

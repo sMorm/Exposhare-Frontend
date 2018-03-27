@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { mapStateToProps } from '../shared/utils/redux'
 import { setCurrentUser } from '../actions/user'
+import _ from 'lodash'
 
 import LoggedIn from './Navigation/LoggedIn.jsx'
 import Guest from './Navigation/Guest.jsx'
@@ -31,7 +32,7 @@ class Navigation extends Component {
    * re-appear. See handleScroll() for logic
    */
   componentDidMount() {
-    document.addEventListener('scroll', this.handleScroll)
+    document.addEventListener('scroll', _.debounce(this.handleScroll, 5))
   }
 
   /**
@@ -41,7 +42,7 @@ class Navigation extends Component {
    * just to be safe.
    */
   componentWillUnmount() {
-    document.removeEventListener('scroll')
+    document.removeEventListener('scroll', this.handleScroll)
   }
 
   /**
@@ -53,7 +54,7 @@ class Navigation extends Component {
    */
   handleScroll = event => {
     const offset = window.pageYOffset
-    if(this.state.offset > offset) {
+    if(Math.abs(this.state.offset) > Math.abs(offset)) {
       // Scrolling Up, show
       this.setState({ navContainerStyle: 'navigationContainer enter'})
     } else {
@@ -77,7 +78,7 @@ class Navigation extends Component {
       <div>
         <div className={this.state.navContainerStyle}>
           <span className='navigationContent'>
-            <Link to='/' style={{textDecoration: 'none'}}><h1>Exposhare</h1></Link>
+            <Link to='/' className='navigationLogo'><h1>Exposhare</h1></Link>
             {this.props.user.isAuthenticated 
               ? <LoggedIn logout={this.logout} user={this.props.user} /> 
               : <Guest/> 

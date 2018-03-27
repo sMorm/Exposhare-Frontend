@@ -5,7 +5,9 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { mapStateToProps } from '../../shared/utils/redux'
+import { Mutation } from 'react-apollo'
 
+import UPLOAD_MUTATION from '../../graphql/Upload.graphql'
 import FilterPreviews from './FilterPreviews.jsx'
 import filters from '../../shared/data/filters'
 import CropModal from './CropModal.jsx'
@@ -80,7 +82,7 @@ class EditZone extends Component {
       this.setState({ filter })
   }
 
-  onSubmit = () => {
+  onSubmit = newPost => {
     this.setState({ isLoading: true })
     const { filter, description } = this.state
     const { id } = this.props.user.info
@@ -94,23 +96,28 @@ class EditZone extends Component {
     context.drawImage(this.preview, 0, 0)
     canvas.toBlob((blob => {
       console.log(blob)
-      const fd = new FormData()
-      fd.append('photo', blob, 'image.jpg')
-      fd.append('content', description)
-      fd.append('user_id', id)
-      axios.post('http://localhost:4000/api/posts', fd)
-      .then(res => {
-        this.props.history.push('/')
-        this.setState({ isLoading: false })
-      })
-      .catch(e => console.log)
+      blob.lastModifiedDate = new Date()
+      newPost({ variables: { file: blob, content: description, user_id: id }})
+      // console.log(blob)
+      // const fd = new FormData()
+      // fd.append('photo', blob, 'image.jpg')
+      // fd.append('content', description)
+      // fd.append('user_id', id)
+      // axios.post('http://localhost:4000/api/posts', fd)
+      // .then(res => {
+      //   this.props.history.push('/')
+      //   this.setState({ isLoading: false })
+      // })
+      // .catch(e => console.log)
     }), 'image/jpeg', 0.2) // mime-type, quality 0.1 to 1.0
   }
   
   render() {
-    if(!this.context.router.route.location.state || !this.props.user.isAuthenticated){
+    // no image? redirect — not logged in? redirect
+    if(!this.context.router.route.location.state || !this.props.user.isAuthenticated) {
       return <Redirect to='/upload'/>
     }
+    // has image
     const { file } = this.context.router.route.location.state
     const { 
       cropModal, 
@@ -195,10 +202,34 @@ class EditZone extends Component {
           </span>
 
         </div>
+        <Mutation mutation={UPLOAD_MUTATION}>
+          {(newPost, { data, error, loading }) => {
+            if(loading){
+              return (
+                <span className='editSubmitButton'>
+                  <button 
+                  className='editSubmitButton'>
+                    Loading
+                  </button>
+                </span>
+              )
+            }
+            if(data) {
+              console.log(data)
+              return <Redirect to='/' />
+            }
+            return (
+              <span className='editSubmitButton'>
+                <button 
+                  onClick={() => this.onSubmit(newPost)} 
+                  className='editSubmitButton'>
+                  Create Post
+                </button>
+              </span>
+            )
+          }}
+        </Mutation>
 
-        <span className='editSubmitButton'>
-          <button onClick={this.onSubmit} className='editSubmitButton'>Create Post</button>
-        </span>
       </div>
     )
   }

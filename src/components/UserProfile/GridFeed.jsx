@@ -35,7 +35,6 @@ class GridFeed extends Component {
   render() {
     let feed = ''
     const { posts } = this.props
-    console.log(posts)
     switch(this.state.activeFeed) {
       case 'no-crop':
         const items = [...posts, ...posts, ...posts, ...posts]

@@ -1,0 +1,84 @@
+.getStartedContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.getStartedContent {
+  width: 50%;
+  h1 {
+    font-family: 'proxima_nova_altbold';
+    font-size: 48px;
+  }
+
+  h2 {
+    font-family: 'proxima_nova_altbold';
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 24px;
+    color: #888;
+  }
+
+  h3 {
+    font-family: 'proxima_nova_altbold';
+    display: inline-block;
+    border: solid 1px black;
+    padding: 15px 18px;
+    transition: all 0.2s forwards;
+    cursor: pointer;
+    &:hover {
+      background: black;
+      color: white;
+    }
+  }
+
+  button {
+    font-family: 'proxima_nova_altbold';
+    margin-top: 1.5em;
+    font-size: 16px;
+    display: inline-block;
+    border: solid 1px black;
+    padding: 15px 18px;
+    transition: all 0.2s forwards;
+    cursor: pointer;
+    &:hover {
+      background: black;
+      color: white;
+    }
+  }
+}
+
+.getStartedLottie {
+  width: 45%;
+  height: calc(100vh);
+  min-height: 800px;
+  animation: fade-in 3s forwards;
+}
+
+.editBioContainer {
+  width: 100%;
+  textarea {
+    resize: none;
+    width: 90%;
+    height: 100px;
+    border: solid 1px #888;
+    outline: none;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .getStartedContainer {
+    display: block;
+  }
+  .getStartedLottie {
+    display: none;
+  }
+  .getStartedContent {
+    width: 100%;
+  }
+}
