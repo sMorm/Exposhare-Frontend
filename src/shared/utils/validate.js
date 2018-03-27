@@ -24,8 +24,14 @@ export const validateSignupForm = (data) => {
   let errors = {}
   let isValid = true
 
-  if(Validator.isEmpty(data.username))
-    errors.username = 'A username is required'
+  if(Validator.isEmpty(data.firstname))
+    errors.firstname = 'First Name is required'
+  if(Validator.isEmpty(data.lastname))
+    errors.lastname = 'Last Name is required'
+    if(Validator.isEmpty(data.username))
+    errors.username = 'Username is required'
+    if(Validator.isEmpty(data.password))
+      errors.email = 'Email required to signup'
   if(Validator.isEmpty(data.password))
     errors.password = 'Password required to signup'
   if(data.confirmPassword != data.password)

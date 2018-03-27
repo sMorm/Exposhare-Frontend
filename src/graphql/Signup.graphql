@@ -1,5 +1,5 @@
-mutation newUser($firstname: String!, $lastname: String!, $email: String!, $password: String!) {
-  newUser(firstname: $firstname, lastname: $lastname, email: $email, password: $password) {
+mutation newUser($firstname: String!, $lastname: String!, $email: String!, $password: String!, $bio: String!, $username: String!) {
+  newUser(firstname: $firstname, lastname: $lastname, email: $email, password: $password, bio: $bio, username: $username) {
     user {
       firstname
     },

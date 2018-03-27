@@ -12,6 +12,7 @@ query user($id: Int!) {
   },
   userPosts(id: $id) {
     id,
-    image_url
+    image_url,
+    
   }
 }
