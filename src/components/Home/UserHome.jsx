@@ -17,7 +17,7 @@ class UserHome extends Component {
       <div className='container'>
         <Header title='Feed'/>
         <div className='feedContainer'>
-          <Query query={FEED_QUERY} variables={{ id: this.props.id }} options={{fetchPolicy: 'cache-first'}}>
+          <Query query={FEED_QUERY} variables={{ id: this.props.id }} options={{fetchPolicy: 'cache-and-network'}}>
             {({ loading, error, data }) => {
               if(loading) return <Lottie options={lottieOptions} height={300} width={300} />
               if(error) return <h1>error :/</h1>

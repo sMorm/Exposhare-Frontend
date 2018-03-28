@@ -1,4 +1,7 @@
 // Default Global Styles, fonts, background color, etc
+* {
+  -webkit-overflow-scrolling: touch;
+}
 
 body {
   font-family: 'Proxima Nova', sans-serif;

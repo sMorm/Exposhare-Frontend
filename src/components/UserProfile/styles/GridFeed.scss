@@ -37,7 +37,6 @@
 .gridContainer {
   display: grid;
   padding-top: 50px;
-  display: grid;
   grid-template-columns: repeat(3, auto);
   grid-gap: 60px;
 }
@@ -77,9 +76,15 @@
 // }
 
 @media(max-width: 900px) {
-  // .gridFeedContainer {
-  //   grid-gap: 15px;
-  // }
+  .gridContainer {
+    display: block;
+  }
+  .gridContent {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
   .gridFeedContent {
     flex: 31%;
     max-width: 31%;
