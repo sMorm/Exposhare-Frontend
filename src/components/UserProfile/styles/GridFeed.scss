@@ -84,4 +84,12 @@
     flex: 31%;
     max-width: 31%;
   }
+
+  .noCropContent {
+    flex: 33%;
+    max-width: 33%;
+    img {
+      margin-top: 1px;
+    }
+  }
 }

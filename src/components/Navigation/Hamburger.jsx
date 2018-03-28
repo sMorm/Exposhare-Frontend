@@ -6,6 +6,10 @@ import { mapStateToProps } from '../../shared/utils/redux'
 import { setCurrentUser } from '../../actions/user'
 import './styles/Hamburger.scss'
 
+/**
+ * Hamburger menu to render links for users that 
+ * aren't logged in.
+ */
 const GuestOptions = () => {
   return (
     <div className='hamburgerLinkContainer'>
@@ -23,6 +27,10 @@ const GuestOptions = () => {
   )
 }
 
+/**
+ * Hamburger menu to render links for users that 
+ * are logged in.
+ */
 const LoggedInOptions = (props) => {
   return (
     <div className='hamburgerLinkContainer'>
@@ -54,8 +62,8 @@ const LoggedInOptions = (props) => {
 
 class Hamburger extends Component {
   state = {
-    hamburgerStyle: 'hamburger',
-    navOverlay: 'navOverlay',
+    hamburgerStyle: 'hamburger', // hamburger menu style class
+    navOverlay: 'navOverlay', // overlay class
     showMenu: false
   }
 
@@ -69,6 +77,10 @@ class Hamburger extends Component {
 
   handleScroll = () => this.setState({ showMenu: false, hamburgerStyle: 'hamburger' })
 
+  /**
+   * Toggles classes for hamburger menu on open,
+   * setTimeout is used to debounce the animation
+   */
   toggle = () => {
     if(this.state.hamburgerStyle === 'hamburger')
       this.setState({ hamburgerStyle: 'hamburger open', showMenu: true})

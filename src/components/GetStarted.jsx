@@ -28,6 +28,8 @@ class GetStarted extends Component {
   render() {
     // if(!this.props.user.isAuthenticated || this.state.redirect || this.props.user.info.profile_picture !== null || this.props.user.info.bio) 
     //   return <Redirect to='/' />
+    if(this.state.redirect)
+      return <Redirect to='/' />
     const { firstname, lastname, bio, id } = this.props.user.info
     const lottieOptions = { loop: true, autoplay: true, animationData: lottieFile }
     return (

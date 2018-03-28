@@ -1,6 +1,10 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { mapStateToProps } from '../../shared/utils/redux'
 
+// Components
 import Hamburger from './Hamburger.jsx'
 
 // Already loaded in Guest.jsx
@@ -25,7 +29,7 @@ const Dropdown = (props) => {
   )
 }
 
-export default class LoggedIn extends Component {
+class LoggedIn extends Component {
 
   state = {
     showDropdown: false,
@@ -58,6 +62,9 @@ export default class LoggedIn extends Component {
   }
 
   render() {
+    const { firstname, profile_picture } = this.props.user.info // redux info
+    const { logout } = this.props
+    const dropDownMenu = this.state.showDropdown && <Dropdown logout={logout} toggle={this.toggleDropdown} user_id={id}/>
     return (
       <Fragment>
         <span className='loggedInLinkContainer'>
@@ -66,12 +73,18 @@ export default class LoggedIn extends Component {
           <Link to='/messages' className='loggedInLink'>Messages</Link>
           <span className='loggedInUserBubble' onClick={this.toggleDropdown} ref={(ref) => { this.node = ref }}>
             <img src={this.state.profile_picture} alt='User Profile'/>
-            <p>{this.props.user.info.firstname}</p>
+            <p>{firstname}</p>
           </span>
-          {this.state.showDropdown && <Dropdown logout={this.props.logout} toggle={this.toggleDropdown} user_id={this.props.user.info.id}/>}
+          {dropDownMenu}
         </span>
-        <Hamburger user={this.props.user.info.firstname} logout={this.props.logout} loggedIn/>
+        <Hamburger user={firstname} logout={logout} loggedIn/>
       </Fragment>
     )
   }
 }
+
+LoggedIn.propTypes = {
+  logout: PropTypes.func.isRequired // from /components/Navigation.jsx
+}
+
+export default connect(mapStateToProps)(LoggedIn)

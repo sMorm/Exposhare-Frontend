@@ -109,7 +109,7 @@ class EditZone extends Component {
       //   this.setState({ isLoading: false })
       // })
       // .catch(e => console.log)
-    }), 'image/jpeg', 0.2) // mime-type, quality 0.1 to 1.0
+    }), 'image/jpeg', 0.4) // mime-type, quality 0.1 to 1.0
   }
   
   render() {
@@ -216,7 +216,7 @@ class EditZone extends Component {
             }
             if(data) {
               console.log(data)
-              return <Redirect to='/' />
+              this.props.history.push('/')
             }
             return (
               <span className='editSubmitButton'>

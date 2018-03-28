@@ -4,7 +4,7 @@
 }
 
 .postImageContainer {
-  width: 40%;
+  width: 50%;
   img {
     width: 100%;
     border: solid 1px #eee;
@@ -30,7 +30,7 @@
 }
 
 .postContentContainer{
-  width: 40%;
+  width: 45%;
 }
 
 .postInteractionContainer {
@@ -56,4 +56,10 @@
 }
 
 .likeImage {
+}
+
+@media (max-width: 700px) {
+  .postContainer {
+    display: block;
+  }
 }

@@ -54,7 +54,7 @@
 
 .getStartedLottie {
   width: 45%;
-  height: calc(100vh);
+  height: calc(100vh - 100px);
   min-height: 800px;
   animation: fade-in 3s forwards;
 }

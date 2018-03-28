@@ -80,7 +80,7 @@ class Navigation extends Component {
           <span className='navigationContent'>
             <Link to='/' className='navigationLogo'><h1>Exposhare</h1></Link>
             {this.props.user.isAuthenticated 
-              ? <LoggedIn logout={this.logout} user={this.props.user} /> 
+              ? <LoggedIn logout={this.logout} /> 
               : <Guest/> 
             }
           </span>

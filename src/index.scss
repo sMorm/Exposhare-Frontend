@@ -11,6 +11,7 @@ body {
   max-width: 1200px;
   margin: auto;
   padding: 1.5% 0;
+  animation: fade 0.5s forwards;
 }
 
 @keyframes fade-pop-enter {
@@ -28,5 +29,4 @@ body {
     width: 95%;
     padding: 0;
   }
-
 }
