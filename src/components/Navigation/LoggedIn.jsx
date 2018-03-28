@@ -62,7 +62,7 @@ class LoggedIn extends Component {
   }
 
   render() {
-    const { firstname, profile_picture } = this.props.user.info // redux info
+    const { firstname, profile_picture, id } = this.props.user.info // redux info
     const { logout } = this.props
     const dropDownMenu = this.state.showDropdown && <Dropdown logout={logout} toggle={this.toggleDropdown} user_id={id}/>
     return (
