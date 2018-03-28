@@ -37,7 +37,7 @@ class UploadContainer extends Component {
       this.setState({ loading: true })
       const file = acceptedFiles.find(f => f)
       const compressor = new ImageCompressor()
-      const options = { quality: 0.6, convertSize: '5000000'} // convert all over 5mb
+      const options = { quality: 0.5, convertSize: '2000000'} // convert all over 2mb
       compressor.compress(file, options)
       .then(blob => {
         const fr = new FileReader()

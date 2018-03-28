@@ -1,0 +1,18 @@
+query user($id: Int!) {
+  user(id: $id) {
+    firstname,
+    lastname,
+    email,
+    created_at,
+    profile_picture,
+    bio,
+    username,
+    followers,
+    following
+  },
+  userPosts(id: $id) {
+    id,
+    image_url,
+    
+  }
+}

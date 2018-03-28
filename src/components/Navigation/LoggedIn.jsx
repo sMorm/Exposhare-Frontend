@@ -1,6 +1,10 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { mapStateToProps } from '../../shared/utils/redux'
 
+// Components
 import Hamburger from './Hamburger.jsx'
 
 // Already loaded in Guest.jsx
@@ -16,14 +20,16 @@ const Dropdown = (props) => {
   return (
     <span className='loggedInDropdownContainer'>
       <span className='dropdownTriangle'/>
-      <Link to='/account' className='loggedInLinkDropdown' onClick={props.toggle}>Account</Link>
+      <Link to={`/user/${props.user_id}`} className='loggedInLinkDropdown' onClick={props.toggle}>Account</Link>
       <br/>
-      <span className='loggedInLinkDropdown'>Logout</span>
+      <Link to={'/settings'} className='loggedInLinkDropdown' onClick={props.toggle}>Settings</Link>
+      <br/>
+      <span className='loggedInLinkDropdown' onClick={props.logout}>Logout</span>
     </span>
   )
 }
 
-export default class LoggedIn extends Component {
+class LoggedIn extends Component {
 
   state = {
     showDropdown: false,
@@ -56,19 +62,29 @@ export default class LoggedIn extends Component {
   }
 
   render() {
+    const { firstname, profile_picture } = this.props.user.info // redux info
+    const { logout } = this.props
+    const dropDownMenu = this.state.showDropdown && <Dropdown logout={logout} toggle={this.toggleDropdown} user_id={id}/>
     return (
       <Fragment>
         <span className='loggedInLinkContainer'>
+          <Link to='/search' className='loggedInLink'>Search</Link>
           <Link to='/upload' className='loggedInLink'>Upload</Link>                    
           <Link to='/messages' className='loggedInLink'>Messages</Link>
           <span className='loggedInUserBubble' onClick={this.toggleDropdown} ref={(ref) => { this.node = ref }}>
             <img src={this.state.profile_picture} alt='User Profile'/>
-            <p>{this.props.user.info.firstname}</p>
+            <p>{firstname}</p>
           </span>
-          {this.state.showDropdown && <Dropdown logout={this.props.logout} toggle={this.toggleDropdown}/>}
+          {dropDownMenu}
         </span>
-        <Hamburger user={this.props.user.info.firstname} logout={this.props.logout} loggedIn/>
+        <Hamburger user={firstname} logout={logout} loggedIn/>
       </Fragment>
     )
   }
 }
+
+LoggedIn.propTypes = {
+  logout: PropTypes.func.isRequired // from /components/Navigation.jsx
+}
+
+export default connect(mapStateToProps)(LoggedIn)

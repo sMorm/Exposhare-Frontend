@@ -1,5 +1,5 @@
-mutation authenticate($email: String!, $password: String!) {
-  authenticate(email: $email, password: $password) {
+mutation loginUser($email: String!, $password: String!) {
+  loginUser(email: $email, password: $password) {
     user {
       firstname
     },

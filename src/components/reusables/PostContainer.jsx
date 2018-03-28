@@ -1,20 +1,25 @@
 import React, { Component, Fragment } from 'react'
 import Lottie from 'react-lottie'
-
+import { withRouter } from 'react-router-dom'
 import './styles/PostContainer.scss'
 
 import lottieFile from '../../shared/lottie/love_explosion.json'
 
-export default class PostContainer extends Component {
+class PostContainer extends Component {
   state = {
     liked: false
   }
 
   likePicture = () => this.setState({ liked: !this.state.liked })
 
+  pushToProfile = () => this.props.history.push(`/user/${this.props.post.user.id}`)
+
   render() {
-    const { content, image_url, likes } = this.props.post
-    const profile_picture = 'http://via.placeholder.com/100x100'
+    const { content, image_url, likes, user: { firstname, lastname, profile_picture } } = this.props.post
+    const authorFullname = `${firstname} ${lastname}`
+    let profilePicURL = 'http://via.placeholder.com/100x100'
+    if(profile_picture)
+      profilePicURL = profile_picture
     const heart = 'https://s3.amazonaws.com/exposhare-statics/heart.png'
     const lottieOptions = { loop: false, autoplay: true, animationData: lottieFile }
     return (
@@ -22,8 +27,8 @@ export default class PostContainer extends Component {
         <div className='postContainer'>
           <span className='postImageContainer'>
             <span className='userBubbleContainer'>
-              <img src={profile_picture} alt='profile' />
-              <p>Serey Morm</p>
+              <img src={profilePicURL} alt='profile' onClick={this.pushToProfile}/>
+              <p onClick={this.pushToProfile}>{authorFullname}</p>
             </span>
             <img src={`https://s3.amazonaws.com/gui-project-database${image_url}`} alt='' />
           </span>
@@ -48,3 +53,5 @@ export default class PostContainer extends Component {
     )
   }
 }
+
+export default withRouter(PostContainer)

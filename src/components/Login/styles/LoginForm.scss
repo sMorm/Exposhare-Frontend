@@ -5,7 +5,7 @@
 }
 
 .loginForm {
-  padding: 8em 2em;
+  padding: 5em 2em;
   padding-top: 2em;
   background-color: #F8F8F8;
   width: 40%;
@@ -39,6 +39,12 @@
     cursor: pointer;
     outline: none;
   }
+}
+
+.errorText {
+  margin-top: 0px;
+  color: red;
+  height: 18px;
 }
 
 @media (max-width: 700px) {

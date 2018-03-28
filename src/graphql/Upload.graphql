@@ -1,0 +1,15 @@
+mutation newPost($file: Upload!, $content: String!, $user_id: Int! ) {
+  newPost(file: $file, content: $content, user_id: $user_id) {
+    id,
+    content,
+    created_at,
+    image_url,
+    likes,
+    user {
+      profile_picture,
+      firstname,
+      lastname,
+      username
+    }
+  }
+}

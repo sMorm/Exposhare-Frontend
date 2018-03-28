@@ -19,6 +19,9 @@ import SignupContainer from './components/SignupContainer.jsx'
 import UserProfileContainer from './components/UserProfileContainer.jsx'
 import UploadContainer from './components/UploadContainer.jsx'
 import ChatContainer from './components/ChatContainer.jsx'
+import GetStarted from './components/GetStarted.jsx'
+import Settings from './components/Settings.jsx'
+import SearchContainer from './components/SearchContainer.jsx'
 
 import EditZone from './components/Upload/EditZone.jsx'
 import NotFound from './components/NotFound.jsx'
@@ -43,6 +46,9 @@ class Routes extends Component {
                 <Route path='/messages' component={ChatContainer} />
                 <Route exact path='/upload' component={UploadContainer} />
                 <Route path='/upload/edit/' component={EditZone} />
+                <Route path='/get-started' component={GetStarted} />
+                <Route path='/settings' component={Settings} />
+                <Route path='/search' component={SearchContainer} />
                 <Route path='/*' component={NotFound}/>
               </Switch>
             </Fragment>
