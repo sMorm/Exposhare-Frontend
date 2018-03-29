@@ -1,22 +1,13 @@
 {
-  "taskDefinition": {
-    "family": "exposhare-client",
-    "executionRoleArn": "arn:aws:iam::466336452057:role/ecsTaskExecutionRole",,
-    "containerDefinitions": [
-      {
-        "name": "exposhare-client",
-        "image": "466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest",
-        "cpu": 10,
-        "portMappings": [
-          {
-            "protocol": "tcp",
-            "containerPort": 300,
-            "hostPort": 80
-          }
-        ],
-        "memory": 500,
-        "essential": true
-      }
-    ]
-  }
+	"containerDefinitions": [{
+		"portMappings": [{
+			"hostPort": 3000,
+			"protocol": "tcp",
+			"containerPort": 3000
+		}],
+		"image": "466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest",
+		"name": "exposhare-client"
+	}],
+	"memory": "1024",
+	"family": "exposhare-client"
 }
