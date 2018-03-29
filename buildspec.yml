@@ -14,5 +14,3 @@ phases:
   post_build:
     commands: #pushing
       - docker push 466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest
-  artifacts:
-    files: imagedefinitions.json
