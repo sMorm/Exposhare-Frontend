@@ -1,19 +1,21 @@
 {
+  "taskDefinition": {
     "family": "exposhare-client",
     "containerDefinitions": [
-        {
-            "image": "466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest",
-            "name": "exposhare-client",
-            "cpu": 1,
-            "memory": 500,
-            "essential": false,
-            "portMappings": [
-                {
-                    "containerPort": 3000,
-                    "hostPort": 80,
-                    "protocol": "tcp"
-                }
-            ]
-        }
+      {
+        "name": "exposhare-client",
+        "image": "466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest",
+        "cpu": 10,
+        "portMappings": [
+          {
+            "protocol": "tcp",
+            "containerPort": 300,
+            "hostPort": 80
+          }
+        ],
+        "memory": 500,
+        "essential": true
+      }
     ]
+  }
 }
