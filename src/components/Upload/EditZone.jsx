@@ -214,10 +214,7 @@ class EditZone extends Component {
                 </span>
               )
             }
-            if(data) {
-              console.log(data)
-              this.props.history.push('/')
-            }
+            if(data) this.props.history.push('/')
             return (
               <span className='editSubmitButton'>
                 <button 

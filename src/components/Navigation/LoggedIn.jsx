@@ -22,7 +22,7 @@ const Dropdown = (props) => {
       <span className='dropdownTriangle'/>
       <Link to={`/user/${props.user_id}`} className='loggedInLinkDropdown' onClick={props.toggle}>Account</Link>
       <br/>
-      <Link to={'/settings'} className='loggedInLinkDropdown' onClick={props.toggle}>Settings</Link>
+      <Link to={'/edit-profile'} className='loggedInLinkDropdown' onClick={props.toggle}>Settings</Link>
       <br/>
       <span className='loggedInLinkDropdown' onClick={props.logout}>Logout</span>
     </span>

@@ -5,7 +5,7 @@ import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { createUploadLink } from 'apollo-upload-client'
 
-const gqlEndpoint = 'http://localhost:4001/graphql'
+const gqlEndpoint = 'http://35.173.202.28:4001/graphql'
 
 // const httpLink = createHttpLink({
 //   uri: gqlEndpoint

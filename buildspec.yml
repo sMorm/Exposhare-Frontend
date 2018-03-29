@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  prebuild:
+    commands: #authentication
+      - echo Logging into ECR for pushing
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+  build:
+    commands: #building
+      - echo Logged into ECR.. building image now
+      - docker build -t exposhare-frontend .
+      - echo Image built, tagging for push
+      - docker tag exposhare-frontend:latest 466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest
+  post_build:
+    commands: #pushing
+      - docker push 466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest
