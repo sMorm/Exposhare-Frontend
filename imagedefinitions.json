@@ -1,6 +1,7 @@
 {
   "taskDefinition": {
     "family": "exposhare-client",
+    "executionRoleArn": "arn:aws:iam::466336452057:role/ecsTaskExecutionRole",,
     "containerDefinitions": [
       {
         "name": "exposhare-client",
