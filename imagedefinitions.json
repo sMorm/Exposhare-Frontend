@@ -1,0 +1,19 @@
+{
+    "family": "exposhare-client",
+    "containerDefinitions": [
+        {
+            "image": "466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest",
+            "name": "exposhare-client",
+            "cpu": 1,
+            "memory": 500,
+            "essential": false,
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 80,
+                    "protocol": "tcp"
+                }
+            ]
+        }
+    ]
+}
