@@ -48,6 +48,7 @@ class Routes extends Component {
                 <Route path='/upload/edit/' component={EditZone} />
                 <Route path='/get-started' component={GetStarted} />
                 <Route path='/settings' component={Settings} />
+                <Route path='/edit-profile' component={Settings} />
                 <Route path='/search' component={SearchContainer} />
                 <Route path='/*' component={NotFound}/>
               </Switch>

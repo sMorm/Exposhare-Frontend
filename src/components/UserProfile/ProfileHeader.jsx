@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import './styles/ProfileHeader.scss'
 import Ionicon from 'react-ionicons'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { mapStateToProps } from '../../shared/utils/redux'
 
-import USER_QUERY from '../../graphql/Profile.graphql'
-import { Query } from 'react-apollo'
+import FOLLOW_MUTATION from '../../graphql/Follow.graphql'
+import { Mutation } from 'react-apollo'
 
 class ProfileHeader extends Component {
 
@@ -55,7 +57,7 @@ class ProfileHeader extends Component {
         </button>
       )
     }
-    const { firstname, lastname, bio, followers, following, profile_picture, username } = this.props.user
+    const { firstname, lastname, bio, followers, following, profile_picture, username } = this.props.userInfo
     const profilePic = (profile_picture === null) ? 'http://via.placeholder.com/50x50' : profile_picture
     return (
       <React.Fragment>
@@ -70,7 +72,12 @@ class ProfileHeader extends Component {
           </span>
 
           <span className='profileInteractions'>
-            <button>Follow</button>
+            <Mutation mutation={FOLLOW_MUTATION} variables={{ followee: id, follower: this.props.user.info.id}}>
+              {(newFollow, { data, loading, error}) => {
+                if(error || data) return <button>Following</button>
+                return <button onClick={newFollow}>Follow</button>
+              }}
+            </Mutation>
             <button>Message</button>
           </span>
         </span>
@@ -109,4 +116,4 @@ ProfileHeader.propTypes = {
   profilePicture: PropTypes.string
 }
 
-export default withRouter(ProfileHeader)
+export default connect(mapStateToProps)(withRouter(ProfileHeader))

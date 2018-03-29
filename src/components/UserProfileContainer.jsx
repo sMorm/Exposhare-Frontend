@@ -21,7 +21,7 @@ class UserProfileContainer extends Component {
           const { user, userPosts } = data
           return (
             <div className='container'>
-              <ProfileHeader user={user} />
+              <ProfileHeader userInfo={user} />
               <GridFeed posts={userPosts} user={user}/>
             </div>
           )
