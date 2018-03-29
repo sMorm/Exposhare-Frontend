@@ -1,7 +1,7 @@
 version: 0.2
 
 phases:
-  prebuild:
+  pre_build:
     commands: #authentication
       - echo Logging into ECR for pushing
       - $(aws ecr get-login --no-include-email --region us-east-1)
