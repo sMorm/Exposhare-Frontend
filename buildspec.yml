@@ -5,14 +5,14 @@ phases:
     commands: #authentication
       - echo Logging into ECR for pushing
       - $(aws ecr get-login --no-include-email --region us-east-1)
-      - REPOSITORY_URI=
+      - REPOSITORY_URI=466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
   build:
     commands:
       - echo Logged into ECR.. building image now
       - docker build -t $REPOSITORY_URI:latest .
-      - echo Image built, tagging for push
-      - docker tag exposhare-frontend:latest 466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest
+      - echo Image built, tagging with build version
+      - docker tag exposhare-frontend:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands: #pushing
       - docker push $REPOSITORY_URI:latest
