@@ -21,5 +21,6 @@ phases:
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
       - printf '[{"name":"exposhare-client","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - ls
 artifacts:
     files: imagedefinitions.json
