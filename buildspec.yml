@@ -5,12 +5,18 @@ phases:
     commands: #authentication
       - echo Logging into ECR for pushing
       - $(aws ecr get-login --no-include-email --region us-east-1)
+      - REPOSITORY_URI=
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
   build:
     commands:
       - echo Logged into ECR.. building image now
-      - docker build -t exposhare-frontend .
+      - docker build -t $REPOSITORY_URI:latest .
       - echo Image built, tagging for push
       - docker tag exposhare-frontend:latest 466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest
   post_build:
     commands: #pushing
-      - docker push 466336452057.dkr.ecr.us-east-1.amazonaws.com/exposhare-frontend:latest
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - printf '[{"name":"exposhare-client","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+    files: imagedefinitions.json
