@@ -60,5 +60,9 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
-  devServer: { historyApiFallback: true } // router fallback
+  devServer: { 
+    historyApiFallback: true, // router fallback
+    compress: true,
+    disableHostCheck: true
+  } 
 }
