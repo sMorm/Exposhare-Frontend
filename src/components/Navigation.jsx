@@ -78,7 +78,7 @@ class Navigation extends Component {
       <div>
         <div className={this.state.navContainerStyle}>
           <span className='navigationContent'>
-            <Link to='/' className='navigationLogo'><h1>Exposhare</h1></Link>
+            <Link to='/' className='navigationLogo'><h1>Working</h1></Link>
             {this.props.user.isAuthenticated 
               ? <LoggedIn logout={this.logout} /> 
               : <Guest/> 
