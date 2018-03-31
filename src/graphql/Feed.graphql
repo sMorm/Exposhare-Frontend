@@ -4,6 +4,7 @@ query user($id: Int!) {
     created_at,
     image_url,
     likes,
+    liked,
     user {
       id,
       firstname,

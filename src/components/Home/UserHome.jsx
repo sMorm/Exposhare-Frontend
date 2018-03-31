@@ -10,9 +10,6 @@ import Header from '../reusables/Header.jsx'
 import PostContainer from '../reusables/PostContainer.jsx'
 
 class UserHome extends Component {
-  componentDidMount = () => {
-    console.log('mount')
-  }
   render() {
     const lottieOptions = { loop: true, autoplay: true, animationData: lottieFile }    
     return (
@@ -23,7 +20,7 @@ class UserHome extends Component {
             {({ loading, error, data }) => {
               if(loading) return <Lottie options={lottieOptions} height={300} width={300} />
               if(error) return <h1>error :/</h1>
-              return data.userFeed.map((post, key) => <PostContainer key={key} post={post} />)
+              return data.userFeed.map((post, key) => <PostContainer key={key} post={post} user_id={this.props.id}/>)
             }}
           </Query>
         </div>

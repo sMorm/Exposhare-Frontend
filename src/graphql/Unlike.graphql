@@ -1,0 +1,6 @@
+mutation unlike($user_id: Int!, $post_id: Int! ) {
+  removeLike(user_id: $user_id, post_id: $post_id) {
+    user_id,
+    post_id
+  }
+}

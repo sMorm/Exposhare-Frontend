@@ -1,5 +1,5 @@
-query user($id: Int!) {
-  user(id: $id) {
+query user($id: Int!, $context_id: Int!) {
+  user(id: $id, context_id: $context_id) {
     firstname,
     lastname,
     email,
@@ -10,9 +10,9 @@ query user($id: Int!) {
     followers,
     following
   },
-  userPosts(id: $id) {
+  userPosts(id: $id, context_id: $context_id) {
     id,
     image_url,
-    
+    liked
   }
 }
