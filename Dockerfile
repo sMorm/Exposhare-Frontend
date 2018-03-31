@@ -23,11 +23,11 @@ ENV APACHE_PID_FILE /var/run/apache2.pid
 COPY --from=0 /usr/src/app/dist /var/www/html
 COPY ./docker/.htaccess /var/www/html
 COPY ./docker/apache2.conf /etc/apache2/apache2.conf
-COPY ./default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+# COPY ./default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 
-RUN a2enmod expires && a2enmod rewrite && service apache2 restart
+RUN a2enmod expires && a2enmod rewrite && service apache2 restart && a2enmod ssl
 
 # Expose apache port INSIDE the container
-EXPOSE 80
+EXPOSE 443
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
