@@ -49,7 +49,6 @@ class SignupForm extends Component {
     if(isValid) {
       newUser({ variables: { firstname, lastname, email, password, bio, username } })
     } else {
-      console.log(errors)
       this.setState({ errors })
     }
   }
@@ -72,7 +71,6 @@ class SignupForm extends Component {
             )
           }
           if(data) {
-            console.log(data)
             const { token } = data.newUser
             localStorage.setItem('jwtToken', token)
             this.props.dispatch(setCurrentUser(jwt.decode(token)))

@@ -57,8 +57,11 @@ class ProfileHeader extends Component {
         </button>
       )
     }
-    const { firstname, lastname, bio, followers, following, profile_picture, username } = this.props.userInfo
-    const profilePic = (profile_picture === null) ? 'http://via.placeholder.com/50x50' : profile_picture
+    const { firstname, lastname, bio, followers, following, profile_picture, username, id:context_id } = this.props.userInfo
+    let profilePic = 'http://via.placeholder.com/50x50'
+    if(profile_picture !== null) 
+      profilePic = `https://s3.amazonaws.com/gui-project-database/${context_id}/profile_picture.png`
+    
     return (
       <React.Fragment>
         <div className={containerStyle}>

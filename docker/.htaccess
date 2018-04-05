@@ -1,8 +1,0 @@
-RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule ^.*$ / [L,QSA]
-# redirect all routes back to index.html!
-# https://www.reddit.com/r/reactjs/comments/4e6lbt/getting_react_routing_to_work_with_apache2/

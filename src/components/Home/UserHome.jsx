@@ -10,9 +10,6 @@ import Header from '../reusables/Header.jsx'
 import PostContainer from '../reusables/PostContainer.jsx'
 
 class UserHome extends Component {
-  componentDidMount = () => {
-    console.log('mount')
-  }
   render() {
     const lottieOptions = { loop: true, autoplay: true, animationData: lottieFile }    
     return (

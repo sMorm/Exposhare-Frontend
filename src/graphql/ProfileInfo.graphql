@@ -1,0 +1,15 @@
+query user($username: String!, $context_id: Int!) {
+  user(username: $username, context_id: $context_id) {
+    id,
+    firstname,
+    lastname,
+    email,
+    created_at,
+    profile_picture,
+    bio,
+    username,
+    followers,
+    following,
+    is_following
+  }
+}

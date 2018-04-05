@@ -39,7 +39,7 @@ const LoggedInOptions = (props) => {
           HOME
           <Ionicon icon='ios-home-outline' fontSize='30px' color='black'/>
         </Link>
-        <Link to={`/user/${props.userId}`} className='hamburgerLink'>
+        <Link to={`/user/${props.username}`} className='hamburgerLink'>
           PROFILE
           <Ionicon icon='ios-happy-outline' fontSize='30px' color='black'/>
         </Link>

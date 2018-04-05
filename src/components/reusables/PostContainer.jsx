@@ -12,10 +12,10 @@ class PostContainer extends Component {
 
   likePicture = () => this.setState({ liked: !this.state.liked })
 
-  pushToProfile = () => this.props.history.push(`/user/${this.props.post.user.id}`)
+  pushToProfile = () => this.props.history.push(`/user/${this.props.post.user.username}`)
 
   render() {
-    const { content, image_url, likes, user: { firstname, lastname, profile_picture } } = this.props.post
+    const { content, image_url, likes, user: { firstname, lastname, profile_picture, id } } = this.props.post
     const authorFullname = `${firstname} ${lastname}`
     let profilePicURL = 'http://via.placeholder.com/100x100'
     if(profile_picture)

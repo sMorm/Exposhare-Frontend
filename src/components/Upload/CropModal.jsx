@@ -58,6 +58,7 @@ export default class CropModal extends Component {
     }, 500)
   }
 
+  // props: close, function to close modal, file: image file, squareRatio: boolean
   render() {
     return (
       <div className='cropModalContainer'>
@@ -71,6 +72,7 @@ export default class CropModal extends Component {
             src={this.props.file}
             style={{height: 'calc(100vh - 300px)', width: '100%'}}
             guides={false}
+            aspectRatio={this.props.squareRatio ? 1 : null}
             ref='cropper'/>
           <span className='cropModalButtons'>
             <button onClick={this.crop}>Make crop</button>

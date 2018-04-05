@@ -39,7 +39,7 @@ class SearchContainer extends Component {
             users = data.searchUser.map((user, key) => {
               const avatar = user.profile_picture === null ? 'http://via.placeholder.com/100x100' : user.profile_picture
               return (
-                <Link to={`/user/${user.id}`} key={key} className='searchUserResultContent'>
+                <Link to={`/user/${user.username}`} key={key} className='searchUserResultContent'>
                   <span className='searchUserResultFlex'>
                     <img src={avatar} alt='' />
                     <span>

@@ -4,12 +4,9 @@ import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { createUploadLink } from 'apollo-upload-client'
+import { WebSocketLink } from 'apollo-link-ws' // requires subscriptions-transport-ws
 
 const gqlEndpoint = 'http://35.173.202.28:4001/graphql'
-
-// const httpLink = createHttpLink({
-//   uri: gqlEndpoint
-// })
 
 /**
  * Applies token to header. This gets called every 

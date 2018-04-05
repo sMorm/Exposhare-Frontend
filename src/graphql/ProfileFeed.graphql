@@ -1,0 +1,7 @@
+query userPosts($id: Int!, $context_id: Int!, $after: Int) {
+  userPosts(id: $id, context_id: $context_id, after: $after) {
+    id,
+    image_url,
+    liked
+  }
+}

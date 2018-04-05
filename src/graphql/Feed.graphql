@@ -8,7 +8,8 @@ query user($id: Int!) {
       id,
       firstname,
       lastname,
-      profile_picture
+      profile_picture,
+      username
     }
   }
 }

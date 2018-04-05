@@ -20,7 +20,7 @@ const Dropdown = (props) => {
   return (
     <span className='loggedInDropdownContainer'>
       <span className='dropdownTriangle'/>
-      <Link to={`/user/${props.user_id}`} className='loggedInLinkDropdown' onClick={props.toggle}>Account</Link>
+      <Link to={`/user/${props.username}`} className='loggedInLinkDropdown' onClick={props.toggle}>Account</Link>
       <br/>
       <Link to={'/edit-profile'} className='loggedInLinkDropdown' onClick={props.toggle}>Settings</Link>
       <br/>
@@ -43,8 +43,9 @@ class LoggedIn extends Component {
    */
   componentDidMount() {
     document.addEventListener('click', this.handleClickOutside, true)
-    const { profile_picture } = this.props.user.info
-    if(profile_picture) this.setState({ profile_picture })
+    const { profile_picture, id } = this.props.user.info
+    if(profile_picture) 
+      this.setState({ profile_picture: `https://s3.amazonaws.com/gui-project-database/${id}/profile_picture.png?t=${+ new Date().getTime()}` })
   }
 
   componentWillUnmount() {
@@ -62,9 +63,9 @@ class LoggedIn extends Component {
   }
 
   render() {
-    const { firstname, profile_picture, id } = this.props.user.info // redux info
+    const { firstname, profile_picture, id, username } = this.props.user.info // redux info
     const { logout } = this.props
-    const dropDownMenu = this.state.showDropdown && <Dropdown logout={logout} toggle={this.toggleDropdown} user_id={id}/>
+    const dropDownMenu = this.state.showDropdown && <Dropdown logout={logout} toggle={this.toggleDropdown} username={username}/>
     return (
       <Fragment>
         <span className='loggedInLinkContainer'>
