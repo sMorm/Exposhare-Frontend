@@ -33,26 +33,29 @@ class GridFeed extends Component {
 
   toggleFeed = activeFeed => this.setState({ activeFeed })
 
-  // componentDidMount = () => {
-  //   window.addEventListener('scroll', this.handleScroll)
-  // }
-
-  // componentWillUnmount = () => {
-  //   window.removeEventListener('scroll', this.handleScroll)   
-  // }
-
-  // /**
-  //  * http://blog.sodhanalibrary.com/2016/08/detect-when-user-scrolls-to-bottom-of.html#.WftmORNSyL4
-  //  */
-  // handleScroll = () => {
-  //   const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight
-  //   const body = document.body
-  //   const html = document.documentElement
-  //   const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight)
-  //   const windowBottom = windowHeight + window.pageYOffset
-  //   windowBottom >= docHeight && console.log('hit bottom')
-  // }
-
+  chunkFeed = userPosts => {
+    const chunks = _.chunk(userPosts, userPosts.length/3)
+    const noCropFeed = chunks.map((chunk, key) => {
+      return (
+        <span key={key} className='noCropContent'>
+          {chunk.map((post, key) => {
+            return (
+              <img 
+                key={key} 
+                src={`https://s3.amazonaws.com/gui-project-database${post.image_url}`} 
+                alt={post.content}/>
+              )
+            })
+          }
+        </span>
+      )
+    })
+    return (
+      <div className='noCropContainer'>
+        {noCropFeed}
+      </div>
+    )
+  }
 
   render() {
     const { id, context_id } = this.props
@@ -60,30 +63,10 @@ class GridFeed extends Component {
       <div>
         <FeedOptions toggleFeed={this.toggleFeed}/>
         <Query query={QUERY_PROFILE_FEED} variables={{ id, context_id, after: null }}> 
-          {(props) => {
+          {props => {
             const { userPosts } = props.data
             if(userPosts) {
-        const chunks = _.chunk(userPosts, userPosts.length/3)
-        const noCropFeed = chunks.map((chunk, key) => {
-          return (
-            <span key={key} className='noCropContent'>
-              {chunk.map((post, key) => {
-                return (
-                  <img 
-                    key={key} 
-                    src={`https://s3.amazonaws.com/gui-project-database${post.image_url}`} 
-                    alt={post.content}
-                  />
-                )
-              })}
-            </span>
-          )
-        })
-        let gridFeed = (
-          <div className='noCropContainer'>
-            {noCropFeed}
-          </div>
-        )
+              const gridFeed = this.chunkFeed(userPosts)
               return (
                 <div className='gridContainer'>
                   {gridFeed}
@@ -107,7 +90,8 @@ class GridFeed extends Component {
             }
             return <p>prop</p>
           }}
-        </Query>      </div>
+        </Query>      
+      </div>
     )
   }
 }

@@ -36,8 +36,14 @@ class SignupForm extends Component {
     this.setState({ errors: {} })
   }
 
-  onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
+  // don't allow spaces
+  onChange = e => {
+    const { errors } = this.state
+    let value = e.target.value
+    if(value.includes(" "))
+      value = value.replace(/\s/g, "")
+    delete errors[e.target.name] // remove error notification on change
+    this.setState({ [e.target.name]: value, errors })
   }
 
   onSubmit = (e, newUser) => {

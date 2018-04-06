@@ -32,7 +32,7 @@ class Navigation extends Component {
    * re-appear. See handleScroll() for logic
    */
   componentDidMount() {
-    document.addEventListener('scroll', _.debounce(this.handleScroll, 5))
+    document.addEventListener('scroll', _.debounce(this.handleScroll, 50))
   }
 
   /**

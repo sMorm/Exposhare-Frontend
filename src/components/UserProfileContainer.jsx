@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+// Components
 import ProfileHeader from './UserProfile/ProfileHeader.jsx'
 import GridFeed from './UserProfile/GridFeed.jsx'
 import LottieLoad from './reusables/LottieLoad.jsx'
-import { connect } from 'react-redux'
-import { mapStateToProps } from '../shared/utils/redux'
+
+// Apollo
 import QUERY_PROFILE_INFO from '../graphql/ProfileInfo.graphql'
-
 import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
 
+// Helpers
+import { mapStateToProps } from '../shared/utils/redux'
 import './styles/UserProfileContainer.scss'
 
 class UserProfileContainer extends Component {
   render() {
     const username = this.props.match.params[0]
+    if(!this.props.user.isAuthenticated) return <Redirect to='/' />
     const { id:context_id } = this.props.user.info
     return (
       <Query query={QUERY_PROFILE_INFO} variables={{ username, context_id }} >
@@ -25,7 +29,7 @@ class UserProfileContainer extends Component {
           if(data) {
             return (
               <div className='container'>
-                <ProfileHeader userInfo={user} />
+                <ProfileHeader userInfo={user} context_id={context_id}/>
                 <GridFeed id={data.user.id} context_id={context_id} />
               </div>
             )
@@ -37,21 +41,3 @@ class UserProfileContainer extends Component {
   }
 
   export default connect(mapStateToProps)(withRouter(UserProfileContainer))
-
-  // <GridFeed id={user.id} context_id={context_id} />
-  // <GridFeed 
-  // posts={userPosts} 
-  // user={user}
-  // onLoadMore={() => {
-  //   fetchMore({
-  //     variables: {
-  //       after: userPosts[userPosts.length-1].id
-  //     },
-  //     updateQuery: (prev, {fetchMoreResult}) => {
-  //       if(!fetchMoreResult) return prev
-  //       return Object.assign({}, prev, {
-  //         userPosts: [...prev.feed, ...fetchMoreResult.feed]
-  //       })
-  //     }
-  //   })
-  // }}/>

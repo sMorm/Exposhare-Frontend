@@ -7,6 +7,13 @@ import { mapStateToProps } from '../../shared/utils/redux'
 // Components
 import Hamburger from './Hamburger.jsx'
 
+// Apollo
+import QUERY_PROFILE from '../../graphql/ProfileInfo.graphql'
+import { Query } from 'react-apollo'
+
+// Helpers
+import { generateAvatarLink } from '../../shared/utils/helpers'
+
 // Already loaded in Guest.jsx
 import './styles/LoggedIn.scss'
 
@@ -43,9 +50,6 @@ class LoggedIn extends Component {
    */
   componentDidMount() {
     document.addEventListener('click', this.handleClickOutside, true)
-    const { profile_picture, id } = this.props.user.info
-    if(profile_picture) 
-      this.setState({ profile_picture: `https://s3.amazonaws.com/gui-project-database/${id}/profile_picture.png?t=${+ new Date().getTime()}` })
   }
 
   componentWillUnmount() {
@@ -63,7 +67,7 @@ class LoggedIn extends Component {
   }
 
   render() {
-    const { firstname, profile_picture, id, username } = this.props.user.info // redux info
+    const { firstname, profile_picture, id:context_id, username } = this.props.user.info // redux info
     const { logout } = this.props
     const dropDownMenu = this.state.showDropdown && <Dropdown logout={logout} toggle={this.toggleDropdown} username={username}/>
     return (
@@ -73,7 +77,14 @@ class LoggedIn extends Component {
           <Link to='/upload' className='loggedInLink'>Upload</Link>                    
           <Link to='/messages' className='loggedInLink'>Messages</Link>
           <span className='loggedInUserBubble' onClick={this.toggleDropdown} ref={(ref) => { this.node = ref }}>
-            <img src={this.state.profile_picture} alt='User Profile'/>
+            <Query query={QUERY_PROFILE} variables={{ username, context_id }}>
+              {({ loading, error, data: { user } }) => {
+                let avatarSource = 'https://via.placeholder.com/100x100'
+                if(!loading && user.profile_picture !== null) 
+                  avatarSource = generateAvatarLink(context_id)
+                return <img src={avatarSource} alt='User Profile'/>
+              }}
+            </Query>  
             <p>{firstname}</p>
           </span>
           {dropDownMenu}

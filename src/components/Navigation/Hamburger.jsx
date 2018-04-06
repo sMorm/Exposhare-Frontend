@@ -107,7 +107,7 @@ class Hamburger extends Component {
           <span className={this.state.navOverlay}>
             <span className='overlayContent'>
               <span onClick={this.toggle}>
-                {this.props.guest ? <GuestOptions /> : <LoggedInOptions logout={this.logout} userId={this.props.user.info.id}/>}
+                {this.props.guest ? <GuestOptions /> : <LoggedInOptions logout={this.logout} username={this.props.user.info.username}/>}
               </span>
             </span>
           </span>

@@ -1,0 +1,5 @@
+mutation removeFollow($follower: Int!, $followee: Int!) {
+  removeFollow(follower: $follower, followee: $followee) {
+    message
+  }
+}

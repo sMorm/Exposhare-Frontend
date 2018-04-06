@@ -43,3 +43,11 @@ export function dataURItoBlob(dataURI) {
   return blob;
 
 }
+
+export function generateImageLink(photoPostfix) {
+  return `https://s3.amazonaws.com/gui-project-database${photoPostfix}`
+}
+
+export function generateAvatarLink(id) {
+  return `https://s3.amazonaws.com/gui-project-database/${id}/profile_picture.png?t=${new Date().getTime()}`
+}

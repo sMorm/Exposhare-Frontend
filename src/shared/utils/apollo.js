@@ -5,8 +5,12 @@ import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { createUploadLink } from 'apollo-upload-client'
 import { WebSocketLink } from 'apollo-link-ws' // requires subscriptions-transport-ws
+import { split } from 'apollo-link'
+import { getMainDefinition } from 'apollo-utilities'
+const baseEndpoint = '35.173.202.28'
 
-const gqlEndpoint = 'http://35.173.202.28:4001/graphql'
+const wsEndpoint = `ws://${baseEndpoint}:4001/subscriptions`
+const gqlEndpoint = `http://${baseEndpoint}:4001/graphql`
 
 /**
  * Applies token to header. This gets called every 
@@ -23,7 +27,23 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
+const wsLink = new WebSocketLink({
+  uri: wsEndpoint,
+  options: {
+    reconnect: true
+  }
+})
+
+const link = split(
+  ({ query }) => {
+    const { kind, operation } = getMainDefinition(query);
+    return kind === 'OperationDefinition' && operation === 'subscription';
+  },
+  wsLink,
+  authLink.concat(createUploadLink({ uri: gqlEndpoint })),
+)
+
 export const client = new ApolloClient({
-  link: authLink.concat(createUploadLink({ uri: gqlEndpoint })),
+  link: link,
   cache: new InMemoryCache()
 })

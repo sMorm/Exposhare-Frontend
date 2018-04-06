@@ -1,0 +1,6 @@
+mutation newLike($user_id: Int!, $post_id: Int!) {
+  newLike(user_id: $user_id, post_id: $post_id) {
+    user_id
+    post_id
+  }
+}

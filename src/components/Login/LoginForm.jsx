@@ -17,10 +17,20 @@ class LoginForm extends Component {
   
   state = {
     email: '',
-    password: ''
+    password: '',
+    errors: {}
   }
 
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value })
+  // don't allow spaces
+  onChange = (e) => {
+    const { errors } = this.state
+    let value = e.target.value
+    if(value.includes(" "))
+      value = value.replace(/\s/g, "")
+    delete errors[e.target.name] // remove error notification on change
+    this.setState({ [e.target.name]: value, errors })
+  }
+
 
   onSubmit = (e, loginUser) => {
     e.preventDefault()
@@ -34,6 +44,8 @@ class LoginForm extends Component {
       .catch(e => {
         // do stuff on error
       })
+    } else {
+      this.setState({ errors })
     }
   }
 
@@ -49,23 +61,35 @@ class LoginForm extends Component {
           }
           let errorMessage = ''
           if(error) errorMessage = (error.graphQLErrors.find(f => f)).message
+          let formErrors = ''
+          if( Object.entries(this.state.errors).length > 0) {
+            formErrors = (
+              <ul className='formErrorList'>
+                {Object.entries(this.state.errors).map((e, key) => {
+                  return <li key={key}>{e[1]}</li>
+                })}
+              </ul>
+            )
+          }
           return (
             <div className='loginFormContainer'>
               <form className='loginForm' onSubmit={e => this.onSubmit(e, loginUser)}>
                 <h1>Login</h1>
                 <input
-                  type='text'
+                  type='email'
                   name='email'
                   placeholder='E-mail'
                   onChange={this.onChange}
-                  value={this.state.email}/>
+                  value={this.state.email}
+                  required/>
                 <br/>
                 <input
                   type='password'
                   name='password'
                   placeholder='Password'
                   onChange={this.onChange}
-                  value={this.state.password}/>
+                  value={this.state.password}
+                  required/>
                 <br/>
                 <p className='errorText'>{errorMessage}</p>
                 <button
@@ -73,6 +97,7 @@ class LoginForm extends Component {
                   {loading ? <ThreeBounce color='white' size={14}/> : 'LOGIN' }
                 </button>
                 <p className='signupMember'>Not a member? <Link to='/signup'>Signup</Link></p>          
+                {formErrors}
               </form>
             </div>
           )

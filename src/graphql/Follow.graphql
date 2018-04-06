@@ -1,6 +1,6 @@
 mutation newFollow($follower: Int!, $followee: Int!) {
   newFollow(follower: $follower, followee: $followee) {
-    followee,
+    followee
     follower
   }
 }

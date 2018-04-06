@@ -2,7 +2,7 @@ mutation newUser($firstname: String!, $lastname: String!, $email: String!, $pass
   newUser(firstname: $firstname, lastname: $lastname, email: $email, password: $password, bio: $bio, username: $username) {
     user {
       firstname
-    },
+    }
     token
   }
 }

@@ -6,8 +6,9 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { mapStateToProps } from '../../shared/utils/redux'
 
-import FOLLOW_MUTATION from '../../graphql/Follow.graphql'
 import { Mutation } from 'react-apollo'
+
+import ProfileInteractions from './ProfileInteractions.jsx'
 
 class ProfileHeader extends Component {
 
@@ -45,7 +46,7 @@ class ProfileHeader extends Component {
 
 
   render() {
-    const id = this.props.match.params[0]
+    // const followee = this.props.match.params[0]
     let containerStyle = 'profileHeaderContainer', showScrollButton = false
     if(this.state.isScrollingUp)
       containerStyle = 'profileHeaderContainer stickyNav'
@@ -57,11 +58,14 @@ class ProfileHeader extends Component {
         </button>
       )
     }
-    const { firstname, lastname, bio, followers, following, profile_picture, username, id:context_id } = this.props.userInfo
+    const { firstname, lastname, bio, followers, following, is_following,
+      profile_picture, username, id } = this.props.userInfo
+    const { context_id } = this.props
+    let viewingSelf = false
+    if(id === this.props.user.info.id) viewingSelf = true
     let profilePic = 'http://via.placeholder.com/50x50'
     if(profile_picture !== null) 
-      profilePic = `https://s3.amazonaws.com/gui-project-database/${context_id}/profile_picture.png`
-    
+      profilePic = `https://s3.amazonaws.com/gui-project-database/${id}/profile_picture.png`
     return (
       <React.Fragment>
         <div className={containerStyle}>
@@ -73,16 +77,15 @@ class ProfileHeader extends Component {
               <h5>@{username}</h5>
             </span>
           </span>
-
-          <span className='profileInteractions'>
-            <Mutation mutation={FOLLOW_MUTATION} variables={{ followee: id, follower: this.props.user.info.id}}>
-              {(newFollow, { data, loading, error}) => {
-                if(error || data) return <button>Following</button>
-                return <button onClick={newFollow}>Follow</button>
-              }}
-            </Mutation>
-            <button>Message</button>
-          </span>
+          {!viewingSelf && (
+            <ProfileInteractions 
+              is_following={is_following}
+              follower={this.props.user.info.id}
+              followee={id} 
+              username={username}
+              context_id={context_id} />
+            )
+          }
         </span>
 
         <span className='profileHeaderStats'>
@@ -120,3 +123,10 @@ ProfileHeader.propTypes = {
 }
 
 export default connect(mapStateToProps)(withRouter(ProfileHeader))
+
+// <Mutation mutation={FOLLOW_MUTATION} variables={{ followee: id, follower: this.props.user.info.id}}>
+//   {(newFollow, { data, loading, error}) => {
+//     if(error || data) return <button>Following</button>
+//     return <button onClick={newFollow}>Follow</button>
+//   }}
+// </Mutation>

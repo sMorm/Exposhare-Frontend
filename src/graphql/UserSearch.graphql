@@ -1,10 +1,10 @@
 query searchUser($username: String!) {
   searchUser(username: $username) {
-    id,
-    username,
-    firstname,
-    lastname,
-    bio,
+    id
+    username
+    firstname
+    lastname
+    bio
     profile_picture
   }
 }
