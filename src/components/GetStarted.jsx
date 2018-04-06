@@ -2,71 +2,154 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { mapStateToProps } from '../shared/utils/redux'
 import { getGreetingMessage } from '../shared/utils/helpers'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import Lottie from 'react-lottie'
 import Cropper from 'react-cropper'
-import lottieFile from '../shared/lottie/balloons.json'
+import balloonLottie from '../shared/lottie/balloons.json'
+import emojiLottie from '../shared/lottie/emoji_tongue.json'
+import Dropzone from 'react-dropzone'
+import { dataURItoBlob } from '../shared/utils/helpers'
 
+import { Mutation } from 'react-apollo'
+import PROFILE_MUTATION from '../graphql/UpdateInfo.graphql'
+
+import CropModal from './Upload/CropModal.jsx'
 import './styles/GetStarted.scss'
+import { setCurrentUser } from '../actions/user';
 
 class GetStarted extends Component {
   state = {
     redirect: false,
-    bio: ''
+    profilePic: null,
+    cropModal: false,
+    croppedImage: null,
+    bio: '',
+    errorMessage: '',
   }
-  componentDidMount() {
-    if(this.props.user.isAuthenticated) {
-      const { bio } = this.props.user.info
-      this.setState({ bio })
-    }
-  }
+
+  // componentDidMount() {
+  //   if(this.props.user.isAuthenticated) {
+  //     const { bio } = this.props.user.info
+  //     this.setState({ bio })
+  //   }
+  // }
 
   onChange = e => this.setState({ [e.target.name]: e.target.value })
 
+  onDrop = (acceptedFiles, rejectedFiles) => {
+    if(rejectedFiles.length > 0) {
+      this.setState({ errorMessage: 'File not supported!'})
+    } else {
+      const file = acceptedFiles.find(f => f)
+      this.setState({ profilePic: file.preview, cropModal: true })
+    }
+  }
+
+  recrop = () => this.setState({ cropModal: true })
+
+  changePhoto = () => this.setState({ profilePic: null, croppedImage: null })
+
+  finishCrop = croppedImage => this.setState({ croppedImage })
+
+  toggleCrop = () => this.setState({ cropModal: !this.state.cropModal })
+
   redirect = () => this.setState({ redirect: true })
 
+  saveProfile = updateInfo => {
+    const { croppedImage, bio } = this.state
+    const { id } = this.props.user.info
+    const profile_picture = dataURItoBlob(croppedImage)
+    updateInfo({ variables: { id, bio, profile_picture  }})
+    .then(res => this.props.history.push('/'))
+  }
+
   render() {
+    const { cropModal, profilePic, errorMessage, croppedImage } = this.state
     // if(!this.props.user.isAuthenticated || this.state.redirect || this.props.user.info.profile_picture !== null || this.props.user.info.bio) 
     //   return <Redirect to='/' />
+    const balloonOptions = { loop: true, autoplay: true, animationData: balloonLottie }
+    const pictureOptions = { loop: true, autoplay: true, animationData: emojiLottie }
     if(this.state.redirect)
       return <Redirect to='/' />
-    const { firstname, lastname, bio, id } = this.props.user.info
-    const lottieOptions = { loop: true, autoplay: true, animationData: lottieFile }
+    const { firstname, lastname, bio, id, username } = this.props.user.info
     return (
-      <div className='getStartedContainer'>
-        <div className='getStartedContent'>
-          <div className='getStartedGreeting'>
-            <h1>{getGreetingMessage(firstname)} —</h1>
-            <p>Thanks for joining us, let's get started with setting up your profile. Let's start by telling us a bit about yourself which will serve as your profile bio.</p>
-            <h3 onClick={this.redirect}>I don't want to do this right now.</h3>
+      <React.Fragment>
+        {cropModal && (
+          <CropModal 
+            file={profilePic} 
+            close={this.toggleCrop}
+            crop={this.finishCrop}
+            squareRatio/> 
+        )}
+        <div className='getStartedContainer'>
+          <div className='getStartedContent'>
+            <div className='getStartedGreeting'>
+              <h1>{getGreetingMessage(firstname)} —</h1>
+              <p>Thanks for joining us, let's get started with setting up your profile. Let's start by telling us a bit about yourself which will serve as your profile bio.</p>
+              <h3 onClick={this.redirect}>I don't want to do this right now.</h3>
+            </div>
+            <div className='editBioContainer'>
+              <h2>Tell us something about yourself.</h2>
+              <textarea 
+                name='bio'
+                type='text' 
+                onChange={this.onChange}
+                value={this.state.bio}
+                column={8}/>
+            </div>
+            <div className='editProfilePictureContainer'>
+              <h2>{croppedImage === null ? 'Profile Picture' : 'Looking Good!'}</h2>
+              {croppedImage !== null
+                ? (
+                  <div className='cropPreviewContainer'>
+                    <span className='cropPreviewContent'>
+                      <img src={croppedImage} alt='preview' />
+                      <span>
+                        <h4>{firstname} {lastname}</h4>
+                        <h5>@{username}</h5>
+                      </span>
+                    </span>
+                    <span className='cropPreviewOptions'>
+                      <h3 onClick={this.recrop}>Re-crop</h3>
+                      <h3 onClick={this.changePhoto}>Change Photo</h3>
+                    </span>
+                  </div>
+                )
+                : (
+                  <Dropzone
+                    onDrop={this.onDrop}
+                    accept="image/*"
+                    className='uploadDropzone'
+                    activeClassName='uploadDropzoneActive'
+                    multiple={false}>
+                      <span className='uploadDropzoneContainer'>
+                        <Lottie options={pictureOptions} height={150} width={150} />
+                        <p>Add Profile Photo</p>
+                      </span>
+                  </Dropzone>
+                )
+              }
+
+            </div>
+            <Mutation mutation={PROFILE_MUTATION}>
+              {(updateInfo, {data, loading, error }) => {
+                if(error) return <p>upload error</p>
+                if(loading) return <button>Loading</button>
+                return (
+                  <button onClick={() => this.saveProfile(updateInfo)}>
+                    All set? Save my profile.
+                  </button>
+                )
+              }}
+            </Mutation>
           </div>
-          <div className='editBioContainer'>
-            <h2>Tell us something about yourself.</h2>
-            <textarea 
-              name='bio'
-              type='text' 
-              onChange={this.onChange}
-              value={this.state.bio}
-              column={8}/>
-           </div>
-          <div className='editProfilePictureContainer'>
-            <h2>Profile Picture</h2>
-              <Cropper
-                ref='cropper'
-                src='http://via.placeholder.com/300x300'
-                style={{ width: '300px', height: '300px'}}
-                aspectRatio={1}
-                guides={false}
-                ref='cropper'/>
+          <div className='getStartedLottie'>
+            <Lottie options={balloonOptions} height={'100%'} width={'100%'} />
           </div>
-          <button>All set? Take me away!</button>
         </div>
-        <div className='getStartedLottie'>
-          <Lottie options={lottieOptions} height={'100%'} width={'100%'} />
-        </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
 
-export default connect(mapStateToProps)(GetStarted)
+export default connect(mapStateToProps)(withRouter(GetStarted))

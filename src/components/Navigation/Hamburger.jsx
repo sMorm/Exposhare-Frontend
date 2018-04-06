@@ -39,7 +39,7 @@ const LoggedInOptions = (props) => {
           HOME
           <Ionicon icon='ios-home-outline' fontSize='30px' color='black'/>
         </Link>
-        <Link to={`/user/${props.userId}`} className='hamburgerLink'>
+        <Link to={`/user/${props.username}`} className='hamburgerLink'>
           PROFILE
           <Ionicon icon='ios-happy-outline' fontSize='30px' color='black'/>
         </Link>
@@ -107,7 +107,7 @@ class Hamburger extends Component {
           <span className={this.state.navOverlay}>
             <span className='overlayContent'>
               <span onClick={this.toggle}>
-                {this.props.guest ? <GuestOptions /> : <LoggedInOptions logout={this.logout} userId={this.props.user.info.id}/>}
+                {this.props.guest ? <GuestOptions /> : <LoggedInOptions logout={this.logout} username={this.props.user.info.username}/>}
               </span>
             </span>
           </span>

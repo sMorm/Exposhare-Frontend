@@ -1,0 +1,44 @@
+.profileInteractions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+  button {
+    width: 100px;
+    padding: 5px 0px;
+    border: none;
+    border-radius: 16px;
+    color: white;
+    font-size: 16px;
+    background: rgb(154, 154, 240);
+    cursor: pointer;
+    outline: none;
+    &:first-child {
+      margin-right: 2px;
+    }
+    &:last-child {
+      margin-left: 2px;
+    }
+  }
+}
+
+.followingButton {
+  background: white !important;
+  color: rgb(154, 154, 240) !important;
+  border: solid 1px rgb(154, 154, 240) !important;
+}
+
+.followLoading {
+  opacity: 0.5;
+}
+
+@media (max-width: 800px) {
+
+  .profileInteractions {
+    button {
+      width: 75px;
+      font-size: 12px;
+      padding: 6px 0;
+    }
+  }
+}

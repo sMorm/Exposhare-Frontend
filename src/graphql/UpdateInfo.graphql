@@ -1,0 +1,7 @@
+mutation updateInfo($id: Int!, $bio: String!, $profile_picture: Upload! ) {
+  updateInfo(id: $id, bio: $bio, profile_picture: $profile_picture) {
+    id
+    profile_picture
+    bio
+  }
+}

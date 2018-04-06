@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { mapStateToProps } from '../shared/utils/redux'
@@ -20,4 +20,4 @@ class HomeContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps)(HomeContainer)
+export default connect(mapStateToProps)(withRouter(HomeContainer))

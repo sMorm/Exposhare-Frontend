@@ -1,0 +1,65 @@
+.homeFeedUtility {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  padding: 0;
+  transition: all 0.2s;
+  button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background: #bbb;
+    outline: none;
+    border: none;
+    border-radius: 24px;
+    padding: 5px;
+    padding-right: 15px;
+    padding-bottom: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    animation: fade-in 0.4s forwards;
+    font-weight: 100;
+    float: right;
+  }
+  
+  li {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 12px;
+    list-style: none;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    background: rgba(0,0,0,0.15);
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    animation: fadeInUp 1s forwards;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+  }
+  p {
+    padding-left: 10px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInUp {
+  animation-name: fadeInUp;
+}

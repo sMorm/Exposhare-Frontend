@@ -71,6 +71,44 @@
   }
 }
 
+.profilePicCropperContainer {
+  width: 35vw;
+  height: 35vw;
+  img {
+    width: 80%;
+  }
+}
+
+.cropPreviewContainer {
+  span {
+    padding-left: 5px;
+  }
+  img {
+    width: 100px;
+    border-radius: 50%;
+  }
+  h4 {
+    font-size: 24px;
+    margin: 3px;
+  }
+  h5 {
+    margin: 0;
+    color: #888;
+    font-size: 20px;
+  }
+}
+
+.cropPreviewContent {
+  display: flex;
+  align-items: center;
+}
+
+.cropPreviewOptions {
+  h3:last-child {
+    margin-left: 5px;
+  }
+}
+
 @media (max-width: 700px) {
   .getStartedContainer {
     display: block;

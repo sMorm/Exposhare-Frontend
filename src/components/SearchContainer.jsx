@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Lottie from 'react-lottie'
-import { Query } from 'react-apollo'
 import _ from 'lodash'
 
-import USER_QUERY from '../graphql/UserSearch.graphql'
+// Lottie
+import Lottie from 'react-lottie'
 import lottieFile from '../shared/lottie/camera_search.json'
+
+// Apollo
+import USER_QUERY from '../graphql/UserSearch.graphql'
+import { Query } from 'react-apollo'
+
+// Helpers
+import { generateAvatarLink } from '../shared/utils/helpers'
 
 import './styles/SearchContainer.scss'
 
@@ -37,11 +43,12 @@ class SearchContainer extends Component {
           let users = ''
           if(data.searchUser) { // list of users returned, map it and store it in users
             users = data.searchUser.map((user, key) => {
-              const avatar = user.profile_picture === null ? 'http://via.placeholder.com/100x100' : user.profile_picture
+              let avatarSource = 'http://via.placeholder.com/100x100'
+              if(user.profile_picture !== null) avatarSource = generateAvatarLink(user.id)
               return (
-                <Link to={`/user/${user.id}`} key={key} className='searchUserResultContent'>
+                <Link to={`/user/${user.username}`} key={key} className='searchUserResultContent'>
                   <span className='searchUserResultFlex'>
-                    <img src={avatar} alt='' />
+                    <img src={avatarSource} alt='' />
                     <span>
                       <h3>{user.firstname} {user.lastname}</h3>
                       <p>@{user.username}</p>

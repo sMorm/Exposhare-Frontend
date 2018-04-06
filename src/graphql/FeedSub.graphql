@@ -1,5 +1,6 @@
-query user($id: Int!, $after: Int) {
-  userFeed(id: $id, after: $after) {
+# this query HAS to be indentical to Feed.graphql !!
+subscription newPost($feed_id: Int!) {
+  newPost(feed_id: $feed_id) {
     id
     created_at
     image_url

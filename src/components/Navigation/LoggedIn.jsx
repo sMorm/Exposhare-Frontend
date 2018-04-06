@@ -7,6 +7,13 @@ import { mapStateToProps } from '../../shared/utils/redux'
 // Components
 import Hamburger from './Hamburger.jsx'
 
+// Apollo
+import QUERY_PROFILE from '../../graphql/ProfileInfo.graphql'
+import { Query } from 'react-apollo'
+
+// Helpers
+import { generateAvatarLink } from '../../shared/utils/helpers'
+
 // Already loaded in Guest.jsx
 import './styles/LoggedIn.scss'
 
@@ -20,7 +27,7 @@ const Dropdown = (props) => {
   return (
     <span className='loggedInDropdownContainer'>
       <span className='dropdownTriangle'/>
-      <Link to={`/user/${props.user_id}`} className='loggedInLinkDropdown' onClick={props.toggle}>Account</Link>
+      <Link to={`/user/${props.username}`} className='loggedInLinkDropdown' onClick={props.toggle}>Account</Link>
       <br/>
       <Link to={'/edit-profile'} className='loggedInLinkDropdown' onClick={props.toggle}>Settings</Link>
       <br/>
@@ -43,8 +50,6 @@ class LoggedIn extends Component {
    */
   componentDidMount() {
     document.addEventListener('click', this.handleClickOutside, true)
-    const { profile_picture } = this.props.user.info
-    if(profile_picture) this.setState({ profile_picture })
   }
 
   componentWillUnmount() {
@@ -62,9 +67,9 @@ class LoggedIn extends Component {
   }
 
   render() {
-    const { firstname, profile_picture, id } = this.props.user.info // redux info
+    const { firstname, profile_picture, id:context_id, username } = this.props.user.info // redux info
     const { logout } = this.props
-    const dropDownMenu = this.state.showDropdown && <Dropdown logout={logout} toggle={this.toggleDropdown} user_id={id}/>
+    const dropDownMenu = this.state.showDropdown && <Dropdown logout={logout} toggle={this.toggleDropdown} username={username}/>
     return (
       <Fragment>
         <span className='loggedInLinkContainer'>
@@ -72,7 +77,14 @@ class LoggedIn extends Component {
           <Link to='/upload' className='loggedInLink'>Upload</Link>                    
           <Link to='/messages' className='loggedInLink'>Messages</Link>
           <span className='loggedInUserBubble' onClick={this.toggleDropdown} ref={(ref) => { this.node = ref }}>
-            <img src={this.state.profile_picture} alt='User Profile'/>
+            <Query query={QUERY_PROFILE} variables={{ username, context_id }}>
+              {({ loading, error, data: { user } }) => {
+                let avatarSource = 'https://via.placeholder.com/100x100'
+                if(!loading && user.profile_picture !== null) 
+                  avatarSource = generateAvatarLink(context_id)
+                return <img src={avatarSource} alt='User Profile'/>
+              }}
+            </Query>  
             <p>{firstname}</p>
           </span>
           {dropDownMenu}

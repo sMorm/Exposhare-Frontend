@@ -95,20 +95,8 @@ class EditZone extends Component {
       context.filter = filter
     context.drawImage(this.preview, 0, 0)
     canvas.toBlob((blob => {
-      console.log(blob)
       blob.lastModifiedDate = new Date()
       newPost({ variables: { file: blob, content: description, user_id: id }})
-      // console.log(blob)
-      // const fd = new FormData()
-      // fd.append('photo', blob, 'image.jpg')
-      // fd.append('content', description)
-      // fd.append('user_id', id)
-      // axios.post('http://localhost:4000/api/posts', fd)
-      // .then(res => {
-      //   this.props.history.push('/')
-      //   this.setState({ isLoading: false })
-      // })
-      // .catch(e => console.log)
     }), 'image/jpeg', 0.4) // mime-type, quality 0.1 to 1.0
   }
   
