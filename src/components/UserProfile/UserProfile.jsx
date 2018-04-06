@@ -3,19 +3,19 @@ import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 // Components
-import ProfileHeader from './UserProfile/ProfileHeader.jsx'
-import GridFeed from './UserProfile/GridFeed.jsx'
-import LottieLoad from './reusables/LottieLoad.jsx'
+import ProfileHeader from './ProfileHeader.jsx'
+import GridFeed from './GridFeed.jsx'
+import LottieLoad from '../reusables/LottieLoad.jsx'
 
 // Apollo
-import QUERY_PROFILE_INFO from '../graphql/ProfileInfo.graphql'
+import QUERY_PROFILE_INFO from '../../graphql/ProfileInfo.graphql'
 import { Query } from 'react-apollo'
 
 // Helpers
-import { mapStateToProps } from '../shared/utils/redux'
-import './styles/UserProfileContainer.scss'
+import { mapStateToProps } from '../../shared/utils/redux'
+import './styles/UserProfile.scss'
 
-class UserProfileContainer extends Component {
+class UserProfile extends Component {
   render() {
     const username = this.props.match.params[0]
     if(!this.props.user.isAuthenticated) return <Redirect to='/' />
@@ -40,4 +40,4 @@ class UserProfileContainer extends Component {
     }
   }
 
-  export default connect(mapStateToProps)(withRouter(UserProfileContainer))
+  export default connect(mapStateToProps)(withRouter(UserProfile))

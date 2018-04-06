@@ -4,28 +4,29 @@ import { Redirect, withRouter } from 'react-router-dom'
 import Cropper from 'react-cropper'
 import Dropzone from 'react-dropzone'
 
-// Helper functions
-import { getGreetingMessage, dataURItoBlob } from '../shared/utils/helpers'
-import { mapStateToProps } from '../shared/utils/redux'
+// Components
+import CropModal from '../Upload/CropModal.jsx'
 
-// Lottie
-import Lottie from 'react-lottie'
-import winkLottie from '../shared/lottie/wink.json'
-import emojiLottie from '../shared/lottie/emoji_tongue.json'
+// Redux
+import { mapStateToProps } from '../../shared/utils/redux'
+import { setCurrentUser } from '../../actions/user';
 
 // Apollo
 import { Mutation } from 'react-apollo'
-import PROFILE_MUTATION from '../graphql/UpdateInfo.graphql'
+import PROFILE_MUTATION from '../../graphql/UpdateInfo.graphql'
 
-// Redux
-import { setCurrentUser } from '../actions/user';
+// Lottie
+import Lottie from 'react-lottie'
+import balloonLottie from '../../shared/lottie/balloons.json'
+import emojiLottie from '../../shared/lottie/emoji_tongue.json'
 
-// Components & Styling
-import CropModal from './Upload/CropModal.jsx'
+// Helpers
+import { dataURItoBlob } from '../../shared/utils/helpers'
+import { getGreetingMessage } from '../../shared/utils/helpers'
+
 import './styles/GetStarted.scss'
 
-
-class Settings extends Component {
+class GetStarted extends Component {
   state = {
     redirect: false,
     profilePic: null,
@@ -33,13 +34,6 @@ class Settings extends Component {
     croppedImage: null,
     bio: '',
     errorMessage: '',
-  }
-
-  componentDidMount() {
-    if(this.props.user.isAuthenticated) {
-      const { bio } = this.props.user.info
-      this.setState({ bio })
-    }
   }
 
   onChange = e => this.setState({ [e.target.name]: e.target.value })
@@ -73,10 +67,12 @@ class Settings extends Component {
 
   render() {
     const { cropModal, profilePic, errorMessage, croppedImage } = this.state
-    if(!this.props.user.isAuthenticated) 
-      return <Redirect to='/' />
-    const balloonOptions = { loop: true, autoplay: true, animationData: winkLottie }
+    // if(!this.props.user.isAuthenticated || this.state.redirect || this.props.user.info.profile_picture !== null || this.props.user.info.bio) 
+    //   return <Redirect to='/' />
+    const balloonOptions = { loop: true, autoplay: true, animationData: balloonLottie }
     const pictureOptions = { loop: true, autoplay: true, animationData: emojiLottie }
+    if(this.state.redirect)
+      return <Redirect to='/' />
     const { firstname, lastname, bio, id, username } = this.props.user.info
     return (
       <React.Fragment>
@@ -91,10 +87,11 @@ class Settings extends Component {
           <div className='getStartedContent'>
             <div className='getStartedGreeting'>
               <h1>{getGreetingMessage(firstname)} —</h1>
-              <p>On this page you can update your profile picture, and edit your bio to let other users learn more about you.</p>
+              <p>Thanks for joining us, let's get started with setting up your profile. Let's start by telling us a bit about yourself which will serve as your profile bio.</p>
+              <h3 onClick={this.redirect}>I don't want to do this right now.</h3>
             </div>
             <div className='editBioContainer'>
-              <h2>Your bio —</h2>
+              <h2>Tell us something about yourself.</h2>
               <textarea 
                 name='bio'
                 type='text' 
@@ -139,7 +136,7 @@ class Settings extends Component {
             <Mutation mutation={PROFILE_MUTATION}>
               {(updateInfo, {data, loading, error }) => {
                 if(error) return <p>upload error</p>
-                if(loading) return <button>Saving...</button>
+                if(loading) return <button>Loading</button>
                 return (
                   <button onClick={() => this.saveProfile(updateInfo)}>
                     All set? Save my profile.
@@ -157,4 +154,4 @@ class Settings extends Component {
   }
 }
 
-export default connect(mapStateToProps)(withRouter(Settings))
+export default connect(mapStateToProps)(withRouter(GetStarted))

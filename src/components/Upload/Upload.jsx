@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import Header from './reusables/Header.jsx'
 import Lottie from 'react-lottie'
 import ImageCompressor from 'image-compressor.js'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import UploadZone from './Upload/UploadZone.jsx'
-import EditZone from './Upload/EditZone.jsx'
+import Header from '../reusables/Header.jsx'
+import UploadZone from './UploadZone.jsx'
+import EditZone from './EditZone.jsx'
 
-import lottieFile from '../shared/lottie/simple_loader.json'
+import lottieFile from '../../shared/lottie/simple_loader.json'
 
 const Loading = () => {
   const lottieOptions = { loop: true, autoplay: true, animationData: lottieFile }  
@@ -19,7 +19,7 @@ const Loading = () => {
  * The upload page. See <EditZone /> and <UploadZone />
  * for more info on the upload flow.
  */
-class UploadContainer extends Component {
+class Upload extends Component {
   state = {
     errorMessage: null, // On unsupported image uploaded
     loading: false
@@ -71,8 +71,8 @@ class UploadContainer extends Component {
   }
 }
 
-UploadContainer.contextTypes = {
+Upload.contextTypes = {
   router: PropTypes.object.isRequired
 }
 
-export default withRouter(UploadContainer)
+export default withRouter(Upload)

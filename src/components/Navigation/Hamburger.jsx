@@ -1,9 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
 import Ionicon from 'react-ionicons'
+
+// Redux
+import { connect } from 'react-redux'
 import { mapStateToProps } from '../../shared/utils/redux'
 import { setCurrentUser } from '../../actions/user'
+
+
 import './styles/Hamburger.scss'
 
 /**

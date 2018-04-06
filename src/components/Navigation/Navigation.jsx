@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { mapStateToProps } from '../shared/utils/redux'
-import { setCurrentUser } from '../actions/user'
+import { mapStateToProps } from '../../shared/utils/redux'
+import { setCurrentUser } from '../../actions/user'
 import _ from 'lodash'
 
-import LoggedIn from './Navigation/LoggedIn.jsx'
-import Guest from './Navigation/Guest.jsx'
+import LoggedIn from './LoggedIn.jsx'
+import Guest from './Guest.jsx'
 
 import './styles/Navigation.scss'
 

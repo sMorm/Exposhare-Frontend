@@ -4,18 +4,18 @@ import _ from 'lodash'
 
 // Lottie
 import Lottie from 'react-lottie'
-import lottieFile from '../shared/lottie/camera_search.json'
+import lottieFile from '../../shared/lottie/camera_search.json'
 
 // Apollo
-import USER_QUERY from '../graphql/UserSearch.graphql'
+import USER_QUERY from '../../graphql/UserSearch.graphql'
 import { Query } from 'react-apollo'
 
 // Helpers
-import { generateAvatarLink } from '../shared/utils/helpers'
+import { generateAvatarLink } from '../../shared/utils/helpers'
 
-import './styles/SearchContainer.scss'
+import './styles/Search.scss'
 
-class SearchContainer extends Component {
+class Search extends Component {
   state = {
     username: '',
     debouncedUsername: ''
@@ -88,4 +88,4 @@ class SearchContainer extends Component {
   }
 }
 
-export default SearchContainer
+export default Search

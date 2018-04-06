@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Header from './reusables/Header.jsx'
+import Header from '../reusables/Header.jsx'
 
-export default class ChatContainer extends Component {
+export default class Chat extends Component {
   render() {
     return (
       <div className='container'>

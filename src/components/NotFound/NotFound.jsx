@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Lottie from 'react-lottie'
-import lottieFile from '../shared/lottie/cycling.json'
+import lottieFile from '../../shared/lottie/cycling.json'
 
 import './styles/NotFound.scss'
 

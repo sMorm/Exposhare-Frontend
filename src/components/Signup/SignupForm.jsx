@@ -3,15 +3,18 @@ import PropTypes from 'prop-types'
 import jwt from 'jsonwebtoken'
 import { Link, withRouter } from 'react-router-dom'
 import { ThreeBounce } from 'better-react-spinkit'
-import { validateSignupForm } from '../../shared/utils/validate'
-import { setCurrentUser } from '../../actions/user'
 
 // Redux
 import { connect } from 'react-redux'
 import { mapStateToProps, dispatchAndRedirect } from '../../shared/utils/redux'
+import { setCurrentUser } from '../../actions/user'
 
+// Apollo
 import { Mutation } from 'react-apollo'
 import SIGNUP_MUTATION from '../../graphql/Signup.graphql'
+
+// Helpers
+import { validateSignupForm } from '../../shared/utils/validate'
 
 import './styles/SignupForm.scss'
 

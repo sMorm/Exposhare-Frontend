@@ -96,7 +96,7 @@ class LoggedIn extends Component {
 }
 
 LoggedIn.propTypes = {
-  logout: PropTypes.func.isRequired // from /components/Navigation.jsx
+  logout: PropTypes.func.isRequired // from ./Navigation.jsx
 }
 
 export default connect(mapStateToProps)(LoggedIn)

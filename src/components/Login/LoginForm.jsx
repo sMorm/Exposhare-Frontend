@@ -2,14 +2,19 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { ThreeBounce } from 'better-react-spinkit'
 import PropTypes from 'prop-types'
-import { validateLoginForm } from '../../shared/utils/validate'
+import jwt from 'jsonwebtoken'
+
+// Redux
 import { connect } from 'react-redux'
 import { dispatchAndRedirect } from '../../shared/utils/redux'
 import { setCurrentUser } from '../../actions/user'
-import jwt from 'jsonwebtoken'
 
-import { graphql, Mutation } from 'react-apollo'
+// Apollo
+import { Mutation } from 'react-apollo'
 import LOGIN_MUTATION from '../../graphql/Login.graphql'
+
+// Helpers
+import { validateLoginForm } from '../../shared/utils/validate'
 
 import './styles/LoginForm.scss'
 
@@ -31,7 +36,6 @@ class LoginForm extends Component {
     this.setState({ [e.target.name]: value, errors })
   }
 
-
   onSubmit = (e, loginUser) => {
     e.preventDefault()
     const { dispatch, authenticate } = this.props
@@ -39,14 +43,10 @@ class LoginForm extends Component {
     const { email, password } = this.state
 
     const { isValid, errors } = validateLoginForm(this.state)
-    if(isValid) {
+    if(isValid)
       loginUser({ variables: { email, password } })
-      .catch(e => {
-        // do stuff on error
-      })
-    } else {
+    else
       this.setState({ errors })
-    }
   }
 
   render() {
@@ -62,6 +62,7 @@ class LoginForm extends Component {
           let errorMessage = ''
           if(error) errorMessage = (error.graphQLErrors.find(f => f)).message
           let formErrors = ''
+          // Format Errors
           if( Object.entries(this.state.errors).length > 0) {
             formErrors = (
               <ul className='formErrorList'>

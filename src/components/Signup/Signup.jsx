@@ -2,13 +2,13 @@
 import React, { Component } from 'react'
 
 // Import Components
-import SignupForm from './Signup/SignupForm.jsx'
+import SignupForm from './SignupForm.jsx'
 
 // Import images/styles
-import { svgCamp } from '../shared/constants/links'
-import './styles/SignupContainer.scss'
+import { svgCamp } from '../../shared/constants/links'
+import './styles/Signup.scss'
 
-export default class SignupContainer extends Component {
+export default class Signup extends Component {
   render() {
     return (
       <div className='container'>

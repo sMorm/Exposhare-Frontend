@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import LoginForm from './Login/LoginForm.jsx'
-import { svgBus } from '../shared/constants/links'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
-import './styles/LoginContainer.scss'
+// Components
+import LoginForm from './LoginForm.jsx'
 
-class LoginContainer extends Component {
+// Styles/Media
+import { svgBus } from '../../shared/constants/links'
+import './styles/Login.scss'
+
+class Login extends Component {
 
   componentDidMount = () => {
     if(localStorage.jwtToken) this.props.history.push('/')
@@ -28,8 +31,8 @@ class LoginContainer extends Component {
   }
 }
 
-LoginContainer.contextTypes = {
+Login.contextTypes = {
   router: PropTypes.object.isRequired
 }
 
-export default withRouter(LoginContainer)
+export default withRouter(Login)

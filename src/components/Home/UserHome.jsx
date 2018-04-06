@@ -33,14 +33,14 @@ class UserHome extends Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('scroll', this.Handler)
+    document.removeEventListener('scroll', this.scrollHandler)
   }
 
   scrollHandler = () => {
-    if(window.pageYOffset > 200)
-      this.setState({ scrollUpButton: true })
-    else
-      this.setState({ scrollUpButton: false })
+    // if(window.pageYOffset > 200)
+    //   this.setState({ scrollUpButton: true })
+    // else
+    //   this.setState({ scrollUpButton: false })
   }
 
   // scrolls to top, if they're too far deep into their

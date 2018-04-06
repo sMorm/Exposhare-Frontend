@@ -1,17 +1,19 @@
 import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 
+// Redux
 import { connect } from 'react-redux'
-import { mapStateToProps } from '../shared/utils/redux'
+import { mapStateToProps } from '../../shared/utils/redux'
 
-import GuestHome from './Home/GuestHome.jsx'
-import UserHome from './Home/UserHome.jsx'
+// Components
+import GuestHome from './GuestHome.jsx'
+import UserHome from './UserHome.jsx'
 
 /**
  * Display different pages for users who are logged
  * in and guests users
  */
-class HomeContainer extends Component {
+class Home extends Component {
   render() {
     if(this.props.user.isAuthenticated)
       return <UserHome id={this.props.user.info.id}/>
@@ -20,4 +22,4 @@ class HomeContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps)(withRouter(HomeContainer))
+export default connect(mapStateToProps)(withRouter(Home))
