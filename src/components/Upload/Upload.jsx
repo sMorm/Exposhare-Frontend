@@ -8,12 +8,7 @@ import Header from '../reusables/Header.jsx'
 import UploadZone from './UploadZone.jsx'
 import EditZone from './EditZone.jsx'
 
-import lottieFile from '../../shared/lottie/simple_loader.json'
-
-const Loading = () => {
-  const lottieOptions = { loop: true, autoplay: true, animationData: lottieFile }  
-  return <Lottie options={lottieOptions} height={300} width={300} />
-}
+import FullScreenSpinner from '../reusables/FullScreenSpinner.jsx'
 
 /**
  * The upload page. See <EditZone /> and <UploadZone />
@@ -56,10 +51,11 @@ class Upload extends Component {
     }
   }
 
+
   render() {
     const { errorMessage, loading, file } = this.state
     if(loading) {
-      return <Loading />
+      return <FullScreenSpinner size={100} color='salmon' text={['Compressing..', 'Beep Boop', `Beefy file..`, 'Hmm..']} clear/>
     } else {
       return (
         <div className='container'>

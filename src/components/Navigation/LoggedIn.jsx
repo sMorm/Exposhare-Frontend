@@ -6,6 +6,7 @@ import { mapStateToProps } from '../../shared/utils/redux'
 
 // Components
 import Hamburger from './Hamburger.jsx'
+import NoProfilePicture from '../reusables/NoProfilePicture.jsx'
 
 // Apollo
 import QUERY_PROFILE from '../../graphql/ProfileInfo.graphql'
@@ -40,7 +41,7 @@ class LoggedIn extends Component {
 
   state = {
     showDropdown: false,
-    profile_picture: 'https://via.placeholder.com/100x100'
+    profile_picture: null
   }
 
   /**
@@ -70,6 +71,7 @@ class LoggedIn extends Component {
     const { firstname, profile_picture, id:context_id, username } = this.props.user.info // redux info
     const { logout } = this.props
     const dropDownMenu = this.state.showDropdown && <Dropdown logout={logout} toggle={this.toggleDropdown} username={username}/>
+    let hasPic = false
     return (
       <Fragment>
         <span className='loggedInLinkContainer'>
@@ -77,12 +79,12 @@ class LoggedIn extends Component {
           <Link to='/upload' className='loggedInLink'>Upload</Link>                    
           <Link to='/messages' className='loggedInLink'>Messages</Link>
           <span className='loggedInUserBubble' onClick={this.toggleDropdown} ref={(ref) => { this.node = ref }}>
-            <Query query={QUERY_PROFILE} variables={{ username, context_id }}>
-              {({ loading, error, data: { user } }) => {
-                let avatarSource = 'https://via.placeholder.com/100x100'
-                if(!loading && user.profile_picture !== null) 
-                  avatarSource = generateAvatarLink(context_id)
-                return <img src={avatarSource} alt='User Profile'/>
+            <Query query={QUERY_PROFILE} variables={{ username, context_id }} >
+              {({ loading, data, error }) => {
+                let avatar = <NoProfilePicture name={firstname} size='40px'/>
+                if(!loading && data.user.profile_picture !== null)
+                  avatar =  <img src={generateAvatarLink(context_id)} alt={firstname}/>
+                return avatar
               }}
             </Query>  
             <p>{firstname}</p>

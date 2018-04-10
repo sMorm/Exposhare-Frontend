@@ -32,7 +32,7 @@ class Navigation extends Component {
    * re-appear. See handleScroll() for logic
    */
   componentDidMount() {
-    document.addEventListener('scroll', _.debounce(this.handleScroll, 50))
+    document.addEventListener('scroll', this.handleScroll, 50)
   }
 
   /**
@@ -42,7 +42,7 @@ class Navigation extends Component {
    * just to be safe.
    */
   componentWillUnmount() {
-    document.removeEventListener('scroll', this.handleScroll)
+   document.removeEventListener('scroll', this.handleScroll)
   }
 
   /**

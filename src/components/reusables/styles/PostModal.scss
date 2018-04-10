@@ -1,0 +1,42 @@
+.postModalOverlay {
+  display: block;
+  position: fixed;
+  z-index: 6;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow-y: hidden; /* Enable scroll if needed */
+  background-color: white;
+  padding: 2em 0;
+}
+
+.postModalContainer {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+
+.postModalContentLandscape {
+  display: block;
+  overflow-y: auto;
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}
+
+.postModalContentPortrait {
+  display: flex;
+  justify-content: space-between;
+  overflow-y: auto;
+  img {
+    align-self: center;
+    width: 45%;
+    position: sticky;
+    top: 20px;
+  }
+}

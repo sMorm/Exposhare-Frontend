@@ -55,27 +55,26 @@ class SignupForm extends Component {
     const { isValid, errors } = validateSignupForm(this.state)    
     const bio = ''
     
-    if(isValid) {
+    if(isValid)
       newUser({ variables: { firstname, lastname, email, password, bio, username } })
-    } else {
+    else 
       this.setState({ errors })
-    }
   }
 
   render() {
     return (
       <Mutation mutation={SIGNUP_MUTATION}>
         {(newUser, { data, error, loading }) => {
-          if(error) {
-            return <h1>server error</h1> // graphql server error
-          }
+          let serverErrors = null
+          if(error) serverErrors = error.graphQLErrors.find(f => f)
           let formErrors = ''
-          if( Object.entries(this.state.errors).length > 0) {
+          if( Object.entries(this.state.errors).length > 0 || serverErrors) {
             formErrors = (
               <ul className='formErrorList'>
                 {Object.entries(this.state.errors).map((e, key) => {
                   return <li key={key}>{e[1]}</li>
                 })}
+                {serverErrors !== null && <li key={999}>{serverErrors.message}</li>}
               </ul>
             )
           }

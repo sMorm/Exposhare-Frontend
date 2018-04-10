@@ -1,3 +1,21 @@
+.gridFeedContainer {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  align-items: end;
+  grid-gap: 2em;
+  padding-top: 2em;
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+}
+
+.gridFeedItem {
+  padding: 1.5em 0;
+
+}
+
 .gridFeedOptions {
   display: flex;
   justify-content: space-around;
@@ -51,26 +69,72 @@
   }
 }
 
-@media(max-width: 900px) {
-  .gridContainer {
-    display: block;
-  }
-  .gridContent {
+@media(max-width: 1100px) {
+  .flexFeedRow {
+    padding: 1em;
     img {
-      width: 100%;
-      height: auto;
-    }
-  }
-  .gridFeedContent {
-    flex: 31%;
-    max-width: 31%;
-  }
-
-  .noCropContent {
-    flex: 33%;
-    max-width: 33%;
-    img {
-      margin-top: 1px;
+      width: 25vw;
+      height: 25vw;
+      max-width: 300px;
+      max-height: 300px;
+      min-width: 250px;
+      min-height: 250px;
     }
   }
 }
+
+@media(max-width: 950px) {
+  .flexFeedRow {
+    padding: 1em;
+    img {
+      width: 25vw;
+      height: 25vw;
+      max-width: 270px;
+      max-height: 270px;
+      min-width: 230px;
+      min-height: 230px;
+    }
+  }
+}
+
+@media (max-width: 860px) {
+  .flexFeedRow {
+    display: block;
+    width: 100%;
+    padding: 0;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-width: none;
+      max-height: none;
+      padding: 2em 0;
+    }
+  }
+}
+
+
+// @media(max-width: 900px) {
+//   .gridContainer {
+//     display: block;
+//   }
+//   .gridContent {
+//     img {
+//       width: 100%;
+//       height: auto;
+//     }
+//   }
+//   .gridFeedContent {
+//     flex: 31%;
+//     max-width: 31%;
+//   }
+
+//   .noCropContent {
+//     flex: 33%;
+//     max-width: 33%;
+//     img {
+//       margin-top: 1px;
+//     }
+//   }
+// }

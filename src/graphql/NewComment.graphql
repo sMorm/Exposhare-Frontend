@@ -1,0 +1,7 @@
+mutation newComment($user_id: Int!, $post_id: Int!, $comment: String!){
+  newComment(user_id: $user_id, post_id: $post_id, comment: $comment) {
+    user_id
+    post_id
+    comment
+  }
+}

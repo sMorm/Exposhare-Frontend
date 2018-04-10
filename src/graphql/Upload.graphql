@@ -6,6 +6,7 @@ mutation newPost($file: Upload!, $content: String!, $user_id: Int! ) {
     image_url
     likes
     user {
+      id
       profile_picture
       firstname
       lastname

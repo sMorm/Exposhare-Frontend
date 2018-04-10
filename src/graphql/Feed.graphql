@@ -13,5 +13,11 @@ query user($id: Int!, $after: Int) {
       profile_picture
       username
     }
+    comments {
+      firstname
+      lastname
+      username
+      comment
+    }
   }
 }

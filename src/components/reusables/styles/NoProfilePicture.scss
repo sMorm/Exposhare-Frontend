@@ -1,0 +1,14 @@
+.noProfilePicture {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background: salmon;
+  color: white;
+  font-family: 'proxima_nova_altbold' !important;
+  line-height: 0;
+  cursor: pointer;
+}

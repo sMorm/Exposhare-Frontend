@@ -3,23 +3,11 @@ import Header from '../reusables/Header.jsx'
 import Cropper from 'react-cropper'
 import Lottie from 'react-lottie'
 
+import FullScreenSpinner from '../reusables/FullScreenSpinner.jsx'
+
 import './styles/CropModal.scss'
 import 'cropperjs/dist/cropper.css' // bootstrap react-cropper css
 import lottieFile from '../../shared/lottie/simple_loader.json'
-
-/**
- * Full-screen loading component
- */
-const Loading = () => {
-  const lottieOptions = { loop: true, autoplay: true, animationData: lottieFile }
-  return (
-    <div className='cropModalLoading'>
-      <span className='cropModalLoadingContent'>
-        <Lottie options={lottieOptions} width={300} height={300} />
-      </span>
-    </div>
-  )
-}
 
 /**
  * This modal gets rendered when the user wants
@@ -31,7 +19,8 @@ const Loading = () => {
  */
 export default class CropModal extends Component {
   state = {
-    loading: false
+    loading: false,
+    changeRatio: 1
   }
 
   componentDidMount() {
@@ -58,8 +47,11 @@ export default class CropModal extends Component {
     }, 500)
   }
 
+  changeRatio = cropRatio => this.setState({ cropRatio })
+
   // props: close, function to close modal, file: image file, squareRatio: boolean
   render() {
+    const { loading, cropRatio } = this.state
     return (
       <div className='cropModalContainer'>
         <div className='modalContent'>
@@ -72,13 +64,19 @@ export default class CropModal extends Component {
             src={this.props.file}
             style={{height: 'calc(100vh - 300px)', width: '100%'}}
             guides={false}
-            aspectRatio={this.props.squareRatio ? 1 : null}
+            aspectRatio={this.props.squareRatio ? 1 : cropRatio }
             ref='cropper'/>
-          <span className='cropModalButtons'>
-            <button onClick={this.crop}>Make crop</button>
+          <span className='cropModalOptions'>
+            <button onClick={() => this.changeRatio(NaN)}>Original</button>
+            <button onClick={() => this.changeRatio(1)}>1:1</button>
+            <button onClick={() => this.changeRatio(8/10)}>8:10</button>
+            <button onClick={() => this.changeRatio(4/3)}>4:3</button>
+          </span>
+          <span className='cropModalButton'>
+            <button onClick={this.crop}>Crop</button>
           </span>
         </div>
-        {this.state.loading && <Loading />}
+        {loading && <FullScreenSpinner size={100} color='salmon' text={'Cropping..'} clear/>}
       </div>
     )
   }

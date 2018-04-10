@@ -68,9 +68,6 @@
   justify-content: space-between;
   text-align: right;
   font-family: 'proxima_nova_altbold';
-  span {
-    padding-left: 5%;
-  }
   p {
     color: #555;
   }
@@ -153,6 +150,7 @@
       font-size: 12px;
       margin: 2px;
     }
+
   }
 
   .profileHeaderUtility {
@@ -160,11 +158,19 @@
     bottom: -5px;
     right: 10px;
   }
+  .stickyNav {
+    animation: slideDown-mobile 0.5s forwards;
+  }
 }
 
 @keyframes slideDown {
   from { transform: translateY(0px); }
   to { transform: translateY(78px); }
+}
+
+@keyframes slideDown-mobile {
+  from { transform: translateY(0px); }
+  to { transform: translateY(69px); }
 }
 
 @keyframes slideUp {

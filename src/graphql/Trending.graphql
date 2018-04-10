@@ -1,0 +1,16 @@
+query trending {
+  trending {
+    id
+    content
+    created_at
+    image_url
+    likes
+    user {
+      id
+      username
+      profile_picture
+      firstname
+      lastname
+    }
+  }
+}

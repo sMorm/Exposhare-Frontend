@@ -7,20 +7,42 @@ $primary-dark-color: rgb(200,200,200);
   margin: auto;
 }
 
-.welcomeContainer {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: none;
-  align-items: center;
-  padding: 3em 0;
+.welcomeImageContainer {
+  width: 100%;
+  border: black;
+  // position: absolute;
   img {
-    width: 50%;
+    width: 100%;
+    height: calc(38vh);
+    min-height: 320px;
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    object-fit: cover;
+    filter: brightness(1.01);
   }
-  animation: fade-up 0.5s forwards;
+  // display: flex;
+  // justify-content: space-between;
+  // flex-wrap: none;
+  // align-items: center;
+  // padding: 3em 0;
+  // img {
+  //   width: 50%;
+  // }
+  // animation: fade-up 0.5s forwards;
 }
 
 .welcomeText {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 50%;
+  height: calc(30vh);
+  min-height: 200px;
+  padding-left: 4em;
   min-width: 270px;
+  z-index: 2;
   h1 {
     font-size: 45px;
     line-height: 0px;
@@ -34,21 +56,21 @@ $primary-dark-color: rgb(200,200,200);
 
 .welcomeSignupButton {
   text-decoration: none;
-  border: solid 1px #D4CDC7;
-  padding: 10px 15px;
-  color: rgb(179, 173, 168);
+  padding: 10px 20px;
+  background: white;
+  color: #333;
   border-radius: 5px;
   transition: all 0.5s;
-  &:hover {
-    background-color: #D4CDC7;
-    color: white;
-  }
+  -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.15);
+  font-family: 'proxima_nova_altbold';
 }
 
 .secondWelcomeContainer {
   display: flex;
   justify-content: space-between;
-  border-top: solid 2px #efefef;
+  // border-top: solid 2px #efefef;
   padding: 50px 0px;
   padding-bottom: 30px;
   h1 {
@@ -61,6 +83,9 @@ $primary-dark-color: rgb(200,200,200);
 
   img {
     width: 100%;
+    border-radius: 3px;
+    border: solid 1px #ccc;
+    filter: brightness(1.06);
   }
 
 }
@@ -81,13 +106,25 @@ $primary-dark-color: rgb(200,200,200);
   }
 }
 
+.discoverContainer {
+  h3 {
+    margin-top: 0;
+    color: #888;
+    font-size: 24px;
+    font-weight: 300;
+  }
+}
+
 @media (max-width: 700px) {
   .welcomeContainer {
     img {
-      display: none;
+      height: calc(20vh);
+      min-height: 250px;
     }
   }
   .welcomeText {
+    padding-left: 2em;
+    height: calc(20vh);
     h1 {
       font-size: 30px;
     }
@@ -97,7 +134,7 @@ $primary-dark-color: rgb(200,200,200);
   }
 
   .welcomeSignupButton {
-    padding: 5px 10px;
+    padding: 8px 14px;
     font-size: 14px;
   }
 

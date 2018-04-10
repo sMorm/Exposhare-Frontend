@@ -21,6 +21,7 @@ import Navigation from './components/Navigation/Navigation.jsx'
 import NotFound from './components/NotFound/NotFound.jsx'
 import Search from './components/Search/Search.jsx'
 import Settings from './components/Settings/Settings.jsx'
+import Welcome from './components/Welcome/Welcome.jsx'
 import Signup from './components/Signup/Signup.jsx'
 import Upload from './components/Upload/Upload.jsx'
 import UserProfile from './components/UserProfile/UserProfile.jsx'
@@ -45,6 +46,7 @@ class Routes extends Component {
                 <Route exact path='/upload' component={Upload} />
                 <Route path='/upload/edit/' component={EditZone} />
                 <Route path='/get-started' component={GetStarted} />
+                <Route path='/welcome' component={Welcome} />
                 <Route path='/settings' component={Settings} />
                 <Route path='/edit-profile/' component={Settings} />
                 <Route path='/search' component={Search} />

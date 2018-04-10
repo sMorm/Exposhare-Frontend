@@ -1,0 +1,10 @@
+query following($id: Int!) {
+  following(id: $id) {
+    id
+    username
+    firstname
+    lastname
+    profile_picture
+    created_at
+  }
+}

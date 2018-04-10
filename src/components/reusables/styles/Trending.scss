@@ -1,0 +1,178 @@
+.trendingLoadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.trendingLoadingContent {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  transform: scale(2)
+}
+
+.trendingPostsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(2, 1fr);
+  justify-content: space-between;
+  grid-gap: 2em;
+  img:last-child {
+    width: 270px;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+}
+
+.trendingImgSkeleton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 270px;
+  height: 270px;
+}
+
+.trendingPostUserContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  padding-top: 2px;
+  width: 95%;
+
+  p {
+    color: #888;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+.trendingPostUser {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  h4 {
+    padding-left: 0.5em;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}
+
+@media (max-width: 1300px) {
+  .trendingPostsContainer {
+    img:last-child {
+      width: 250px;
+      height: 250px;
+    }
+  }
+  .trendingImgSkeleton {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .trendingPostsContainer {
+    grid-gap: 15px;
+    img:last-child {
+      width: 240px;
+      height: 240px;
+    }
+  }
+
+  .trendingImgSkeleton {
+    width: 240px;
+    height: 240px;
+  }
+
+  .trendingPostUserContainer {
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .trendingPostUser {
+    img {
+      width: 30px;
+      height: 30px;
+    }
+    h4 {
+      font-size: 13px;
+    }
+  }
+}
+
+@media (max-width: 1150px) {
+  .trendingPostsContainer {
+    grid-gap: 5px;
+    img:last-child {
+      width: 220px;
+      height: 220px;
+    }
+  }
+  .trendingPostUser img {
+    width: 30px;
+    height: 30px;
+  }
+  .trendingImgSkeleton {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 970px) {
+  .trendingPostsContainer {
+    grid-gap: 5px;
+    img:last-child {
+      width: 190px;
+      height: 190px;
+    }
+  }
+  .trendingImgSkeleton {
+    width: 190px;
+    height: 190px;
+  }
+}
+
+@media (max-width: 820px) {
+  .trendingPostsContainer {
+    display: block;
+    grid-gap: none;
+    img:last-child {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    p {
+      font-size: 14px
+    }
+  }
+  .trendingImgSkeleton {
+    width: 100%;
+    height: auto;
+  }
+  .trendingPostItem {
+    padding: 3em 0em;
+  }
+
+  .trendingPostUser {
+    h4 {
+      padding-left: 0.5em;
+      font-size: 15px;
+    }
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

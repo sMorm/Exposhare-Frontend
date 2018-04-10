@@ -17,6 +17,14 @@ body {
   animation: fade 0.5s forwards;
 }
 
+.hide {
+  display: none;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+}
 @keyframes fade-pop-enter {
   from { transform: scale(0.85); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
@@ -29,7 +37,7 @@ body {
 
 @media (max-width: 700px) {
   .container {
-    width: 95%;
+    width: 98%;
     padding: 0;
   }
 }

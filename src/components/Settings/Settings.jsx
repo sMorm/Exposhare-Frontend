@@ -65,7 +65,7 @@ class Settings extends Component {
   saveProfile = updateInfo => {
     const { croppedImage, bio } = this.state
     const { id } = this.props.user.info
-    const profile_picture = dataURItoBlob(croppedImage)
+    const profile_picture = croppedImage ? dataURItoBlob(croppedImage) : null
     updateInfo({ variables: { id, bio, profile_picture  }})
     .then(res => this.props.history.push('/'))
   }

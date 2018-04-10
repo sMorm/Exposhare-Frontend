@@ -56,7 +56,7 @@
   }
 }
 
-.cropModalButtons {
+.cropModalButton {
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -65,40 +65,34 @@
     cursor: pointer;
     outline: none;
     padding: 5px 10px;
-    border: solid 1px #c9b7ad;
-    color: #c9b7ad;
+    border: solid 1px black;
+    color: black;
     font-family: 'proxima_nova_ltsemibold';
     font-size: 18px;
-    border-radius: 15px;
     &:hover {
-      background: #c9b7ad;
+      background: black;
       color: white;
     }
   }
 }
 
-.cropModalLoading {
-  position: fixed;
-  z-index: 6;
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: scroll; /* Enable scroll if needed */
-  background-color: transparent; /* Fallback color */
-  background-color: transparent; /* Black w/ opacity */
-}
-
-.cropModalLoadingContent {
+.cropModalOptions {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255,255,255, 0.95);
-  h1 {
-    font-family: 'proxima_nova_ltsemibold';
-    font-size: 40px;
+  padding: 1.2em 0;
+  button {
+    cursor: pointer;
+    margin: 0px 2em;
+    outline: none;
+    border: solid 1px black;
+    color: black;
+    font-size: 18px;
+    padding: 8px 12px;
+    &:hover {
+      background: black;
+      color: white;
+    }
   }
 }
 

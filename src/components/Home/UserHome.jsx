@@ -13,11 +13,11 @@ import FEED_SUBSCRIPTION from '../../graphql/FeedSub.graphql'
 
 // Components
 import Header from '../reusables/Header.jsx'
-import PostContainer from '../reusables/PostContainer.jsx'
+import PostContainer from '../reusables/PostContainer/PostContainer.jsx'
 import PaginateListener from '../reusables/PaginateListener.jsx'
 
 // Helpers
-import { generateImageLink } from '../../shared/utils/helpers'
+import { generateImageLink, generateAvatarLink } from '../../shared/utils/helpers'
 
 import './styles/UserHome.scss'
 
@@ -37,10 +37,10 @@ class UserHome extends Component {
   }
 
   scrollHandler = () => {
-    // if(window.pageYOffset > 200)
-    //   this.setState({ scrollUpButton: true })
-    // else
-    //   this.setState({ scrollUpButton: false })
+    if(window.pageYOffset > 200)
+      this.setState({ scrollUpButton: true })
+    else
+      this.setState({ scrollUpButton: false })
   }
 
   // scrolls to top, if they're too far deep into their
@@ -89,7 +89,7 @@ class UserHome extends Component {
           {this.state.newPosts.length} new posts
         </li>
       )
-    } else {
+    } else if(this.state.newPosts.length > 0) {
       subscriptionAlerts = newPosts.map((post, key) => {
         return (
           <li onClick={this.updateCache} key={key}>
@@ -113,32 +113,42 @@ class UserHome extends Component {
         <Query 
           query={FEED_QUERY} 
           variables={{ id, after: null }} 
-          fetchPolicy='cache-and-network'
-          >
-          {({ loading, error, data, fetchMore, subscribeToMore }) => {
-            if(error) return <h1>error :/</h1>
-            let feed = []
-            if(data.userFeed) 
-              feed = data.userFeed.map((post, key) => <PostContainer key={key} post={post} user_id={id}/>)
-            return (
-              <React.Fragment>
-                {feed}
-                <PaginateListener onLoadMore={() => {
-                  fetchMore({
-                    variables: {
-                      after: data.userFeed[data.userFeed.length-1].id,
-                    },
-                    updateQuery: (prev, {fetchMoreResult}) => {
-                      if(!fetchMoreResult) return prev
-                      return Object.assign({}, prev, {
-                        userFeed: [...prev.userFeed, ...fetchMoreResult.userFeed]
-                      })
-                    }
-                  })
-                }}/>
-              </React.Fragment>
-            )
-          }}
+          fetchPolicy='cache-and-network'>
+            {({ loading, error, data, fetchMore }) => {
+              if(error) console.log(error)
+              let feed = []
+              if(data && Object.entries(data).length > 0) {
+                feed = data.userFeed.map((post, key) => <PostContainer key={key} post={post} user_id={id}/>)
+                feed.push(
+                  <PaginateListener key={999} onLoadMore={() => {
+                    fetchMore({
+                      variables: {
+                        after: data.userFeed ? data.userFeed[data.userFeed.length-1].id : null,
+                      },
+                      updateQuery: (prev, {fetchMoreResult}) => {
+                        if(!fetchMoreResult) return prev
+                        return Object.assign({}, prev, {
+                          userFeed: [...prev.userFeed, ...fetchMoreResult.userFeed]
+                        })
+                      }
+                    })
+                  }}/>
+                )
+              } else if(!loading) {
+                feed = (
+                  <span className='emptyFeedContainer'>
+                    <p>It looks like your feed is empty. We suggest you that you follow some users to populate your feed.</p>
+                    <p>Look for users by navigating to the <strong>Search</strong> page on the navigation bar.</p>
+                  </span>
+                )
+              }
+              return (
+                <React.Fragment>
+                  {feed}
+                </React.Fragment>
+              )
+            }
+          }
         </Query>
         <ul className='homeFeedUtility'>
           {subscriptionAlerts}
@@ -160,3 +170,4 @@ UserHome.propTypes = {
 }
 
 export default UserHome
+

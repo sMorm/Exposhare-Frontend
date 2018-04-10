@@ -62,6 +62,8 @@
   }
 }
 .searchUserResultContent {
+  display: flex;
+  align-content: center;
   text-decoration: none;
   border: solid 1px #ccc;
   width: 28%;
@@ -78,10 +80,14 @@
   display: flex;
   justify-content: flex-start;
   img {
-    width: 100px;
+    align-self: center;
+    width: 70px;
     border-radius: 50%;
     align-self: center;
     padding-right: 5px;
+  }
+  span {
+    padding-left: 5px;
   }
 }
 

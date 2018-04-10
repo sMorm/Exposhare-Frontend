@@ -12,7 +12,7 @@ export default class Header extends Component {
       <div className="headerContainer">
         <h1 style={{ fontSize: size }}>{title}</h1>
         <hr/>
-        <br/><br/>
+        <br/>
       </div>
     )
   }

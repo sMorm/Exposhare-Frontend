@@ -1,0 +1,15 @@
+.whoToFollowContainer {
+  animation: slideUp 1s forwards;  
+  h1 {
+    font-family: 'proxima_nova_altbold';
+    font-size: 44px;
+  }
+}
+
+@media (max-width: 800px) {
+  .whoToFollowContainer {
+    h1 {
+      font-size: 34px;
+    }
+  }
+}

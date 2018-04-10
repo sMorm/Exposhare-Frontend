@@ -1,0 +1,110 @@
+.followModalOverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left: 0;
+  background-color: rgba(0,0,0, 0.4);
+  z-index:6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.followModalContainer {
+  height: calc(80vh);
+  min-height: 600px;
+  width: 40%;
+  max-width: 500px;
+  min-width: 400px;
+  background: white;
+  padding: 2em;
+}
+
+.followModalContent {
+  overflow: hidden;
+  height: 100%;
+}
+
+.followModalItemContainer {
+  height: 100%;
+  overflow: scroll;
+}
+
+.followModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 1em;
+  border-bottom: solid 1px #ccc;  
+  h1 {
+    margin: 0;
+    font-family: 'proxima_nova_altbold';
+    font-size: 40px
+  }
+}
+
+.followModalItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1.2em 0;
+  text-decoration: none;
+  color: black;
+  p {
+    font-size: 12px;
+    color: #aaa;
+    width: 35%;
+    text-align: right;
+  }
+
+  &:last-child {
+    border-bottom: solid 1px #ccc;
+  }
+}
+
+.followModalLink {
+  text-decoration: none;
+  color: black;
+}
+
+.followModalInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60%;
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: solid 1px #eee;
+  }
+}
+
+.followModalName {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: black;
+  padding: 5px 0;
+  padding-left: 5px;
+  h3 {
+    margin: 0px;
+  }
+  h5 {
+    margin: 0px;
+    color: #888;
+  }
+}
+
+@media (max-width: 800px) {
+  .followModalContainer {
+    width: 100%;
+    height: calc(100vh);
+    max-width: none;
+    min-width: none;
+    padding: 2em 4em;
+  }
+}

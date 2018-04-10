@@ -14,6 +14,7 @@ import { Query } from 'react-apollo'
 import { generateAvatarLink } from '../../shared/utils/helpers'
 
 import './styles/Search.scss'
+import NoProfilePicture from '../reusables/NoProfilePicture.jsx';
 
 class Search extends Component {
   state = {
@@ -30,7 +31,7 @@ class Search extends Component {
   onChange = e => { 
     this.setState(
       { [e.target.name]: e.target.value },
-      _.debounce(() => this.setState({ debouncedUsername: this.state.username }), 1000))
+      _.debounce(() => this.setState({ debouncedUsername: this.state.username }), 250))
   }
 
   render() {
@@ -43,12 +44,12 @@ class Search extends Component {
           let users = ''
           if(data.searchUser) { // list of users returned, map it and store it in users
             users = data.searchUser.map((user, key) => {
-              let avatarSource = 'http://via.placeholder.com/100x100'
-              if(user.profile_picture !== null) avatarSource = generateAvatarLink(user.id)
+              let avatar = <NoProfilePicture name={user.firstname} size='70px' fontSize='24px'/>
+              if(user.profile_picture !== null) avatar = <img src={generateAvatarLink(user.id)} alt='' />
               return (
                 <Link to={`/user/${user.username}`} key={key} className='searchUserResultContent'>
                   <span className='searchUserResultFlex'>
-                    <img src={avatarSource} alt='' />
+                    {avatar}
                     <span>
                       <h3>{user.firstname} {user.lastname}</h3>
                       <p>@{user.username}</p>

@@ -1,0 +1,19 @@
+.postContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.postLoadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(60vh);
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .postContainer {
+    display: block;
+  }
+}

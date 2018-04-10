@@ -1,0 +1,10 @@
+query followers($id: Int!) {
+  followers(id: $id) {
+    id
+    username
+    firstname
+    lastname
+    profile_picture
+    created_at
+  }
+}

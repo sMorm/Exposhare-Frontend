@@ -30,42 +30,29 @@ export default class ProfileInteractions extends Component {
       data: { user: { ...user, is_following: !user.is_following, followers }}
     })
   }
+
   render() {
     const { is_following, follower, followee } = this.props
+    const mutation = is_following ? UNFOLLOW_MUTATION : FOLLOW_MUTATION
+    const buttonContent = is_following ? 'Following' : 'Follow'
+    const buttonClass = is_following ? 'followingButton' : 'notFollowingButton'
+    const updateType = is_following ? 'unfollowed' : 'following'
     return (
       <span className='profileInteractions'>
-        {is_following
-          ? <Mutation 
-            mutation={UNFOLLOW_MUTATION}
-            update={ cache => this.updateCache(cache, 'unfollowed') } >
-              {(removeFollow, { data, loading, error}) => {
-                if(loading) 
-                  return <button className='followLoading'>...</button>
-                return (
-                  <button 
-                    onClick={() => removeFollow({ variables: { follower, followee } })}
-                    className='followingButton'>
-                  Following
-                  </button>
-                )
-              }}
-            </Mutation>
-          :  <Mutation 
-              mutation={FOLLOW_MUTATION}
-              update={ cache => this.updateCache(cache, 'following')} >
-              {(newFollow, { data, loading, error}) => {
-                if(loading) 
-                  return <button className='followLoading'>...</button>
-                return (
-                  <button 
-                  onClick={() => newFollow({ variables: { follower, followee } })}
-                  className='notFollowingButton'>
-                  Follow
-                  </button>
-                )
-              }}
-            </Mutation>
-          } 
+        <Mutation 
+          mutation={mutation}
+          update={ cache => this.updateCache(cache, updateType)}>
+          {(mutate, { loading, error, data }) => {
+            if(loading) return <button className='followLoading'>...</button>
+            return (
+              <button 
+                onClick={() => mutate({ variables: { follower, followee } })}
+                className={buttonClass}>
+                {buttonContent}
+              </button>
+            )
+          }}
+        </Mutation> 
         <button>Message</button>
       </span>
     )

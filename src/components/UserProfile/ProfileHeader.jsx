@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { mapStateToProps } from '../../shared/utils/redux'
 
+import FollowModal from '../reusables/FollowModal.jsx'
+
 import { Mutation } from 'react-apollo'
 
 import ProfileInteractions from './ProfileInteractions.jsx'
@@ -14,7 +16,9 @@ class ProfileHeader extends Component {
 
   state = {
     isSticky: false,
-    isScrollingUp: null
+    isScrollingUp: null,
+    toggleFollowers: false,
+    toggleFollowings: false
   }
 
   componentDidMount = () => {
@@ -44,6 +48,11 @@ class ProfileHeader extends Component {
     })
   }
 
+  toggleFollowers = () => this.setState({ toggleFollowers: true })
+  toggleFollowings = () => this.setState({ toggleFollowings: true })
+  close = () => this.setState({ toggleFollowings: false, toggleFollowers: false })
+
+
 
   render() {
     // const followee = this.props.match.params[0]
@@ -61,6 +70,7 @@ class ProfileHeader extends Component {
     const { firstname, lastname, bio, followers, following, is_following,
       profile_picture, username, id } = this.props.userInfo
     const { context_id } = this.props
+    const { toggleFollowers, toggleFollowings } = this.state
     let viewingSelf = false
     if(id === this.props.user.info.id) viewingSelf = true
     let profilePic = 'http://via.placeholder.com/50x50'
@@ -68,6 +78,8 @@ class ProfileHeader extends Component {
       profilePic = `https://s3.amazonaws.com/gui-project-database/${id}/profile_picture.png`
     return (
       <React.Fragment>
+        {toggleFollowers && <FollowModal type='followers' id={id} close={this.close}/>}
+        {toggleFollowings && <FollowModal type='followings' id={id} close={this.close}/>}
         <div className={containerStyle}>
         <span className='profileHeaderContent'>
           <span className='profileHeaderName'>
@@ -95,11 +107,11 @@ class ProfileHeader extends Component {
           </span>
           <span>
             <h3>Followers</h3>
-            <p>{followers}</p>
+            <p onClick={this.toggleFollowers}>{followers}</p>
           </span>
           <span>
             <h3>Following</h3>
-            <p>{following}</p>
+            <p onClick={this.toggleFollowings}>{following}</p>
           </span>
           <span>
             <h3>Likes</h3>
@@ -123,10 +135,3 @@ ProfileHeader.propTypes = {
 }
 
 export default connect(mapStateToProps)(withRouter(ProfileHeader))
-
-// <Mutation mutation={FOLLOW_MUTATION} variables={{ followee: id, follower: this.props.user.info.id}}>
-//   {(newFollow, { data, loading, error}) => {
-//     if(error || data) return <button>Following</button>
-//     return <button onClick={newFollow}>Follow</button>
-//   }}
-// </Mutation>

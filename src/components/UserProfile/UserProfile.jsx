@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import ProfileHeader from './ProfileHeader.jsx'
 import GridFeed from './GridFeed.jsx'
 import LottieLoad from '../reusables/LottieLoad.jsx'
+import FullScreenSpinner from '../reusables/FullScreenSpinner.jsx'
 
 // Apollo
 import QUERY_PROFILE_INFO from '../../graphql/ProfileInfo.graphql'
@@ -23,7 +24,7 @@ class UserProfile extends Component {
     return (
       <Query query={QUERY_PROFILE_INFO} variables={{ username, context_id }} >
         {({ loading, error, data }) => {
-          if(loading) return <h1>loading</h1>
+          if(loading) return <FullScreenSpinner size={100} color='salmon' text='Grabbing user info..' />
           if(error) return <h1>error: fetch profile info</h1>
           const { user } = data
           if(data) {

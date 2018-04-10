@@ -15,9 +15,15 @@
 
 .userBubbleContainer {
   display: flex;
+  justify-content: space-between;
   align-self: center;
-  align-content: center;
+  align-items: center;
   padding: 10px 0px;
+  span {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
   img {
     align-self: center;    
     width: 50px;
@@ -25,8 +31,13 @@
     cursor: pointer;
   }
   p {
+    color: #888;
+  }
+
+  h3 {
     padding: 0px 5px;
     cursor: pointer;
+    font-weight: 300;
   }
 }
 
@@ -35,6 +46,7 @@
 }
 
 .postInteractionContainer {
+  height: 100%;
   img {
     width: 60px;
     height: 56px;

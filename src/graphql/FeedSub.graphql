@@ -14,5 +14,11 @@ subscription newPost($feed_id: Int!) {
       profile_picture
       username
     }
+    comments {
+      firstname
+      lastname
+      username
+      comment
+    }
   }
 }
