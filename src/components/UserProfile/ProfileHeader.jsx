@@ -11,6 +11,7 @@ import FollowModal from '../reusables/FollowModal.jsx'
 
 import { Mutation } from 'react-apollo'
 
+import NoProfilePicture from '../reusables/NoProfilePicture.jsx'
 import ProfileInteractions from './ProfileInteractions.jsx'
 import { generateAvatarLink } from '../../shared/utils/helpers';
 
@@ -71,11 +72,11 @@ class ProfileHeader extends Component {
     const { context_id } = this.props
     const { toggleFollowers, toggleFollowings } = this.state
     let viewingSelf = (id === this.props.user.info.id) ? true : false
-    let profilePic = 'http://via.placeholder.com/50x50'
-    if(profile_picture !== null) 
-      profilePic = generateAvatarLink(id)
     let avatarGlow = { border: 'solid 2px #eee' }
     if(is_following && !viewingSelf) avatarGlow = { border: 'solid 2px lightblue' } 
+    let profilePic = <NoProfilePicture size='70px' fontSize='24px' name={firstname} style={avatarGlow}/>
+    if(profile_picture !== null) 
+      profilePic = <img style={avatarGlow} src={generateAvatarLink(id)} alt={`${username}'s profile`} />
     return (
       <React.Fragment>
         {toggleFollowers && <FollowModal type='followers' id={id} close={this.close}/>}
@@ -83,7 +84,7 @@ class ProfileHeader extends Component {
         <div className={containerStyle}>
         <span className='profileHeaderContent'>
           <span className='profileHeaderName'>
-            <img style={avatarGlow} src={profilePic} alt={`${username}'s profile`} />
+            {profilePic}
             <span>
               <h1>{`${firstname} ${lastname}`}</h1>
               <h5>@{username}</h5>
