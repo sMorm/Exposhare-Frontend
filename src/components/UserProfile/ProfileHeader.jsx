@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './styles/ProfileHeader.scss'
 import Ionicon from 'react-ionicons'
+import moment from 'moment'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { mapStateToProps } from '../../shared/utils/redux'
@@ -11,6 +12,7 @@ import FollowModal from '../reusables/FollowModal.jsx'
 import { Mutation } from 'react-apollo'
 
 import ProfileInteractions from './ProfileInteractions.jsx'
+import { generateAvatarLink } from '../../shared/utils/helpers';
 
 class ProfileHeader extends Component {
 
@@ -68,14 +70,15 @@ class ProfileHeader extends Component {
       )
     }
     const { firstname, lastname, bio, followers, following, is_following,
-      profile_picture, username, id } = this.props.userInfo
+      profile_picture, username, id, created_at } = this.props.userInfo
     const { context_id } = this.props
     const { toggleFollowers, toggleFollowings } = this.state
-    let viewingSelf = false
-    if(id === this.props.user.info.id) viewingSelf = true
+    let viewingSelf = (id === this.props.user.info.id) ? true : false
     let profilePic = 'http://via.placeholder.com/50x50'
     if(profile_picture !== null) 
-      profilePic = `https://s3.amazonaws.com/gui-project-database/${id}/profile_picture.png`
+      profilePic = generateAvatarLink(id)
+    let avatarGlow = { border: 'solid 2px #eee' }
+    if(is_following && !viewingSelf) avatarGlow = { border: 'solid 2px lightblue' } 
     return (
       <React.Fragment>
         {toggleFollowers && <FollowModal type='followers' id={id} close={this.close}/>}
@@ -83,7 +86,7 @@ class ProfileHeader extends Component {
         <div className={containerStyle}>
         <span className='profileHeaderContent'>
           <span className='profileHeaderName'>
-            <img src={profilePic} alt={`${username}'s profile`} />
+            <img style={avatarGlow} src={profilePic} alt={`${username}'s profile`} />
             <span>
               <h1>{`${firstname} ${lastname}`}</h1>
               <h5>@{username}</h5>
@@ -119,6 +122,16 @@ class ProfileHeader extends Component {
           </span>
         </span>
 
+        </div>
+        <div className='profileHeaderSecondPanel'>
+          <span className='bioPanel'>
+            <h3>Bio</h3>
+            <p>{bio}</p>
+          </span>
+          <span className='memberSincePanel'>
+            <h3>Member Since</h3>
+            <p>{moment(created_at).format(`MMMM Do, YYYY`)}</p>
+          </span>
         </div>
       <span className='profileHeaderUtility'>
         {showScrollButton}

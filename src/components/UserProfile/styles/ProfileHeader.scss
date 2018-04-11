@@ -70,6 +70,10 @@
   font-family: 'proxima_nova_altbold';
   p {
     color: #555;
+    cursor: pointer;    
+  }
+  h3 {
+    cursor: pointer;    
   }
 }
 
@@ -98,6 +102,29 @@
     animation: fade-in 0.4s forwards;
     font-weight: 100;
   }
+}
+
+.profileHeaderSecondPanel {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: solid 1px #eee;
+  h3 {
+    margin: 0;
+    margin-top: 10px;
+  }
+  p {
+    font-size: 16px;
+    color: #888;
+  }
+}
+
+.bioPanel {
+  width: 35%;
+}
+
+.memberSincePanel {
+  width: 35%;
+  padding-left: 5px;
 }
 
 @media (max-width: 800px) {
@@ -158,8 +185,21 @@
     bottom: -5px;
     right: 10px;
   }
+
   .stickyNav {
     animation: slideDown-mobile 0.5s forwards;
+  }
+
+  .profileHeaderSecondPanel {
+    justify-content: space-between;
+  }
+
+  .bioPanel {
+    width: 60%;
+  }
+
+  .memberSincePanel {
+    width: auto;
   }
 }
 

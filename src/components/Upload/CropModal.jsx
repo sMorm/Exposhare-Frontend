@@ -66,12 +66,14 @@ export default class CropModal extends Component {
             guides={false}
             aspectRatio={this.props.squareRatio ? 1 : cropRatio }
             ref='cropper'/>
-          <span className='cropModalOptions'>
-            <button onClick={() => this.changeRatio(NaN)}>Original</button>
-            <button onClick={() => this.changeRatio(1)}>1:1</button>
-            <button onClick={() => this.changeRatio(8/10)}>8:10</button>
-            <button onClick={() => this.changeRatio(4/3)}>4:3</button>
-          </span>
+          {!this.props.squareRatio && (
+            <span className='cropModalOptions'>
+              <button onClick={() => this.changeRatio(NaN)}>Original</button>
+              <button onClick={() => this.changeRatio(1)}>1:1</button>
+              <button onClick={() => this.changeRatio(8/10)}>8:10</button>
+              <button onClick={() => this.changeRatio(4/3)}>4:3</button>
+            </span>
+          )}
           <span className='cropModalButton'>
             <button onClick={this.crop}>Crop</button>
           </span>

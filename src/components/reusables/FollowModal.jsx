@@ -40,7 +40,7 @@ export default class FollowModal extends Component {
                     <div className='followModalItemContainer'>
                       {users.map((user, key) => {
                         const { id:current_id, username, firstname, lastname, profile_picture, created_at } = user
-                        let avatar = <NoProfilePicture size='60px' fontSize='24px' />
+                        let avatar = <NoProfilePicture size='60px' fontSize='24px' name={firstname}/>
                         if(profile_picture) 
                           avatar = <img src={generateAvatarLink(current_id)} alt={`${username}'s story`} />
                         return (
