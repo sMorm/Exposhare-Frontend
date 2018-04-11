@@ -24,13 +24,13 @@ class PostInteractions extends Component {
     comment: ''
   }
 
-  componentDidMount() {
-    this.handleCommentScroll()
-  }
+  // componentDidMount() {
+  //   this.handleCommentScroll()
+  // }
 
-  componentDidUpdate() {
-    this.handleCommentScroll()
-  }
+  // componentDidUpdate() {
+  //   this.handleCommentScroll()
+  // }
 
   handleCommentScroll = () => {
     if(this.props.comments !== null) {

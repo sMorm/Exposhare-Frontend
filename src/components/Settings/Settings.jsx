@@ -16,7 +16,8 @@ import emojiLottie from '../../shared/lottie/emoji_tongue.json'
 // Apollo
 import { Mutation } from 'react-apollo'
 import PROFILE_MUTATION from '../../graphql/UpdateInfo.graphql'
-
+import QUERY_PROFILE from '../../graphql/ProfileInfo.graphql'
+import { client } from '../../shared/utils/apollo'
 // Redux
 import { setCurrentUser } from '../../actions/user';
 
@@ -34,11 +35,16 @@ class Settings extends Component {
     errorMessage: '',
   }
 
+  // Query for the latest bio, else fall back to redux bio
   componentDidMount() {
-    if(this.props.user.isAuthenticated) {
-      const { bio } = this.props.user.info
-      this.setState({ bio })
-    }
+    const { bio, username, id:context_id } = this.props.user.info
+    client.query({ query: QUERY_PROFILE, variables: { username, context_id } })
+    .then(res => {
+      if(res.data.user.bio) 
+        this.setState({ bio: res.data.user.bio })
+      else
+        this.setState({ bio }) 
+    })
   }
 
   onChange = e => this.setState({ [e.target.name]: e.target.value })

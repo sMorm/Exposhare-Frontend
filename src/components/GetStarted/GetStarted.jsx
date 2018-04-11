@@ -67,8 +67,8 @@ class GetStarted extends Component {
 
   render() {
     const { cropModal, profilePic, errorMessage, croppedImage } = this.state
-    // if(!this.props.user.isAuthenticated || this.state.redirect || this.props.user.info.profile_picture !== null || this.props.user.info.bio) 
-    //   return <Redirect to='/' />
+    if(!this.props.user.isAuthenticated || this.state.redirect || this.props.user.info.profile_picture !== null || this.props.user.info.bio) 
+      return <Redirect to='/' />
     const balloonOptions = { loop: true, autoplay: true, animationData: balloonLottie }
     const pictureOptions = { loop: true, autoplay: true, animationData: emojiLottie }
     if(this.state.redirect)

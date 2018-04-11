@@ -54,10 +54,7 @@ class ProfileHeader extends Component {
   toggleFollowings = () => this.setState({ toggleFollowings: true })
   close = () => this.setState({ toggleFollowings: false, toggleFollowers: false })
 
-
-
   render() {
-    // const followee = this.props.match.params[0]
     let containerStyle = 'profileHeaderContainer', showScrollButton = false
     if(this.state.isScrollingUp)
       containerStyle = 'profileHeaderContainer stickyNav'
