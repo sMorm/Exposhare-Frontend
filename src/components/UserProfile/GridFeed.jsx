@@ -8,7 +8,7 @@ import FullScreenSpinner from '../reusables/FullScreenSpinner.jsx'
 import PostModal from '../reusables/PostModal.jsx'
 import PaginateListener from '../reusables/PaginateListener.jsx'
 import { Query } from 'react-apollo'
-import QUERY_USER_INFO from '../../graphql/UserInfo.graphql'
+import QUERY_USER_POSTS from '../../graphql/UserPosts.graphql'
 
 import './styles/GridFeed.scss'
 
@@ -73,7 +73,7 @@ class GridFeed extends Component {
     return (
       <div>
         {postModal && <PostModal currentPost={currentPost} closeModal={this.closePostModal} isLandscape={isLandscape}/>}
-        <Query query={QUERY_PROFILE_FEED} variables={{ id, context_id, after: null }}> 
+        <Query query={QUERY_USER_POSTS} variables={{ id, context_id, after: null }}> 
           {({ data, loading, error, fetchMore }) => {
             if(error) console.log(error)
             if(loading) return <FullScreenSpinner size={100} color='salmon' text='Grabbing the Photos..' />
