@@ -9,7 +9,7 @@ import Hamburger from './Hamburger.jsx'
 import NoProfilePicture from '../reusables/NoProfilePicture.jsx'
 
 // Apollo
-import QUERY_PROFILE from '../../graphql/ProfileInfo.graphql'
+import QUERY_PROFILE from '../../graphql/UserInfo.graphql'
 import { Query } from 'react-apollo'
 
 // Helpers

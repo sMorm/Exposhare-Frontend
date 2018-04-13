@@ -41,17 +41,17 @@ class PostContainer extends Component {
         </div>
       )
     }
-    
-    let profilePicURL = (profile_picture) ? generateAvatarLink(id) : 'http://via.placeholder.com/100x100'
+
     return (
       <div className='postContainer' ref='container'>
         <ImageContainer 
-          profilePicURL={profilePicURL}
+          profile_picture={profile_picture}
           fullname={`${firstname} ${lastname}`}
           image_url={image_url}
           created_at={created_at}
           pushToProfile={this.pushToProfile}
-          onImageLoad={() => this.setState({ imageLoaded: true })}/>
+          onImageLoad={() => this.setState({ imageLoaded: true })}
+          user_id={id}/>
         <PostInteractions
           content={content}
           likes={likes} 

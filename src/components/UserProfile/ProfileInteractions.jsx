@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import UNFOLLOW_MUTATION from '../../graphql/Unfollow.graphql'
 import FOLLOW_MUTATION from '../../graphql/Follow.graphql'
-import QUERY_PROFILE_INFO from '../../graphql/ProfileInfo.graphql'
+import QUERY_PROFILE_INFO from '../../graphql/UserInfo.graphql'
 
 
 // Styles

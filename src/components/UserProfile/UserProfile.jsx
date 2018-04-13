@@ -9,7 +9,7 @@ import LottieLoad from '../reusables/LottieLoad.jsx'
 import FullScreenSpinner from '../reusables/FullScreenSpinner.jsx'
 
 // Apollo
-import QUERY_PROFILE_INFO from '../../graphql/ProfileInfo.graphql'
+import QUERY_PROFILE_INFO from '../../graphql/UserInfo.graphql'
 import { Query } from 'react-apollo'
 
 // Helpers

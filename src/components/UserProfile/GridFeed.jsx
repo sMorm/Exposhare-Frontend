@@ -8,7 +8,7 @@ import FullScreenSpinner from '../reusables/FullScreenSpinner.jsx'
 import PostModal from '../reusables/PostModal.jsx'
 import PaginateListener from '../reusables/PaginateListener.jsx'
 import { Query } from 'react-apollo'
-import QUERY_PROFILE_FEED from '../../graphql/ProfileFeed.graphql'
+import QUERY_USER_INFO from '../../graphql/UserInfo.graphql'
 
 import './styles/GridFeed.scss'
 

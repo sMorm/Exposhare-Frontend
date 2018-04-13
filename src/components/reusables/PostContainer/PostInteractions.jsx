@@ -76,15 +76,14 @@ class PostInteractions extends Component {
             <span className='likeImage'>
               <Mutation 
                 mutation={liked ? UNLIKE_MUTATION : LIKE_MUTATION}
-                refetchQueries={[{query: FEED_QUERY, variables: { id: user_id, after: null } }]}
-                update={cache => this.updateCache(cache)}>
+                refetchQueries={[{query: FEED_QUERY, variables: { id: user_id, after: null } }]}>
                   {(mutate, { data, loading, error }) => {
                     if(loading) return <img src={likeHeart} alt='heart' />
                     const mutateVariables = { variables: { user_id, post_id } }
                     if(liked){
                       return (
                         <span onClick={() => mutate(mutateVariables)} >
-                          <Lottie options={lottieOptions} width={60} height={60} />
+                          <Lottie options={lottieOptions} width={60} height={64} />
                         </span>
                       )
                     } else {

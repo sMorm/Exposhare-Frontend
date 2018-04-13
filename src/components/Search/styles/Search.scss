@@ -35,8 +35,8 @@
 }
 
 .searchUserResults {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-auto-columns: 1fr 1fr 1fr;
   flex-wrap: wrap;
   span {
     margin: 5px 0;

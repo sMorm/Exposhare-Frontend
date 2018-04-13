@@ -1,20 +1,26 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 
+import NoProfilePicture from '../../reusables/NoProfilePicture.jsx'
+
 // Helpers
-import { generateImageLink } from '../../../shared/utils/helpers'
+import { generateImageLink, generateAvatarLink } from '../../../shared/utils/helpers'
 
 // Styles
 import './styles/ImageContainer.scss'
 
 class ImageContainer extends Component {
   render() {
-    const { profilePicURL, pushToProfile, fullname, created_at, image_url, onImageLoad  } = this.props
+    const { profile_picture, pushToProfile, fullname, created_at,
+      user_id, image_url, onImageLoad  } = this.props
+    let profilePic = <NoProfilePicture name={fullname} size='50px' fontSize='20px' onClick={pushToProfile}/>
+    if(profile_picture)
+      profilePic = <img src={generateAvatarLink(user_id)} alt='avatar' onClick={pushToProfile} />
     return (
       <span className='postImageContainer'>
         <span className='userBubbleContainer'>
           <span>
-            <img src={profilePicURL} alt='profile' onClick={pushToProfile}/>
+            {profilePic}
             <h3 onClick={pushToProfile}>{fullname}</h3>
           </span>
           <p>{moment(created_at).fromNow()}</p>

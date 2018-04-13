@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { mapStateToProps } from '../../shared/utils/redux'
 import { Mutation } from 'react-apollo'
 
-import UPLOAD_MUTATION from '../../graphql/Upload.graphql'
+import POST_MUTATION from '../../graphql/NewPost.graphql'
 import FilterPreviews from './FilterPreviews.jsx'
 import filters from '../../shared/data/filters'
 import CropModal from './CropModal.jsx'
@@ -190,7 +190,7 @@ class EditZone extends Component {
           </span>
 
         </div>
-        <Mutation mutation={UPLOAD_MUTATION}>
+        <Mutation mutation={POST_MUTATION}>
           {(newPost, { data, error, loading }) => {
             if(loading){
               return (

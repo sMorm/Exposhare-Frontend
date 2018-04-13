@@ -16,7 +16,7 @@ import emojiLottie from '../../shared/lottie/emoji_tongue.json'
 // Apollo
 import { Mutation } from 'react-apollo'
 import PROFILE_MUTATION from '../../graphql/UpdateInfo.graphql'
-import QUERY_PROFILE from '../../graphql/ProfileInfo.graphql'
+import QUERY_PROFILE from '../../graphql/UserInfo.graphql'
 import { client } from '../../shared/utils/apollo'
 // Redux
 import { setCurrentUser } from '../../actions/user';
