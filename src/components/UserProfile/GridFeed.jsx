@@ -32,7 +32,7 @@ class GridFeed extends Component {
   state = {
     activeFeed: 'no-crop',
     postModal: false,
-    currentPost: {},
+    postKey: null,
     isLoadingMore: false
   }
 
@@ -41,12 +41,12 @@ class GridFeed extends Component {
   /**
    * Expands photo to show more information, in a modal
    */
-  openPostModal = (e, post) => { 
+  openPostModal = (e, postKey) => { 
     const { naturalHeight, naturalWidth } = e.target
     if (naturalHeight > naturalWidth)
-      this.setState({ postModal: true, currentPost: post, isLandscape: false })
+      this.setState({ postModal: true, postKey, isLandscape: false })
     else
-      this.setState({ postModal: true, currentPost: post, isLandscape: true })
+      this.setState({ postModal: true, postKey, isLandscape: true })
   }
 
   closePostModal = () => this.setState({ postModal: false, currentPost: {} })
@@ -59,7 +59,7 @@ class GridFeed extends Component {
             key={key} 
             src={`https://s3.amazonaws.com/gui-project-database${post.image_url}`} 
             alt={post.content}
-            onClick={e => this.openPostModal(e, post)}
+            onClick={e => this.openPostModal(e, key)}
             ref={`post${key}`}
             />
         ))}
@@ -69,12 +69,11 @@ class GridFeed extends Component {
 
   render() {
     const { id, context_id } = this.props
-    const { currentPost, postModal, isLandscape } = this.state
+    const { postKey, postModal, isLandscape } = this.state
     return (
       <div>
-        {postModal && <PostModal currentPost={currentPost} closeModal={this.closePostModal} isLandscape={isLandscape}/>}
         <Query query={QUERY_USER_POSTS} variables={{ id, context_id, after: null }}> 
-          {({ data, loading, error, fetchMore }) => {
+          {({ data, loading, error, fetchMore, refetch }) => {
             if(error) console.log(error)
             if(loading) return <FullScreenSpinner size={100} color='salmon' text='Grabbing the Photos..' />
             if(!loading && data) {
@@ -82,6 +81,7 @@ class GridFeed extends Component {
               const mapFeed = this.mapFeed(userPosts)
               return (
                 <div>
+                  {postModal && <PostModal currentPost={userPosts[postKey]} closeModal={this.closePostModal} isLandscape={isLandscape} index={postKey}/>}
                   {mapFeed}
                   <PaginateListener onLoadMore={() => {
                     fetchMore({

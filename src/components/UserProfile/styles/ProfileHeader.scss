@@ -32,7 +32,6 @@
   width: 50%;
   min-width: 170px;
   h1 {
-    font-family: 'proxima_nova_altbold';
     letter-spacing: 0px;
     font-size: 20px;
     margin: 0;
@@ -40,7 +39,7 @@
 
   h5 {
     color: #888;
-    font-family: 'proxima_nova_ltthin';
+    font-family: 'Circular-Pro-Book', sans-serif;
     margin: 0;
   }
 
@@ -67,7 +66,7 @@
   display: flex;
   justify-content: space-between;
   text-align: right;
-  font-family: 'proxima_nova_altbold';
+  font-family: 'Circular-Pro-Book', sans-serif;
   p {
     color: #555;
     cursor: pointer;    
@@ -149,7 +148,7 @@
   
     h5 {
       color: #888;
-      font-family: 'proxima_nova_ltthin';
+      font-family: 'Circular-Pro-Book', sans-serif;
       margin: 0;
     }
   

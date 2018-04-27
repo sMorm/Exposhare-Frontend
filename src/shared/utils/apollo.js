@@ -36,8 +36,8 @@ const wsLink = new WebSocketLink({
 
 const link = split(
   ({ query }) => {
-    const { kind, operation } = getMainDefinition(query);
-    return kind === 'OperationDefinition' && operation === 'subscription';
+    const { kind, operation } = getMainDefinition(query)
+    return kind === 'OperationDefinition' && operation === 'subscription'
   },
   wsLink,
   authLink.concat(createUploadLink({ uri: gqlEndpoint })),
@@ -45,5 +45,7 @@ const link = split(
 
 export const client = new ApolloClient({
   link: link,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  addTypeName: true,
+  dataIdFromObject: ({ id }) => (id || null)
 })

@@ -9,8 +9,8 @@ import './styles/NavigationOptions.scss'
 const LinkOptions = () => {
   return (
     <span className='navigationLinkContainer'>
-      <Link to='/login' className='navigationLink'>LOGIN</Link>
-      <Link to='/signup' className='navigationLink'>SIGNUP</Link>
+      <Link to='/login' className='navigationLink'>Login</Link>
+      <Link to='/signup' className='navigationLink'>Signup</Link>
     </span>
   )
 }

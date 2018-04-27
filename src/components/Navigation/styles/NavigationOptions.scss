@@ -11,9 +11,9 @@ $primary-color: #b0998c;
 
 .navigationLink {
   text-decoration: none;
-  letter-spacing: 2px;
   color: black;
   border-bottom: solid 1px transparent;
+  font-family: 'Circular-Pro-Bold', sans-serif;
   &:hover {
     border-bottom: solid 1px $primary-color;
   }

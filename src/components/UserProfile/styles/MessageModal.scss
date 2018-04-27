@@ -1,0 +1,49 @@
+.messageModalContainer {
+  border: solid 5px;
+  width: 100%;
+}
+
+.messageModalContent {
+  position: absolute;
+  z-index: 8;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: white; /* Fallback color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  input {
+    padding: 4px 6px;
+    font-size: 16px;
+    outline: none;
+  }
+  button {
+    width: 60px;
+    padding: 5px 0px;
+    font-family: 'Circular-Pro-Book';
+    border: none;
+    border-radius: 16px;
+    color: white;
+    font-size: 16px;
+    background: rgb(154, 154, 240);
+    cursor: pointer;
+    outline: none;
+    margin: 0px 5px;
+  }
+  
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  h1 {
+    font-size: 30px;
+  }
+}

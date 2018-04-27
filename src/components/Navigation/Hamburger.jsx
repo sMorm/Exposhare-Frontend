@@ -19,11 +19,11 @@ const GuestOptions = () => {
     <div className='hamburgerLinkContainer'>
       <div className='hamburgerLinkContent'>
         <Link to='/login' className='hamburgerLink'>
-          LOGIN
+          Login
           <Ionicon icon='ios-create-outline' fontSize='30px' color='black'/>
         </Link>
         <Link to='/signup' className='hamburgerLink'>
-          SIGNUP
+          Signup
           <Ionicon icon='ios-happy-outline' fontSize='30px' color='black'/>
         </Link>
       </div>
@@ -40,23 +40,23 @@ const LoggedInOptions = (props) => {
     <div className='hamburgerLinkContainer'>
       <div className='hamburgerLinkContent'>
         <Link to='/' className='hamburgerLink'>
-          HOME
+          Home
           <Ionicon icon='ios-home-outline' fontSize='30px' color='black'/>
         </Link>
         <Link to={`/user/${props.username}`} className='hamburgerLink'>
-          PROFILE
+          Profile
           <Ionicon icon='ios-happy-outline' fontSize='30px' color='black'/>
         </Link>
         <Link to='/search' className='hamburgerLink'>
-          SEARCH
+          Search
           <Ionicon icon='ios-search-outline' fontSize='30px' color='black'/>
         </Link>
         <Link to='/upload' className='hamburgerLink'>
-          UPLOAD
+          Upload
           <Ionicon icon='ios-photos-outline' fontSize='30px' color='black'/>
         </Link>
         <span className='hamburgerLink' onClick={props.logout}>
-          LOGOUT
+          Logout
           <Ionicon icon='ios-exit-outline' fontSize='30px' clock='black' />
         </span>
       </div>

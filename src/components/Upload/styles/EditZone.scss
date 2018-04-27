@@ -40,7 +40,6 @@ $secondary-color: #c9b7ad;
 .editToolboxHeader {
   display: flex;
   align-items: center;
-  font-family: 'proxima_nova_ltsemibold';
   font-size: 30px;
   padding: 10px 0px;
 }
@@ -58,7 +57,7 @@ $secondary-color: #c9b7ad;
     height: 100px;
     padding: 4px;
     font-size: 16px;
-    font-family: 'proxima_nova_ltsemibold';
+    font-family: 'Circular-Pro-Bold', sans-serif;
     background: white;
     border: solid 1px black;
     color: black;
@@ -85,7 +84,7 @@ $secondary-color: #c9b7ad;
 }
 
 .editDescriptionInput {
-  font-family: 'proxima_nova_ltsemibold';
+  font-family: 'Circular-Pro-Bold', sans-serif;
   textarea {
     width: 99%;
     resize: none;
@@ -113,7 +112,6 @@ $secondary-color: #c9b7ad;
     justify-content: center;
     width: 30%;
     font-size: 20px;
-    font-family: 'proxima_nova_ltsemibold';
     border: solid 1px black;
     background: white;
     margin-top: 20px;

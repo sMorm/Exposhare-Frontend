@@ -42,7 +42,8 @@ class Routes extends Component {
                 <Route exact path='/' component={Home} />
                 <Route path='/login' component={Login} />
                 <Route path='/signup' component={Signup} />
-                <Route path='/messages' component={Chat} />
+                <Route exact path='/chat' component={Chat} />
+                <Route path='/chat/:username' component={Chat} />
                 <Route exact path='/upload' component={Upload} />
                 <Route path='/upload/edit/' component={EditZone} />
                 <Route path='/get-started' component={GetStarted} />

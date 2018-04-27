@@ -107,18 +107,18 @@ class UserHome extends Component {
             if(!loading && data.newPost ) {
               this.setState({ newPosts: [ data.newPost, ...this.state.newPosts ]})
             }
-            return <span />
+            return <span className='hide'/>
           }}
         </Subscription>
         <Query 
           query={FEED_QUERY} 
           variables={{ id, after: null }} 
           fetchPolicy='cache-and-network'>
-            {({ loading, error, data, fetchMore }) => {
+            {({ loading, error, data, fetchMore, refetch }) => {
               if(error) console.log(error)
               let feed = []
               if(data && Object.entries(data).length > 0) {
-                feed = data.userFeed.map((post, key) => <PostContainer key={key} post={post} user_id={id}/>)
+                feed = data.userFeed.map((post, key) => <PostContainer key={key} index={key} post={post} user_id={id} refetch={refetch}/>)
                 feed.push(
                   <PaginateListener key={999} onLoadMore={() => {
                     fetchMore({

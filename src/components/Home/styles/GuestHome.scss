@@ -20,15 +20,6 @@ $primary-dark-color: rgb(200,200,200);
     object-fit: cover;
     filter: brightness(1.01);
   }
-  // display: flex;
-  // justify-content: space-between;
-  // flex-wrap: none;
-  // align-items: center;
-  // padding: 3em 0;
-  // img {
-  //   width: 50%;
-  // }
-  // animation: fade-up 0.5s forwards;
 }
 
 .welcomeText {
@@ -46,7 +37,7 @@ $primary-dark-color: rgb(200,200,200);
   h1 {
     font-size: 45px;
     line-height: 0px;
-    font-family: 'proxima_nova_altbold', sans-serif;
+    font-family: 'Circular-Pro-Book', sans-serif;
   }
   p {
     font-size: 30px;
@@ -64,7 +55,7 @@ $primary-dark-color: rgb(200,200,200);
   -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.15);
   -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.15);
   box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.15);
-  font-family: 'proxima_nova_altbold';
+  font-family: 'Circular', sans-serif;
 }
 
 .secondWelcomeContainer {
@@ -74,11 +65,16 @@ $primary-dark-color: rgb(200,200,200);
   padding: 50px 0px;
   padding-bottom: 30px;
   h1 {
-    font-family: 'proxima_nova_altbold';
+    font-family: 'Circular', sans-serif;
     font-size: 40px;
   }
   p {
     display: inline;
+    font-family: 'Circular-Pro-Book', sans-serif;
+    color: #aaa;
+  }
+  strong {
+    color: black;
   }
 
   img {
@@ -98,11 +94,11 @@ $primary-dark-color: rgb(200,200,200);
   display: flex;
   font-size: 40px;
   strong {
-    font-family: 'proxima_nova_altbold';
+    font-family: 'Circular', sans-serif;
   }
   p {
     font-weight: 300;
-    font-family: 'proxima_nova_ltthin'
+    font-family: 'Circular-Pro-Book', sans-serif;
   }
 }
 

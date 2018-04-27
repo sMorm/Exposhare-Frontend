@@ -77,7 +77,7 @@ class LoggedIn extends Component {
         <span className='loggedInLinkContainer'>
           <Link to='/search' className='loggedInLink'>Search</Link>
           <Link to='/upload' className='loggedInLink'>Upload</Link>                    
-          <Link to='/messages' className='loggedInLink'>Messages</Link>
+          <Link to='/chat' className='loggedInLink'>Chat</Link>
           <span className='loggedInUserBubble' onClick={this.toggleDropdown} ref={(ref) => { this.node = ref }}>
             <Query query={QUERY_PROFILE} variables={{ username, context_id }} >
               {({ loading, data, error }) => {

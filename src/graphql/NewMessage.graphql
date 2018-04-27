@@ -1,0 +1,10 @@
+mutation newMessage( $user_id: Int!, $message: String!, $conversation_id: Int!) {
+  newMessage(user_id: $user_id, message: $message, conversation_id: $conversation_id) {
+    user_id
+    profile_picture
+    firstname
+    lastname
+    message
+    conversation_id
+  }
+}

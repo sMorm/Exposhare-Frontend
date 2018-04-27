@@ -1,0 +1,5 @@
+mutation newConversation($user1: Int!, $user2: Int!) {
+  newConversation(user1: $user1, user2: $user2) {
+    id
+  }
+}

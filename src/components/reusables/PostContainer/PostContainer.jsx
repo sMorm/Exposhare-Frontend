@@ -28,7 +28,7 @@ class PostContainer extends Component {
   render() {
     const { id:post_id, content, created_at, image_url, likes, liked, comments,
       user: { firstname, lastname, profile_picture, id } } = this.props.post
-    const { user_id } = this.props
+    const { user_id, refetch, index } = this.props
     const { containerHeight, imageLoaded } = this.state
 
     if(!imageLoaded) {
@@ -59,7 +59,9 @@ class PostContainer extends Component {
           comments={comments}
           user_id={user_id}
           post_id={post_id}
-          containerHeight={containerHeight}/>
+          containerHeight={containerHeight}
+          refetch={refetch}
+          index={index}/>
       </div>
     )
   }

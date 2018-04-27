@@ -1,0 +1,27 @@
+query userConversations($user_id: Int!) {
+  userConversations(user_id: $user_id) {
+    user1 { 
+      id 
+      firstname
+      lastname
+      username
+      profile_picture
+    }
+    user2 { 
+      id 
+      firstname
+      lastname
+      username
+      profile_picture
+    }
+    id
+    messages {
+      user_id
+      profile_picture
+      firstname
+      lastname
+      message
+      conversation_id
+    }
+  }
+}

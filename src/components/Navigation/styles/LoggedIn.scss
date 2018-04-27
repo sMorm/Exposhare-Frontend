@@ -9,14 +9,17 @@ $primary-color: #b0998c;
 
 .loggedInLink {
   text-decoration: none;
-  letter-spacing: 2px;
   color: black;
   border-bottom: solid 1px transparent;
-  font-family: 'proxima_nova_ltsemibold';
+  font-family: 'Circular-Pro-Bold', sans-serif;
   &:hover {
     border-bottom: solid 1px $primary-color;
   }
-  padding: 0px 10px;
+  margin: 0px 10px;
+}
+
+.activeLink {
+  border-bottom: solid 1px $primary-color;
 }
 
 .loggedInUserBubble {
@@ -25,16 +28,17 @@ $primary-color: #b0998c;
   align-items: center;
   padding: 0 10px;
   border-left: solid 1px #eee;
-  font-family: 'proxima_nova_ltsemibold';
   img {
     align-self: center;
     width: 42px;
     border-radius: 50%;
     cursor: pointer;
+    border: solid 1px #ccc;
   }
   p {
     padding-left: 5px;
     cursor: pointer;
+    font-family: 'Circular-Pro-Bold', sans-serif !important;
   }
 }
 
@@ -55,7 +59,7 @@ $primary-color: #b0998c;
   color: white;
   text-decoration: none;
   border-bottom: solid 1px transparent;
-  font-family: 'proxima_nova_ltsemibold';
+  font-family: 'Circular-Pro-Bold', sans-serif;
   cursor: pointer;
   &:hover {
     border-bottom: solid 1px $primary-color;

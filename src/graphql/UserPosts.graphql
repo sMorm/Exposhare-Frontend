@@ -3,7 +3,15 @@ query userPosts($id: Int!, $context_id: Int!, $after: Int) {
     id
     image_url
     liked
+    likes
     created_at
+    content
+    comments {
+      firstname
+      lastname
+      username
+      comment
+    }
     user {
       id
       username

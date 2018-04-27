@@ -4,9 +4,26 @@
 }
 
 body {
-  font-family: 'Proxima Nova', sans-serif;
+  font-family: 'Circular-Pro-Book', sans-serif;
   margin: 0;
   padding: 0;
+  overflow: 'hidden'
+}
+
+h1 {
+  font-family: 'Circular-Pro-Bold', sans-serif !important;
+}
+
+p {
+  font-family: 'Circular-Pro-Book', sans-serif !important;
+}
+
+input {
+  font-family: 'Circular-Pro-Bold', sans-serif !important;
+}
+
+a {
+  text-decoration: none !important;
 }
 
 .container {
@@ -16,6 +33,7 @@ body {
   padding: 1.5% 0;
   animation: fade 0.5s forwards;
 }
+
 
 .hide {
   display: none;

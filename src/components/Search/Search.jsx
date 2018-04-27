@@ -40,6 +40,8 @@ class Search extends Component {
     return (
       <Query query={USER_QUERY} variables={{ username: debouncedUsername }} skip={debouncedUsername === ''}>
         {({ error, loading, data }) => {
+          if(error) console.log(error)
+          console.log(data)
           if(error) return <p> error</p> // server error
           let users = ''
           if(data.searchUser) { // list of users returned, map it and store it in users
