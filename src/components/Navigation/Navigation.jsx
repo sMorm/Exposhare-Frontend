@@ -31,9 +31,25 @@ class Navigation extends Component {
    * should disappear, when scrolling up, it will
    * re-appear. See handleScroll() for logic
    */
-  // componentDidMount() {
-  //   document.addEventListener('scroll', this.handleScroll, 50)
-  // }
+  componentDidMount() {
+    const { pathname } = this.props.location
+  if(!pathname.match(/chat*/)) {
+      console.log('x')
+      document.addEventListener('scroll', this.handleScroll, true)
+    }
+  }
+
+  componentDidUpdate() {
+    const { pathname } = this.props.location
+    if(pathname.match(/chat*/)) {
+      document.removeEventListener('scroll', this.handleScroll, true)
+    } else {
+      document.addEventListener('scroll', this.handleScroll, 50)
+    }
+    if(pathname === '/') {
+      setTimeout(() => this.setState({ navContainerStyle: 'navigationContainer enter'}), 500)
+    }
+  }
 
   /**
    * Because the navigation bar will always be
@@ -41,9 +57,9 @@ class Navigation extends Component {
    * really unmount, but let's have this here
    * just to be safe.
    */
-  // componentWillUnmount() {
-  //  document.removeEventListener('scroll', this.handleScroll)
-  // }
+  componentWillUnmount() {
+   document.removeEventListener('scroll', this.handleScroll)
+  }
 
   /**
    * Get the current Y-Axis Offset. Check our

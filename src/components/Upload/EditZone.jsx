@@ -197,7 +197,7 @@ class EditZone extends Component {
                 <span className='editSubmitButton'>
                   <button 
                   className='editSubmitButton'>
-                    Loading
+                    Uploading..
                   </button>
                 </span>
               )

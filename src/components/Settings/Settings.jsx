@@ -10,7 +10,7 @@ import { mapStateToProps } from '../../shared/utils/redux'
 
 // Lottie
 import Lottie from 'react-lottie'
-import winkLottie from '../../shared/lottie/wink.json'
+import swingLottie from '../../shared/lottie/swing.json'
 import emojiLottie from '../../shared/lottie/emoji_tongue.json'
 
 // Apollo
@@ -80,7 +80,7 @@ class Settings extends Component {
     const { cropModal, profilePic, errorMessage, croppedImage } = this.state
     if(!this.props.user.isAuthenticated) 
       return <Redirect to='/' />
-    const balloonOptions = { loop: true, autoplay: true, animationData: winkLottie }
+    const balloonOptions = { loop: true, autoplay: true, animationData: swingLottie }
     const pictureOptions = { loop: true, autoplay: true, animationData: emojiLottie }
     const { firstname, lastname, bio, id, username } = this.props.user.info
     return (

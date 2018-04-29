@@ -30,15 +30,17 @@ class Chat extends Component {
   componentDidMount() {
     const { initialChat } = this.state
     if(initialChat !== undefined) {
-      client.query({ query: QUERY_CONVERSATIONS, variables: { user_id: 39 } })
+      client.query({ query: QUERY_CONVERSATIONS, variables: { user_id: this.props.user.info.id } })
       .then(res => {
         res.data.userConversations.forEach((item, key) => {
           if(Number(initialChat) === item.id) { 
             this.setState({ currentChat: key })
-            this.scrollToBottom()
+            setTimeout(() => this.scrollToBottom(), 500)
           }
         })
       })
+    } else {
+      setTimeout(() => this.scrollToBottom(), 500)
     }
   }
 
@@ -188,7 +190,7 @@ class Chat extends Component {
                             }})
                             .then(res => {
                               this.setState({ message: '' })
-                              setTimeout(() => this.scrollToBottom(), 100) // wait for DOM update
+                              setTimeout(() => this.scrollToBottom(), 200) // wait for DOM update
                             })
                         }}>
                           <input

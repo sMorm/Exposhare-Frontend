@@ -1,7 +1,7 @@
 $primary-color: #b0998c;
 
 .navigationLinkContainer {
-  width: 15%;
+  width: 30%;
   max-width: 200px;
   min-width: 150px;
   display: flex;
@@ -14,10 +14,11 @@ $primary-color: #b0998c;
   color: black;
   border-bottom: solid 1px transparent;
   font-family: 'Circular-Pro-Bold', sans-serif;
+  font-size: 20px;
   &:hover {
     border-bottom: solid 1px $primary-color;
   }
-  padding: 0px 5px;
+  margin-left: 40px;
 }
 
 @media (max-width: 700px) {

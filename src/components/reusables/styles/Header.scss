@@ -14,3 +14,15 @@
     border-radius: 5px;
   }
 }
+
+@media (max-width: 700px) {
+  .headerContainer {
+    h1 {
+      font-size: 28px !important;
+    }
+    hr {
+      border-bottom: solid 2px #ccc;
+      width: 30px;
+    }
+  }
+}

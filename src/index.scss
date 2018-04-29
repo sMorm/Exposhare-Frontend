@@ -3,11 +3,18 @@
   -webkit-overflow-scrolling: touch;
 }
 
+::selection {
+  background: #ffb7b7; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #ffb7b7; /* Gecko Browsers */
+}
+
 body {
   font-family: 'Circular-Pro-Book', sans-serif;
   margin: 0;
   padding: 0;
-  overflow: 'hidden'
+  overflow: auto;
 }
 
 h1 {
@@ -30,7 +37,6 @@ a {
   width: 90%;
   max-width: 1200px;
   margin: auto;
-  padding: 1.5% 0;
   animation: fade 0.5s forwards;
 }
 

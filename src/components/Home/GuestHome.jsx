@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { svgPolaroid } from '../../shared/constants/links'
+import Ionicon from 'react-ionicons'
 
 // Components
 import Header from '../reusables/Header.jsx'
@@ -56,6 +57,10 @@ export default class GuestHome extends Component {
           <Header title='Discover' />
           <h3>See how other users are sharing photos on Exposhare.</h3>
           <Trending />
+        </div>
+
+        <div className='guestFooter'>
+          <p>Built with&nbsp;</p><Ionicon icon='md-heart' color='salmon' /><p>&nbsp;in Lowell, MA</p>
         </div>
       </div>
     )

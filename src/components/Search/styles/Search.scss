@@ -68,9 +68,9 @@
   margin: 25px 0;
   padding: 10px 10px;
   border-radius: 3px;
-  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
-  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
-  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
 }
 
 .searchUserResultFlex {
@@ -111,6 +111,7 @@
 @media (max-width: 900px) {
   .searchUserResults {
     display: block;
+    margin: auto;
   }
   .searchUserResultContent {
     display: block;

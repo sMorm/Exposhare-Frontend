@@ -10,6 +10,8 @@ import lottieFile from '../../shared/lottie/camera_search.json'
 import USER_QUERY from '../../graphql/UserSearch.graphql'
 import { Query } from 'react-apollo'
 
+import Header from '../reusables/Header.jsx'
+
 // Helpers
 import { generateAvatarLink } from '../../shared/utils/helpers'
 
@@ -40,11 +42,9 @@ class Search extends Component {
     return (
       <Query query={USER_QUERY} variables={{ username: debouncedUsername }} skip={debouncedUsername === ''}>
         {({ error, loading, data }) => {
-          if(error) console.log(error)
-          console.log(data)
           if(error) return <p> error</p> // server error
           let users = ''
-          if(data.searchUser) { // list of users returned, map it and store it in users
+          if(data.searchUser && debouncedUsername !== '') { // list of users returned, map it and store it in users
             users = data.searchUser.map((user, key) => {
               let avatar = <NoProfilePicture name={user.firstname} size='70px' fontSize='24px'/>
               if(user.profile_picture !== null) avatar = <img src={generateAvatarLink(user.id)} alt='' />
@@ -66,7 +66,7 @@ class Search extends Component {
               <div className='searchHeaderContainer'>
                 <div className='searchHeaderContent'>
                   <span className='searchHeaderText'>
-                    <h1>User Search —</h1>
+                    <Header title='User Search —' />
                     <p>Looking for someone? Enter their username here to get a list of users with matching usernames.</p>
                     <input
                       type='text'

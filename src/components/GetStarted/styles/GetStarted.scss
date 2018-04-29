@@ -54,7 +54,7 @@
 
 .getStartedLottie {
   width: 45%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 300px);
   min-height: 800px;
   animation: fade-in 3s forwards;
 }
@@ -65,7 +65,8 @@
     resize: none;
     width: 90%;
     height: 100px;
-    border: solid 1px #888;
+    border: solid 1px #aaa;
+    font-family: 'Circular-Pro-Book';
     outline: none;
     font-size: 20px;
   }

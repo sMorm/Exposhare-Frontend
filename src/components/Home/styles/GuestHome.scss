@@ -13,7 +13,7 @@ $primary-dark-color: rgb(200,200,200);
   // position: absolute;
   img {
     width: 100%;
-    height: calc(38vh);
+    height: calc(34vh);
     min-height: 320px;
     border: solid 1px #ccc;
     border-radius: 3px;
@@ -109,6 +109,17 @@ $primary-dark-color: rgb(200,200,200);
     font-size: 24px;
     font-weight: 300;
   }
+}
+
+.guestFooter {
+  width: 100%;
+  padding: 2em 0;
+  margin-top: 2em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #888;
+  border-top: solid 1px #eee;
 }
 
 @media (max-width: 700px) {

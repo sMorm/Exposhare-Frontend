@@ -47,6 +47,10 @@ const LoggedInOptions = (props) => {
           Profile
           <Ionicon icon='ios-happy-outline' fontSize='30px' color='black'/>
         </Link>
+          <Link to='chat' className='hamburgerLink'>
+          Chat
+          <Ionicon icon='ios-chatbubbles-outline' fontSize='30px' color='black'/>
+        </Link>
         <Link to='/search' className='hamburgerLink'>
           Search
           <Ionicon icon='ios-search-outline' fontSize='30px' color='black'/>

@@ -12,6 +12,7 @@ $primary-color: #b0998c;
   color: black;
   border-bottom: solid 1px transparent;
   font-family: 'Circular-Pro-Bold', sans-serif;
+  font-size: 20px;
   &:hover {
     border-bottom: solid 1px $primary-color;
   }
@@ -28,6 +29,10 @@ $primary-color: #b0998c;
   align-items: center;
   padding: 0 10px;
   border-left: solid 1px #eee;
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none;   /* Firefox all */
+  -ms-user-select: none;  /* IE 10+ */
+   user-select: none;  /* Likely future */ 
   img {
     align-self: center;
     width: 42px;
@@ -39,6 +44,7 @@ $primary-color: #b0998c;
     padding-left: 5px;
     cursor: pointer;
     font-family: 'Circular-Pro-Bold', sans-serif !important;
+    font-size: 18px;
   }
 }
 
@@ -70,7 +76,7 @@ $primary-color: #b0998c;
 .dropdownTriangle {
   position: absolute;
   left: 70%;
-  bottom: 118px;
+  bottom: 123px;
   width: 0; 
   height: 0; 
   border-left: 10px solid transparent;
