@@ -114,11 +114,11 @@ class UserHome extends Component {
           query={FEED_QUERY} 
           variables={{ id, after: null }} 
           fetchPolicy='cache-and-network'>
-            {({ loading, error, data, fetchMore, refetch }) => {
+            {({ loading, error, data, fetchMore }) => {
               if(error) console.log(error)
               let feed = []
               if(data && Object.entries(data).length > 0) {
-                feed = data.userFeed.map((post, key) => <PostContainer key={key} index={key} post={post} user_id={id} refetch={refetch}/>)
+                feed = data.userFeed.map((post, key) => <PostContainer key={key} index={key} post={post} user_id={id} />)
                 feed.push(
                   <PaginateListener key={999} onLoadMore={() => {
                     fetchMore({

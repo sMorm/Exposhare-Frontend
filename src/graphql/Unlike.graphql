@@ -1,5 +1,9 @@
 mutation removeLike($user_id: Int!, $post_id: Int!) {
   removeLike(user_id: $user_id, post_id: $post_id) {
-    message
+    id
+    created_at
+    image_url
+    # likes
+    # liked
   }
 }

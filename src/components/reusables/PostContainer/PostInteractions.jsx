@@ -27,6 +27,7 @@ class PostInteractions extends Component {
             <h2>Description</h2>
             <p>{content}</p>
           </span>
+          
           <LikePost
             post_id={post_id}
             likes={likes}
