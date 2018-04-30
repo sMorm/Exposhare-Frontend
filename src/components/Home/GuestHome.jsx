@@ -53,6 +53,14 @@ export default class GuestHome extends Component {
           </span>
         </div>
 
+        <div className='sketchWelcomeContainer'>
+          <Header title='Cross-platform' />
+          <span className='sketchWelcomeContent'>
+            <img src='https://s3.amazonaws.com/exposhare-statics/iphone_cropped.png'/>
+            <img src='https://s3.amazonaws.com/exposhare-statics/imac_cropped.png'/>
+          </span>
+        </div>
+
         <div className='discoverContainer'>
           <Header title='Discover' />
           <h3>See how other users are sharing photos on Exposhare.</h3>

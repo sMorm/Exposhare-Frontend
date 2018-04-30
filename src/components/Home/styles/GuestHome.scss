@@ -102,6 +102,21 @@ $primary-dark-color: rgb(200,200,200);
   }
 }
 
+.sketchWelcomeContainer { 
+  border-bottom: solid 1px #d4d4d4;
+}
+
+.sketchWelcomeContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  img {
+    width: 48%;
+    height: auto;
+    align-self: center;
+  }
+}
+
 .discoverContainer {
   h3 {
     margin-top: 0;
@@ -147,5 +162,21 @@ $primary-dark-color: rgb(200,200,200);
 
   .secondWelcomeContainer {
     display: block;
+  }
+  .sketchWelcomeContent {
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+    img {
+      width: 90%;
+      z-index: -1;
+
+      &:first-child {
+        width: 70%;
+        z-index: 2;
+      }
+      &:last-child {
+        margin-top: -6px;
+      }
+    }
   }
 }
