@@ -15,6 +15,7 @@ import FEED_SUBSCRIPTION from '../../graphql/FeedSub.graphql'
 import Header from '../reusables/Header.jsx'
 import PostContainer from '../reusables/PostContainer/PostContainer.jsx'
 import PaginateListener from '../reusables/PaginateListener.jsx'
+import SuggestUsers from './SuggestUsers.jsx'
 
 // Helpers
 import { generateImageLink, generateAvatarLink } from '../../shared/utils/helpers'
@@ -135,12 +136,7 @@ class UserHome extends Component {
                   }}/>
                 )
               } else if(!loading) {
-                feed = (
-                  <span className='emptyFeedContainer'>
-                    <p>It looks like your feed is empty. We suggest you that you follow some users to populate your feed.</p>
-                    <p>Look for users by navigating to the <strong>Search</strong> page on the navigation bar.</p>
-                  </span>
-                )
+                feed = <SuggestUsers />
               }
               return (
                 <React.Fragment>

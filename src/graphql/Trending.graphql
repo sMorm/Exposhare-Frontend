@@ -11,6 +11,7 @@ query trending {
       profile_picture
       firstname
       lastname
+      created_at
     }
   }
 }

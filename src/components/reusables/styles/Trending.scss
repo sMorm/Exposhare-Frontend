@@ -6,32 +6,35 @@
 }
 
 .trendingLoadingContent {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   overflow: hidden;
   transform: scale(2)
 }
 
 .trendingPostsContainer {
   display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(3, auto);
   justify-content: space-between;
-  grid-gap: 2em;
+  grid-gap: 20px;
   img:last-child {
-    width: 270px;
-    height: 270px;
+    width: 400px;
+    height: 400px;
     object-fit: cover;
     border-radius: 3px;
   }
+}
+
+.trendingPostItem {
+  width: 100%;
 }
 
 .trendingImgSkeleton {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 270px;
-  height: 270px;
+  width: 400px;
+  height: 400px;
 }
 
 .trendingPostUserContainer {
@@ -62,22 +65,22 @@
     overflow: hidden;
   }
   img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
   }
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1400px) {
   .trendingPostsContainer {
     img:last-child {
-      width: 250px;
-      height: 250px;
+      width: 360px;
+      height: 360px;
     }
   }
   .trendingImgSkeleton {
-    width: 250px;
-    height: 250px;
+    width: 360px;
+    height: 360px;
   }
 }
 
@@ -85,14 +88,14 @@
   .trendingPostsContainer {
     grid-gap: 15px;
     img:last-child {
-      width: 240px;
-      height: 240px;
+      width: 330px;
+      height: 330px;
     }
   }
 
   .trendingImgSkeleton {
-    width: 240px;
-    height: 240px;
+    width: 330px;
+    height: 330px;
   }
 
   .trendingPostUserContainer {
@@ -103,8 +106,8 @@
 
   .trendingPostUser {
     img {
-      width: 30px;
-      height: 30px;
+      width: 45px;
+      height: 45px;
     }
     h4 {
       font-size: 13px;
@@ -116,8 +119,8 @@
   .trendingPostsContainer {
     grid-gap: 5px;
     img:last-child {
-      width: 220px;
-      height: 220px;
+      width: 300px;
+      height: 300px;
     }
   }
   .trendingPostUser img {
@@ -125,8 +128,8 @@
     height: 30px;
   }
   .trendingImgSkeleton {
-    width: 220px;
-    height: 220px;
+    width: 300px;
+    height: 300px;
   }
 }
 
@@ -134,13 +137,13 @@
   .trendingPostsContainer {
     grid-gap: 5px;
     img:last-child {
-      width: 190px;
-      height: 190px;
+      width: 255px;
+      height: 255px;
     }
   }
   .trendingImgSkeleton {
-    width: 190px;
-    height: 190px;
+    width: 255px;
+    height: 255px;
   }
 }
 

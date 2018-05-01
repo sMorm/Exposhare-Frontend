@@ -104,6 +104,11 @@ $primary-dark-color: rgb(200,200,200);
 
 .sketchWelcomeContainer { 
   border-bottom: solid 1px #d4d4d4;
+  p {
+    margin-top: 0;
+    font-size: 24px;
+    color: #888;
+  }
 }
 
 .sketchWelcomeContent {
@@ -175,7 +180,7 @@ $primary-dark-color: rgb(200,200,200);
         z-index: 2;
       }
       &:last-child {
-        margin-top: -6px;
+        margin-top: -5px;
       }
     }
   }

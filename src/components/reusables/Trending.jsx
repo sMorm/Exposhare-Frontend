@@ -38,7 +38,7 @@ export default class Trending extends Component {
             )
           }
           if(!loading && data.trending) {
-            const posts = data.trending.slice(0, 8).map((post, key) => {
+            const posts = data.trending.slice(0, 6).map((post, key) => {
               let avatarSource = 'http://via.placeholder.com/50x50'
               if(post.user.profile_picture !== null)
                 avatarSource = generateAvatarLink(post.user.id)
@@ -51,14 +51,14 @@ export default class Trending extends Component {
                     </span>
                     <p>{moment(post.created_at).fromNow()}</p>
                   </span>
-                  <div className={this.state.loaded === 8 ? 'hide' : 'trendingImgSkeleton'}>
+                  <div className={this.state.loaded === 6 ? 'hide' : 'trendingImgSkeleton'}>
                     <FoldingCube size={20} color='#ccc' />
                   </div>
                   <img 
                     src={generateImageLink(post.image_url)} 
                     alt={post.content} 
                     onLoad={this.imageLoaded} 
-                    className={this.state.loaded !== 8 ? 'hide' : null}/>
+                    className={this.state.loaded !== 6 ? 'hide' : null}/>
                 </span>
               )
             })

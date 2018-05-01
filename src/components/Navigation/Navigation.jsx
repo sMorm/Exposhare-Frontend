@@ -46,9 +46,9 @@ class Navigation extends Component {
     } else {
       document.addEventListener('scroll', this.handleScroll, 50)
     }
-    if(pathname === '/') {
-      setTimeout(() => this.setState({ navContainerStyle: 'navigationContainer enter'}), 500)
-    }
+    // if(pathname === '/') {
+    //   // setTimeout(() => this.setState({ navContainerStyle: 'navigationContainer enter'}), 500)
+    // }
   }
 
   /**

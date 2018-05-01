@@ -12,12 +12,13 @@ import { ApolloProvider } from 'react-apollo'
 import { client } from './shared/utils/apollo'
 
 // Import Components
+import Navigation from './components/Navigation/Navigation.jsx'
+import Notifications from './components/Notifications/Notifications.jsx'
 import Chat from './components/Chat/Chat.jsx'
 import EditZone from './components/Upload/EditZone.jsx'
 import GetStarted from './components/GetStarted/GetStarted.jsx'
 import Home from './components/Home/Home.jsx'
 import Login from './components/Login/Login.jsx'
-import Navigation from './components/Navigation/Navigation.jsx'
 import NotFound from './components/NotFound/NotFound.jsx'
 import Search from './components/Search/Search.jsx'
 import Settings from './components/Settings/Settings.jsx'
@@ -38,6 +39,7 @@ class Routes extends Component {
           <Router>
             <Fragment>
               <Navigation />
+              <Notifications />
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route path='/login' component={Login} />

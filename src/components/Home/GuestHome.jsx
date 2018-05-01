@@ -55,6 +55,7 @@ export default class GuestHome extends Component {
 
         <div className='sketchWelcomeContainer'>
           <Header title='Cross-platform' />
+          <p>With both mobile and desktop support, share your photos from anywhere.</p>
           <span className='sketchWelcomeContent'>
             <img src='https://s3.amazonaws.com/exposhare-statics/iphone_cropped.png'/>
             <img src='https://s3.amazonaws.com/exposhare-statics/imac_cropped.png'/>

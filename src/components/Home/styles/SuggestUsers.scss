@@ -1,0 +1,101 @@
+.emptyFeedContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.emptyFeedText {
+  width: 52%;  
+  p {
+    font-size: 24px;
+    color: #888;
+    min-width: 400px;
+  }
+}
+
+.cryingLottieContainer {
+  width: 48%;
+}
+
+.trendingUserContainer {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+.trendingUserContent {
+  text-align: center;
+  width: 100%;
+  height: 300px;
+  border: solid 1px #ccc;
+}
+
+.trendingHeader {
+  img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+}
+
+.trendingAvatar {
+  display: flex;
+  justify-content: center;
+  margin-top: -40px;
+  width: 100%;
+  img {
+    align-self: center;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: solid 5px white;
+  }
+}
+
+.trendingUserNames {
+  text-align: center;
+  h3, p {
+    margin: 0;
+  }
+
+  p {
+    color: #aaa;
+  }
+}
+
+@media(max-width: 900px) {
+  .trendingUserContainer {
+    grid-template-columns: repeat(2, auto);
+  }
+
+  .trendingUserContent {
+    height: 250px;
+  }
+
+  .trendingHeader {
+    img {
+      height: 120px;
+    }
+  }
+  .emptyFeedText {
+    p {
+      font-size: 20px;
+      min-width: initial;
+    }
+  }
+}
+
+@media(max-width: 700px) {
+  .trendingUserContainer {
+    grid-template-columns: repeat(1, auto);
+  }
+
+  .trendingUserContent {
+    margin-top: 20px;
+  }
+  .emptyFeedContainer {
+    display: block;
+  }
+}

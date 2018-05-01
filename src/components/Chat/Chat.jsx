@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { withRouter, Link, Redirect } from 'react-router-dom'
+import Markdown from 'react-remarkable'
 import Header from '../reusables/Header.jsx'
-import { withRouter, Link } from 'react-router-dom'
 
 import { client } from '../../shared/utils/apollo'
 import { Query, Mutation, Subscription } from 'react-apollo'
@@ -22,12 +23,13 @@ class Chat extends Component {
   state = {
     currentChat: 0,
     hasNewMessage: {},
-    currentUserId: this.props.user.info.id,
     message: '',
     initialChat: this.props.match.params.conversation_id
   }
 
   componentDidMount() {
+    console.log(this.props.user.isAuthenticated)
+    if(!this.props.user.isAuthenticated) return <Redirect to='/' />
     const { initialChat } = this.state
     if(initialChat !== undefined) {
       client.query({ query: QUERY_CONVERSATIONS, variables: { user_id: this.props.user.info.id } })
@@ -45,7 +47,8 @@ class Chat extends Component {
   }
 
   parseConversations = conversations => { 
-    const { currentUserId:user_id, hasNewMessage } = this.state
+    const { hasNewMessage } = this.state
+    const { id:user_id } = this.props.user.info
     return conversations.map((item, key) => {
       const recipient = (item.user1.id !== user_id) ? item.user1 : item.user2
       const chatItemStyle = this.state.currentChat === key ? 'sideChatItem active' : 'sideChatItem'
@@ -81,7 +84,7 @@ class Chat extends Component {
   }
 
   generateThread = ({ messages, user1, user2, id }) => { 
-    const { currentUserId } = this.state
+    const { id:currentUserId } = this.props.user.info
     const otherUser = (currentUserId !== user1.id) ? user1 : user2
     return (
       <div className='chatWindowContent'>
@@ -102,13 +105,22 @@ class Chat extends Component {
   }
 
   parseMessages = messages => {
-    const { currentUserId } = this.state
+    const { id:currentUserId } = this.props.user.info
     const toReturn = messages.map((item, key) => {
       const msgStyle = item.user_id === currentUserId ? 'messageBubble sent' : 'messageBubble received'
       return (
-        <div key={key} className={msgStyle}>
-          <p>{item.message}</p>
-        </div>
+        <span key={key} className={msgStyle}>
+          <Markdown
+            options={{
+              html: false,
+              xhtmlout: false,
+              breaks: false,
+              typographer: false,
+              quotes: ''
+            }}>
+            {item.message}
+          </Markdown>
+        </span>
       )
     })
     toReturn.push( // append an anchor element to scroll to
@@ -123,6 +135,8 @@ class Chat extends Component {
   }
 
   render() {
+    console.log(this.props.user)
+    if(!this.props.user.isAuthenticated) return <Redirect to='/' />
     const { id:user_id } = this.props.user.info
     const { currentChat } = this.state
     const convoQuery = { query: QUERY_CONVERSATIONS, variables: { user_id } }
