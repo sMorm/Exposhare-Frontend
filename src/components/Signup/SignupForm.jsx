@@ -142,7 +142,7 @@ class SignupForm extends Component {
                 <p className='signupMember'>Already a member? <Link to='/login'>Login</Link></p>
                 <button
                   type='submit'>
-                  {loading ? <ThreeBounce color='white' size={18}/> : 'SIGNUP' }
+                  {loading ? <ThreeBounce color='white' size={18}/> : 'Signup' }
                 </button>
                 {formErrors}
               </form>
