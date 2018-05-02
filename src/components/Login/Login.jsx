@@ -10,12 +10,8 @@ import { svgBus } from '../../shared/constants/links'
 import './styles/Login.scss'
 
 class Login extends Component {
-
-  componentDidMount = () => {
-    if(localStorage.jwtToken) this.props.history.push('/')
-  }
-  
   render() {
+    if(localStorage.jwtToken) this.props.history.push('/')
     return (
       <div className='container'>
         <span className='loginContent'>

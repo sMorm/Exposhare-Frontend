@@ -28,7 +28,6 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.user.isAuthenticated)
     if(!this.props.user.isAuthenticated) return <Redirect to='/' />
     const { initialChat } = this.state
     if(initialChat !== undefined) {
@@ -135,7 +134,6 @@ class Chat extends Component {
   }
 
   render() {
-    console.log(this.props.user)
     if(!this.props.user.isAuthenticated) return <Redirect to='/' />
     const { id:user_id } = this.props.user.info
     const { currentChat } = this.state

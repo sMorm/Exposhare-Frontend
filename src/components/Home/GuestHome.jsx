@@ -42,13 +42,13 @@ export default class GuestHome extends Component {
           <span className='secondWelcomeContent'>
             <img src='https://s3.amazonaws.com/sereymorm.com/media/street12.jpg' alt='' onLoad={this.onLoad}/>
             <span className='secondWelcomeText'>
-              <p><strong>Photo Sharing</strong> Not just photographers.</p>
+              <p><strong>Photo Sharing</strong> platform for creators —</p>
             </span>
           </span>
           <span className='secondWelcomeContent'>
             <img src='https://s3.amazonaws.com/sereymorm.com/media/street13.jpg' alt='' onLoad={this.onLoad}/>
             <span className='secondWelcomeText'>
-              <p><strong>For Everyone</strong> Share photos with friends.</p>
+              <p><strong>For Everyone</strong> Connecting the world through photos —</p>
             </span>
           </span>
         </div>

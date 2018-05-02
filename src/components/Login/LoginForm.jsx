@@ -91,11 +91,10 @@ class LoginForm extends Component {
                   onChange={this.onChange}
                   value={this.state.password}
                   required/>
-                <br/>
                 <p className='errorText'>{errorMessage}</p>
                 <button
                   type='submit'>
-                  {loading ? <ThreeBounce color='white' size={14}/> : 'LOGIN' }
+                  {loading ? <ThreeBounce color='white' size={14}/> : 'Login' }
                 </button>
                 <p className='signupMember'>Not a member? <Link to='/signup'>Signup</Link></p>          
                 {formErrors}

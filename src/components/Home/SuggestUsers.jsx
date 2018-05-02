@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Header from '../reusables/Header.jsx'
+import { RotatingPlane } from 'better-react-spinkit'
 import { Link } from 'react-router-dom'
+import Ionicon from 'react-ionicons'
 
 import { Query } from 'react-apollo'
 import TRENDING_QUERY from '../../graphql/Trending.graphql'
@@ -13,6 +15,13 @@ import NoProfilePicture from '../reusables/NoProfilePicture.jsx'
 import { generateAvatarLink, generateImageLink } from '../../shared/utils/helpers'
 
 import './styles/SuggestUsers.scss'
+
+/**
+ * This component gets rendered when a user's feed is empty,
+ * which probably means that they're not following anyone.
+ * This component will inform them that, as well as suggesting
+ * users who currently has the top trending likes.
+ */
 
 class SuggestUsers extends Component {
   render() {
@@ -35,8 +44,9 @@ class SuggestUsers extends Component {
               return (
                 <div>
                   <Header title='Trending Users' />
+                  <br/>
                   <div className='trendingUserContainer'>
-                    {data.trending.slice(0, 6).map((item, key) => {
+                    {data.trending.slice(2, 6).map((item, key) => {
                       const { user } = item
                       let avatar = <NoProfilePicture name={user.firstname} size='40px' fontSize='24px' />
                       if(user.profile_picture !== null)
@@ -60,11 +70,25 @@ class SuggestUsers extends Component {
                       )
                     })}
                   </div>
-                  <br/><br/><br/><br/>
+                  <br/><br/>
+                  <h1>Looking for someone?</h1>
+                  <Link to='/search' className='suggestSearchLink'>
+                    <h3>Search</h3>
+                    <Ionicon icon='ios-arrow-forward' fontSize='24px' color='salmon'/>
+                  </Link>
+                  <br/><br/><br/><br/><br/>
+
+                  <div className='guestFooter'>
+                    <p>Built with&nbsp;</p><Ionicon icon='md-heart' color='salmon' /><p>&nbsp;in Lowell, MA</p>
+                  </div>
                 </div>
               )
             }
-            return <p>yes</p>
+            return (
+              <div className='trendingLoading'>
+                <RotatingPlane size={50} color='#ccc' />
+              </div>
+            )
           }}
         </Query>
     </React.Fragment>

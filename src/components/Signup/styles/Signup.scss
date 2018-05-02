@@ -18,12 +18,14 @@
   .signupContent {
     display: flex;
     justify-content: center;
+    margin-top: 0;
   }
   .signupImageContainer {
     display: none;
     position: absolute;
     z-index: -1;
     width: 100%;
+    margin: 0;
   }
 }
 

@@ -3,7 +3,7 @@
   position: fixed;
   right: 10px;
   top: 90px;
-
+  z-index: 10;
   p {
     animation: fadeInUp 1s forwards;   
     text-align: center;
