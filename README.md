@@ -1,5 +1,5 @@
-# Exposhare Client
+# Exposhare
 
-Load font: https://github.com/elliakou/proxima-nova-web-fonts
+A photo-sharing community for both creators and the avid social media users.
 
-Download the font and place it in public/fonts
+<img src="./exposhare_panels_bg.png" alt="" />
